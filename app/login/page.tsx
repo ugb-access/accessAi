@@ -10,8 +10,8 @@ import Link from "next/link"
 import { useState } from "react"
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -67,7 +67,7 @@ export default function LoginPage() {
           </CardContent>
           <CardFooter>
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Don&quot;t have an account?{""}
               <Link 
                 href="/signup" 
                 className="text-blue-600 hover:text-blue-800 font-medium"

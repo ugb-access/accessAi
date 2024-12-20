@@ -2,7 +2,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Code, Settings, Users } from 'lucide-react'
+import { Code, Settings, Users } from "lucide-react"
 
 export default function WidgetPage() {
   return (
@@ -23,7 +23,7 @@ export default function WidgetPage() {
           <div className="bg-gray-100 p-6 rounded-lg">
             <Settings className="text-green-500 w-12 h-12 mb-4" />
             <h2 className="text-xl font-semibold mb-2">Customizable Options</h2>
-            <p>Tailor the widget's appearance and functionality to match your brand and user needs.</p>
+            <p>Tailor the widget&apos;s appearance and functionality to match your brand and user needs.</p>
           </div>
           <div className="bg-gray-100 p-6 rounded-lg">
             <Users className="text-purple-500 w-12 h-12 mb-4" />
@@ -58,7 +58,7 @@ export default function WidgetPage() {
           <ol className="list-decimal list-inside space-y-2">
             <li>Sign up for an AccessAI account</li>
             <li>Generate your unique widget code</li>
-            <li>Add the code to your website's HTML</li>
+            <li>Add the code to your websites HTML</li>
             <li>Customize widget settings in your AccessAI dashboard</li>
             <li>Test the widget on your site and gather user feedback</li>
             <li>Monitor usage and accessibility improvements over time</li>
@@ -66,7 +66,7 @@ export default function WidgetPage() {
         </div>
         
         <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-4">Ready to enhance your website's accessibility?</h2>
+          <h2 className="text-2xl font-semibold mb-4">Ready to enhance your websites accessibility?</h2>
           <div className="space-x-4">
             <Button asChild>
               <Link href="/free-trial">Try Widget for Free</Link>

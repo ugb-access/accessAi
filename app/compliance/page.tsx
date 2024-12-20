@@ -10,7 +10,7 @@ export default function CompliancePage() {
       <main className="flex-grow container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-6">Web Accessibility Compliance</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Understanding and achieving web accessibility compliance is crucial for businesses in today's digital landscape. AccessAI is here to help you navigate the complex world of accessibility regulations and standards.
+          Understanding and achieving web accessibility compliance is crucial for businesses in todays digital landscape. AccessAI is here to help you navigate the complex world of accessibility regulations and standards.
         </p>
         
         <div className="mb-12">
@@ -25,7 +25,7 @@ export default function CompliancePage() {
             </div>
             <div className="bg-gray-100 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-2">WCAG (Web Content Accessibility Guidelines)</h3>
-              <p className="mb-4">WCAG provides a set of technical standards for making web content more accessible. It's widely recognized as the international standard for web accessibility.</p>
+              <p className="mb-4">WCAG provides a set of technical standards for making web content more accessible. Its widely recognized as the international standard for web accessibility.</p>
               <Button variant="outline" asChild>
                 <Link href="/compliance/wcag">Explore WCAG Guidelines</Link>
               </Button>

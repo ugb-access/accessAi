@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import { Mail, MessageCircle, Phone, FileText, Clock } from 'lucide-react'
+import { Mail, MessageCircle, Phone, FileText, Clock } from "lucide-react"
 
 export default function SupportPage() {
   return (
@@ -118,7 +118,7 @@ export default function SupportPage() {
         <div className="bg-gray-100 p-8 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">Submit a Support Ticket</h2>
           <p className="text-gray-600 mb-6">
-            Can't find what you're looking for? Submit a support ticket and we'll get back to you as soon as possible.
+            Can&apos;t find what you&apos;re looking for? Submit a support ticket and we&apos;ll get back to you as soon as possible.
           </p>
           <Button size="lg" asChild>
             <Link href="/support/new-ticket">Submit Ticket</Link>

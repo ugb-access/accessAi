@@ -3,6 +3,7 @@ import Contactbox from "./Contactbox";
 import ColorAdjustment from "./ColorAdjustment";
 import Orientation from "./Orientation";
 import  Footer  from "./Footer";
+import Image from "next/image";
 
 
 const SVG = () => (
@@ -214,7 +215,7 @@ const Accessibility = () => {
           <div className="flex items-center gap-1">
 
             <span className="text-white uppercase">English</span>
-            <img src="/images/svgviewer-output (18).svg" alt="" className="h-3 w-3" />
+            <Image width={12} height ={12} src="/images/svgviewer-output (18).svg" alt="" />
           </div>
 
 
@@ -226,16 +227,16 @@ const Accessibility = () => {
             return (
               <div key={index} className=" w-[70%] lg:w-[30%]">
                 <button className="flex bg-white text-[#146FF8]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
-                  <img src={item.Image} alt="" className="h-[20px]  w-[20px]" />
+                  <Image height={20} width={20} src={item.Image} alt="" />
                   {item.button}</button>
               </div>
             )
           })}
         </div>
         <div className="flex bg-[#0041A4] items-center p-3 my-10 gap-5 rounded-full  w-full">
-          <img src="/images/svgviewer-output (6).svg" alt="" className="h-[15px] w-[15px] " />
+          <Image height={15} width={15} src="/images/svgviewer-output (6).svg" alt=""  />
           <input className=" bg-[#0041A4]  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
-          <img src="/images/svgviewer-output (7).svg" alt="" className="h-[10px] w-[10px]" />
+          <Image height={10} width={10} src="/images/svgviewer-output (7).svg" alt="" />
         </div>
       </div>
       {/* on/off */}

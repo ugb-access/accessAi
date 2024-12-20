@@ -2,7 +2,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { BarChart, AlertTriangle, TrendingUp } from 'lucide-react'
+import { BarChart, AlertTriangle, TrendingUp } from "lucide-react"
 
 export default function MonitoringPage() {
   return (
@@ -11,14 +11,14 @@ export default function MonitoringPage() {
       <main className="flex-grow container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-6">Accessibility Monitoring</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Our advanced monitoring system provides continuous oversight of your website's accessibility, ensuring compliance and optimal user experience.
+          Our advanced monitoring system provides continuous oversight of your websites accessibility, ensuring compliance and optimal user experience.
         </p>
         
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <div className="bg-gray-100 p-6 rounded-lg">
             <BarChart className="text-blue-500 w-12 h-12 mb-4" />
             <h2 className="text-xl font-semibold mb-2">Comprehensive Reports</h2>
-            <p>Receive detailed reports on your site's accessibility performance, including trends and improvement areas.</p>
+            <p>Receive detailed reports on your sites accessibility performance, including trends and improvement areas.</p>
           </div>
           <div className="bg-gray-100 p-6 rounded-lg">
             <AlertTriangle className="text-red-500 w-12 h-12 mb-4" />
@@ -66,7 +66,7 @@ export default function MonitoringPage() {
         </div>
         
         <div className="text-center">
-          <h2 className="text-2xl font-semibold mb-4">Start monitoring your website's accessibility today</h2>
+          <h2 className="text-2xl font-semibold mb-4">Start monitoring your websites accessibility today</h2>
           <div className="space-x-4">
             <Button asChild>
               <Link href="/free-trial">Start Free Trial</Link>

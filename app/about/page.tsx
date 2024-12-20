@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div>
             <p className="text-lg text-gray-600 mb-4">
-              At AccessAI, we're on a mission to make the web accessible for everyone. We believe that technology should empower all individuals, regardless of their abilities or disabilities.
+              At AccessAI, were on a mission to make the web accessible for everyone. We believe that technology should empower all individuals, regardless of their abilities or disabilities.
             </p>
             <p className="text-lg text-gray-600 mb-4">
               Founded in 2020, our team of accessibility experts and AI engineers have been working tirelessly to develop cutting-edge solutions that help businesses create inclusive digital experiences.

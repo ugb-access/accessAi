@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -12,12 +12,12 @@ import { useState } from "react"
 
 export default function BookDemoPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    website: '',
-    employees: '',
-    message: ''
+    name: "",
+    email: "",
+    company: "",
+    website: "",
+    employees: "",
+    message: ""
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,14 +32,14 @@ export default function BookDemoPage() {
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold mb-6">Book a Demo</h1>
           <p className="text-lg text-gray-600 mb-8">
-            See how AccessAI can transform your website's accessibility. Schedule a personalized demo with our team.
+            See how AccessAI can transform your websites accessibility. Schedule a personalized demo with our team.
           </p>
 
           <Card>
             <CardHeader>
               <CardTitle>Schedule Your Demo</CardTitle>
               <CardDescription>
-                Fill out the form below and we'll contact you to arrange a demo at a time that suits you.
+                Fill out the form below and well contact you to arrange a demo at a time that suits you.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -126,16 +126,7 @@ export default function BookDemoPage() {
           </Card>
 
           <div className="mt-8 text-center text-gray-600">
-            <p>
-              By scheduling a demo, you agree to our{' '}
-              <Link href="/terms" className="text-blue-600 hover:text-blue-800">
-                Terms of Service
-              </Link>
-              {' '}and{' '}
-              <Link href="/privacy" className="text-blue-600 hover:text-blue-800">
-                Privacy Policy
-              </Link>
-            </p>
+       
           </div>
         </div>
       </main>
