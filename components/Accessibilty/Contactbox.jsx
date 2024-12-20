@@ -3,8 +3,6 @@ import Content_box1 from './Content_box1'
 import Content_box2 from './Content_box2'
 
 const Contactbox = () => {
-
-
     return (
         <div className='m-5 bg-[#fff] p-5 rounded-xl '>
             <h2 className='text-[18px] pb-5'>Content Adjustments</h2>

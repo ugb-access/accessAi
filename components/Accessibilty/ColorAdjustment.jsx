@@ -55,15 +55,14 @@ const ColorAdjustment = () => {
             colorButton={true}
             img={false}
         />
-
- <Content_box1
+        <Content_box1
             heading={"Adjust Title Colors"}
             showBar={false}
             img={false}
             colorButton={true}
             button={"cancel"}
         />
- <Content_box1
+        <Content_box1
             heading={"Adjust Background Colors"}
             showBar={false}
             img={false}
