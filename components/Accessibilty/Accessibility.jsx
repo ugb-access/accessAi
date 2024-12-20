@@ -210,10 +210,9 @@ const Accessibility = () => {
   return (
     <div className="border w-full md:w-[50%] xl:w-[40%] mb-4 bg-[#EEEFFF] rounded-xl">
       <div className="bg-[#146FF8]  p-5 rounded-t-xl">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center cursor-pointer">
           <div className="text-white">x</div>
-          <div className="flex items-center gap-1">
-
+          <div className="flex items-center gap-1 hover:bg-[#0041A4] px-3 py-1 rounded-full">
             <span className="text-white uppercase">English</span>
             <Image width={12} height ={12} src="/images/svgviewer-output (18).svg" alt="" />
           </div>
@@ -225,8 +224,8 @@ const Accessibility = () => {
         <div className="flex justify-around  flex-wrap  w-full items-center gap-5">
           {data.map((item, index) => {
             return (
-              <div key={index} className=" w-[70%] lg:w-[30%]">
-                <button className="flex bg-white text-[#146FF8]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
+              <div key={index} className=" w-[70%] lg:w-[30%] ">
+                <button className="flex bg-white text-[#146FF8] hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
                   <Image height={20} width={20} src={item.Image} alt="" />
                   {item.button}</button>
               </div>
