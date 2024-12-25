@@ -6,7 +6,7 @@ const Orientation = () => {
 
     return (
 
-        <div className='m-5 bg-[#fff] p-5 rounded-xl '>
+        <div className='m-5 bg-[#fff] px-5 rounded-xl '>
             <h2 className='text-[18px] pb-5'>Content Adjustments</h2>
 
             <div className='flex flex-wrap lg:flex-nowrap gap-5'>

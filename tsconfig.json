@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Accessibilty/Accessibility.jsx", "components/Accessibilty/ColorAdjustment.jsx", "components/Accessibilty/Contactbox.jsx", "components/Accessibilty/Content_box1.jsx", "components/Accessibilty/Content_box2.jsx", "components/Accessibilty/Footer.jsx", "components/Accessibilty/Orientation.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Accessibilty/Accessibility.jsx", "components/Accessibilty/ColorAdjustment.jsx", "components/Accessibilty/Contactbox.jsx", "components/Accessibilty/Content_box1.jsx", "components/Accessibilty/Content_box2.jsx", "components/Accessibilty/Footer.jsx", "components/Accessibilty/Orientation.jsx", "app/page.tsx"],
   "exclude": ["node_modules"]
 }

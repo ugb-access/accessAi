@@ -1,9 +1,13 @@
-import React from "react"
+// import React from "react"
+
 import Contactbox from "./Contactbox";
 import ColorAdjustment from "./ColorAdjustment";
 import Orientation from "./Orientation";
-import  Footer  from "./Footer";
+import Footer from "./Footer";
 import Image from "next/image";
+
+import React, { useState, useEffect } from 'react';
+
 
 
 const SVG = () => (
@@ -134,7 +138,35 @@ const SVG6 = () => (
     />
   </svg>
 );
-const Accessibility = () => {
+const Accessibility = ({ handlePageClick, setOpen, open }) => {
+
+
+  const [activeTab, setActiveTab] = useState([])
+  const handleTabChange = (index, tabValue) => {
+    // Update the active tab only for the current item
+    setActiveTab([])
+    if (activeTab.length === 0) {
+      setActiveTab(prevState => ({
+        ...prevState,
+        [index]: tabValue
+      }));
+      if (index === 0) {
+        setOpen(true)
+      }
+    }
+    else {
+      setActiveTab([])
+      setOpen(false)
+    }
+
+  };
+
+
+
+
+
+
+
 
   const data = [{
     button: "Reset setting",
@@ -158,6 +190,7 @@ const Accessibility = () => {
       para1: "Seizure Safe Profile",
       para2: "Clear flashes &amp; reduces color",
       svg: <SVG />,
+      para: "This profile enables epileptic and seizure prone users to browse safely by eliminating the risk of seizures that result from flashing or blinking animations and risky color combinations."
 
 
     },
@@ -167,8 +200,8 @@ const Accessibility = () => {
       para1: "Vision Impaired Profile",
       para2: " Enhances website's visuals",
       svg: <SVG2 />,
+      para: "This profile adjusts the website, so that it is accessible to the majority of visual impairments such as Degrading Eyesight, Tunnel Vision, Cataract, Glaucoma, and others."
 
-      // Imag: "/images/svgviewer-output (11).svg",
     },
     {
       of: "off",
@@ -176,8 +209,8 @@ const Accessibility = () => {
       para1: "ADHD Friendly Profile",
       para2: "More focus & fewer distractions",
       svg: <SVG3 />,
+      para: "This profile significantly reduces distractions, to help people with ADHD and Neurodevelopmental disorders browse, read, and focus on the essential elements of the website more easily."
 
-      // Imag: "/images/svgviewer-output (12).svg",
     },
     {
       of: "off",
@@ -185,8 +218,8 @@ const Accessibility = () => {
       para1: "Cognitive Disability Profile",
       para2: "Assists with reading & focusing",
       svg: <SVG4 />,
+      para: "This profile provides various assistive features to help users with cognitive disabilities such as Autism, Dyslexia, CVA, and others, to focus on the essential elements of the website more easily."
 
-      // Imag: "/images/svgviewer-output (13).svg",
     },
     {
       of: "off",
@@ -194,8 +227,11 @@ const Accessibility = () => {
       para1: "Keyboard Navigation (Motor)",
       para2: "Use website with the keyboard",
       svg: <SVG5 />,
+      para: "This profile enables motor-impaired persons to operate the website using the keyboard Tab, Shift+Tab, and the Enter keys. Users can also use shortcuts such as “M” (menus), “H” (headings), “F” (forms), “B” (buttons), and “G” (graphics) to jump to specific elements.",
+      note: "Note:",
+      Para3: " This profile prompts automatically for keyboard users."
 
-      // Imag: "/images/svgviewer-output (14).svg",
+
     },
     {
       of: "off",
@@ -203,18 +239,23 @@ const Accessibility = () => {
       para1: "Blind Users (Screen Reader)",
       para2: "Optimize website for screen-readers",
       svg: <SVG6 />,
+      para: "This profile adjusts the website to be compatible with screen-readers such as JAWS, NVDA, VoiceOver, and TalkBack. A screen-reader is software that is installed on the blind user’s computer and smartphone, and websites should ensure compatibility with it. ",
+      note: "Note:",
+      Para3: " This profile prompts automatically to screen-readers.",
 
 
     }
   ]
   return (
-    <div className="border w-full md:w-[50%] xl:w-[40%] mb-4 bg-[#EEEFFF] rounded-xl">
-      <div className="bg-[#146FF8]  p-5 rounded-t-xl">
+    <div className={` w-full md:w-[50%] xl:w-[40%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none right-10  top-0 z-10 fixed max-h-screen`}>
+      <div className={`  p-5 rounded-t-xl ${open ? "bg-[#3d6aaf]" : "bg-[#146FF8]"}`}>
         <div className="flex justify-between items-center cursor-pointer">
-          <div className="text-white">x</div>
+          <div className="text-white transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
+            <Image height={12} width={12} src={'/images/svgviewer-output (1).svg'} />
+          </div>
           <div className="flex items-center gap-1 hover:bg-[#0041A4] px-3 py-1 rounded-full">
             <span className="text-white uppercase">English</span>
-            <Image width={12} height ={12} src="/images/svgviewer-output (18).svg" alt="" />
+            <Image width={12} height={12} src="/images/svgviewer-output (18).svg" alt="" />
           </div>
 
 
@@ -233,7 +274,7 @@ const Accessibility = () => {
           })}
         </div>
         <div className="flex bg-[#0041A4] items-center p-3 my-10 gap-5 rounded-full  w-full">
-          <Image height={15} width={15} src="/images/svgviewer-output (6).svg" alt=""  />
+          <Image height={15} width={15} src="/images/svgviewer-output (6).svg" alt="" />
           <input className=" bg-[#0041A4]  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
           <Image height={10} width={10} src="/images/svgviewer-output (7).svg" alt="" />
         </div>
@@ -243,29 +284,57 @@ const Accessibility = () => {
       <div className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
         <h2 className="px-5">Choose  the right accessibilty profile for you</h2>
         {data2.map((item, index) => {
+          const isTabActive = activeTab[index] === true; // 
+          const isTabInactive = activeTab[index] !== false;
           return (
-            <div key={index} className="flex justify-between border-b-2 py-[18px] px-2 group">
-              <div className=" h-[35px] bg-[#f2f7fa] shadow-2xl rounded-[50px] flex-1 flex justify-center items-center">
-                <span className="w-[50%] z-10 bg-[#FFFFFF] rounded-full  h-full border border-gray-100  flex justify-center items-center">{item.of}</span>
-                <span className="w-[50%] text-center">{item.on}</span>
-              </div>
-              <div className="w-[75%] pl-[7%] group ">
-                <p className="text-[#1F2533] text-[16px] group-hover:text-[#146FF8] font-semibold">{item.para1}</p>
-                <p className="text-[#3e465d] text-[14px] group-hover:text-[#146FF8] font-medium">{item.para2}r</p>
-              </div>
-              <div className="bg-[#f2f7fa]  rounded-full hidden md:flex justify-center items-center h-[30px]  w-[30px]">
-                <span className="group-hover:text-[#146FF8]"> {item.svg}</span>
+            <>
+              <div key={index} className={`  border-b-2 py-[18px] px-2 group ${isTabActive && ' bg-gray-300 mx-5 rounded-xl'}`}>
+                <div className="flex justify-between">
+                  <div className=" h-[35px] bg-[#e1e5e7] shadow-2xl rounded-[50px] flex-1 flex justify-center transition-all !duration-1000 items-center">
 
+                    <span
+                      className={`flex justify-center transition-all !duration-200 ease-in-out items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
+                      onClick={() => handleTabChange(index, false)}
+                    >
+                      {item.of}
+                    </span>
+
+
+
+                    <span className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-blue-500 w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`} onClick={() => handleTabChange(index, true)}>{item.on}
+
+
+                    </span>
+                  </div>
+                  <div className="w-[75%] pl-[7%] group ">
+                    <p className="text-[#1F2533] text-[16px] group-hover:text-[#146FF8] font-semibold">{item.para1}</p>
+                    <p className="text-[#3e465d] text-[14px] group-hover:text-[#146FF8] font-medium">{item.para2}r</p>
+                  </div>
+                  <div className="bg-[#f2f7fa]  rounded-full hidden md:flex justify-center items-center h-[30px]  w-[30px]">
+                    <span className="group-hover:text-[#146FF8]"> {item.svg}</span>
+
+                  </div>
+                </div>
+
+                {isTabActive &&
+                  <div>
+                    <div className="text-[15px] p-4 ">{item.para}</div>
+                    <strong className="pl-4 pt-4">{item.note}</strong>
+                    <span>{item.Para3}</span>
+
+                  </div>
+                }
               </div>
 
-            </div>
+            </>
+
           )
         })}
       </div>
       <Contactbox />
       <ColorAdjustment />
       <Orientation />
-      <Footer/>
+      <Footer />
     </div>
 
   )
