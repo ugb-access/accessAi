@@ -71,59 +71,10 @@ const Orientation = () => {
         }
     }
 
-    const createGuideElement = () => {
-
-        setIsVisible(true)
-
-    }
-
 
     const handleClick = () => {
-        setIsVisible(!isVisible)
-        console.log('isVisible', isVisible);
-
         toggleScript()
     }
-    const [isVisible, setIsVisible] = useState(false)
-    // useEffect(() => {
-    //     let guideElement = document.getElementById("guide_elemenet");
-    //     console.log('guideElement: ', guideElement);
-    //     if (!guideElement) {
-    //         guideElement = document.createElement('div');
-    //         guideElement.style.position = 'absolute';
-    //         guideElement.style.width = '500px';
-    //         guideElement.style.height = '10px';
-    //         guideElement.style.backgroundColor = 'blue';
-    //         guideElement.style.pointerEvents = 'none';
-    //         guideElement.style.transition = 'opacity 0.3s ease';
-    //         guideElement.style.opacity = isVisible ? '1' : '0';
-    //         guideElement.id = "guide_elemenet";
-    //         document.body.appendChild(guideElement);
-    //     }
-
-    //     const handleMouseMove = (event) => {
-
-
-    //         guideElement.style.left = `${event.pageX}px`;
-    //         guideElement.style.top = `${event.pageY}px`;
-
-    //     }
-    //     const handleBodyClick = () => {
-    //         if (!isVisible)
-    //             document.addEventListener('mousemove', handleMouseMove);
-    //     };
-
-    //     if (isVisible) {
-    //         document.addEventListener('mousemove', handleMouseMove);
-    //     }
-
-    //     return () => {
-    //         document.removeEventListener('mousemove', handleMouseMove);
-    //         document.removeEventListener('click', handleBodyClick);
-    //         // document.body.removeChild(guideElement);
-    //     };
-
-    // }, [isVisible])
 
     let isScriptAdded = !!document.getElementById('dynamic-guide-script');
     console.log('isScriptAdded-outer: ', isScriptAdded);
@@ -140,9 +91,9 @@ const Orientation = () => {
             if (scriptElement) {
                 document.body.removeChild(scriptElement);
                 if (guideElement) document.body.removeChild(guideElement);
+                isScriptAdded = false;
                 console.log('Script removed.');
             }
-            isScriptAdded = false;
         } else {
             // Create and add the script element
             const scriptElement = document.createElement('script');
@@ -192,7 +143,8 @@ const Orientation = () => {
             `;
             document.body.appendChild(scriptElement);
             console.log('Script added.');
-            // setIsScriptAdded(true);
+            isScriptAdded = true;
+
 
         }
     };
