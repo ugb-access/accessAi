@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 
 export function Navigation() {
   return (
-    <div className="border-b bg-white shadow-sm"> {/* Update 1: Changed background color */}
+    <div className="border-b shadow-sm"> {/* Update 1: Changed background color */}
       <div className="flex h-16 items-center px-4 md:px-6 max-w-7xl mx-auto">
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <span className="text-2xl font-bold">AccessAI</span>
@@ -136,12 +136,12 @@ export function Navigation() {
           <Link href="/support" className="text-sm font-medium text-gray-700 hover:underline underline-offset-4"> {/* Update 2: Changed text color */}
             Support
           </Link>
-          <Button variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200" asChild>  
+          <Button variant="secondary" className="bg-blue-100 text-#146FF8 hover:bg-blue-200" asChild>
             <>
-            <Link href="/book-demo">Book a Demo</Link>
+              <Link href="/book-demo">Book a Demo</Link>
             </>
           </Button>
-          <Button variant="default" className="bg-blue-600 text-white hover:bg-blue-700" asChild> 
+          <Button variant="default" className="bg-#146FF8 text-white hover:bg-#146FF8" asChild>
             <Link href="/free-trial">Start Free Trial</Link>
           </Button>
         </div>

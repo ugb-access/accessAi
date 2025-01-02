@@ -4,9 +4,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className=' bg-[#146FF8] flex justify-around py-1 rounded-b-lg fixed bottom-0 lg:w-[40%] z-10' >
-      <div className='flex'>
-        <h2 className='text-white text-base'>Web Accessibility By</h2>
+    <div className=' bg-primary flex justify-around py-1 rounded-b-lg fixed w-full md:w-[50%] lg:w-[40%]  bottom-0 z-10' >
+      <div className='flex '>
+        <div className='text-white text-base'>Web Accessibility By</div>
         <FOOTER_ICON />
       </div>
       <div className='flex items-center gap-1 text-white text-base cursor-pointer'>Learn more

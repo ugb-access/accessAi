@@ -52,13 +52,13 @@ export default function SupportPage() {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-gray-600" />
-                <a href="mailto:support@accessai.com" className="text-blue-600 hover:text-blue-800">
+                <a href="mailto:support@accessai.com" className="text-#146FF8 hover:text-blue-800">
                   support@accessai.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-5 w-5 text-gray-600" />
-                <a href="tel:1-800-ACCESS-AI" className="text-blue-600 hover:text-blue-800">
+                <a href="tel:1-800-ACCESS-AI" className="text-#146FF8 hover:text-blue-800">
                   1-800-ACCESS-AI
                 </a>
               </div>
@@ -72,7 +72,7 @@ export default function SupportPage() {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2">
                 <FileText className="h-5 w-5 text-gray-600" />
-                <Link href="/docs" className="text-blue-600 hover:text-blue-800">
+                <Link href="/docs" className="text-#146FF8 hover:text-blue-800">
                   View Documentation
                 </Link>
               </div>
@@ -91,22 +91,22 @@ export default function SupportPage() {
             <CardContent>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/faq#installation" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/faq#installation" className="text-#146FF8 hover:text-blue-800">
                     Installation Guide
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq#billing" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/faq#billing" className="text-#146FF8 hover:text-blue-800">
                     Billing Questions
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq#features" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/faq#features" className="text-#146FF8 hover:text-blue-800">
                     Feature Overview
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq#troubleshooting" className="text-blue-600 hover:text-blue-800">
+                  <Link href="/faq#troubleshooting" className="text-#146FF8 hover:text-blue-800">
                     Troubleshooting
                   </Link>
                 </li>

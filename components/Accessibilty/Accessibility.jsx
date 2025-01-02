@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
+import { root } from "postcss";
 
 
 
@@ -140,10 +141,32 @@ const SVG6 = () => (
 );
 const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
-
+  const [isCustomColor, setIsCustonColor] = useState(false);
   const [activeTab, setActiveTab] = useState([])
+
+
+  const changeColor = () => {
+    const root = document.documentElement;
+    console.log({ root })
+
+    if (isCustomColor) {
+      root.style.setProperty('--#146FF8-color', '#146FF8');
+      root.classList.remove('sezure');
+
+    } else {
+      root.style.setProperty('--#146FF8-color', '#3d6aaf');
+      root.classList.add('sezure');
+    }
+    setIsCustonColor(!isCustomColor)
+  }
+
+
+
+
   const handleTabChange = (index, tabValue) => {
-    // Update the active tab only for the current item
+    if (index === 0) {
+      changeColor()
+    }
     setActiveTab([])
     if (activeTab.length === 0) {
       setActiveTab(prevState => ({
@@ -152,11 +175,12 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
       }));
       if (index === 0) {
         setOpen(true)
+
       }
     }
     else {
       setActiveTab([])
-      setOpen(false)
+
     }
 
   };
@@ -247,8 +271,8 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     }
   ]
   return (
-    <div className={` w-full md:w-[50%] xl:w-[40%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none right-10  top-0 z-10 fixed max-h-screen`}>
-      <div className={`  p-5 rounded-t-xl ${open ? "bg-[#3d6aaf]" : "bg-[#146FF8]"}`}>
+    <div className={` w-full md:w-[50%] xl:w-[40%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none right-10  top-0 z-10 fixed  !h-screen `}>
+      <div className="p-5 rounded-t-xl  bg-primary">
         <div className="flex justify-between items-center cursor-pointer">
           <div className="text-white transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
             <Image height={12} width={12} src={'/images/svgviewer-output (1).svg'} />
@@ -258,7 +282,9 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
             <Image width={12} height={12} src="/images/svgviewer-output (18).svg" alt="" />
           </div>
 
+          <div className="!text-#146FF8-foreground">
 
+          </div>
 
         </div>
         <h2 className="text-[24px] text-[#ffffff] text-center pb-[30px]">Accessibility Adjustments</h2>
@@ -266,23 +292,23 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
           {data.map((item, index) => {
             return (
               <div key={index} className=" w-[70%] lg:w-[30%] ">
-                <button className="flex bg-white text-[#146FF8] hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
+                <button className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
                   <Image height={20} width={20} src={item.Image} alt="" />
                   {item.button}</button>
               </div>
             )
           })}
         </div>
-        <div className="flex bg-[#0041A4] items-center p-3 my-10 gap-5 rounded-full  w-full">
+        <div className="flex bg-primary items-center p-3 my-10 gap-5 rounded-full  w-full">
           <Image height={15} width={15} src="/images/svgviewer-output (6).svg" alt="" />
-          <input className=" bg-[#0041A4]  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
+          <input className=" bg-primary  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
           <Image height={10} width={10} src="/images/svgviewer-output (7).svg" alt="" />
         </div>
       </div>
       {/* on/off */}
 
       <div className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
-        <h2 className="px-5">Choose  the right accessibilty profile for you</h2>
+        <div className="px-5">Choose  the right accessibilty profile for you</div>
         {data2.map((item, index) => {
           const isTabActive = activeTab[index] === true; // 
           const isTabInactive = activeTab[index] !== false;
@@ -294,24 +320,24 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
                     <span
                       className={`flex justify-center transition-all !duration-200 ease-in-out items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
-                      onClick={() => handleTabChange(index, false)}
+                      onClick={() => handleTabChange(index)}
                     >
                       {item.of}
                     </span>
 
 
 
-                    <span className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-blue-500 w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`} onClick={() => handleTabChange(index, true)}>{item.on}
+                    <span className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`} onClick={() => handleTabChange(index, true)}>{item.on}
 
 
                     </span>
                   </div>
                   <div className="w-[75%] pl-[7%] group ">
-                    <p className="text-[#1F2533] text-[16px] group-hover:text-[#146FF8] font-semibold">{item.para1}</p>
-                    <p className="text-[#3e465d] text-[14px] group-hover:text-[#146FF8] font-medium">{item.para2}r</p>
+                    <div className="text-[#1F2533] text-[16px] group-hover:text-primary font-semibold">{item.para1}</div>
+                    <div className="text-[#3e465d] text-[14px] group-hover:text-primary font-medium">{item.para2}r</div>
                   </div>
                   <div className="bg-[#f2f7fa]  rounded-full hidden md:flex justify-center items-center h-[30px]  w-[30px]">
-                    <span className="group-hover:text-[#146FF8]"> {item.svg}</span>
+                    <span className="group-hover:text-primary"> {item.svg}</span>
 
                   </div>
                 </div>
@@ -331,10 +357,12 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
           )
         })}
       </div>
+
       <Contactbox />
       <ColorAdjustment />
       <Orientation />
       <Footer />
+
     </div>
 
   )

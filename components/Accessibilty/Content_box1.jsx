@@ -1,7 +1,7 @@
+
 import Image from 'next/image';
 
-import React from 'react';
-const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, button, inputBar = false, img = true, color, colorButton = true }) => {
+const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, button, inputBar = false, img = true, color, colorButton = true, onClick, changeBackgroundColor, colors, onChangeColor, changeTitleColor, changeTextColor }) => {
 
   const options = [
     { value: "homepage" },
@@ -52,9 +52,13 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
     { value: "/accessscan", label: "Web accessibility audit" },
   ]
 
+
+
+
+
   return (
 
-    <div className={`bg-[#F2F7FA] rounded-xl max-w-full  mb-5 py-[20px] px-[25px] cursor-pointer  "}`}>
+    <div className="bg-[#F2F7FA] rounded-xl max-w-full  mb-5 py-[20px] px-[25px] cursor-pointer  " onClick={onClick}>
 
       <div className="flex justify-center gap-3 mb-5">
         {img ?
@@ -62,7 +66,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
           :
           null
         }
-        <h2 className='text-[14px]'>{heading} </h2>
+        <div className='text-[14px]'>{heading} </div>
       </div>
       {inputBar ?
         <div className='bg-white  p-2 rounded-full cursor-pointer '>
@@ -95,12 +99,12 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
       {
         showBar ?
           <div className="flex justify-between items-center bg-white rounded-full ">
-            <div className='p-3 bg-[#146FF8] rounded-full flex justify-center items-center '>
+            <div className='p-3 bg-primary rounded-full flex justify-center items-center '>
               <Image height={10} width={10} src={imag2} alt="" />
 
             </div>
-            <p className='text-[#146FF8] text-[13px] '>{para}</p>
-            <div className='p-3 bg-[#146FF8] rounded-full flex justify-center items-center '>
+            <div className='text-primary text-[13px] '>{para}</div>
+            <div className='p-3 bg-primary rounded-full flex justify-center items-center '>
               <Image height={10} width={10} src={imag3} alt="" />
 
             </div>
@@ -110,19 +114,20 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
       }
 
       {colorButton ? <div className='flex gap-1 justify-center'>
-        <button className='h-[24px] w-[24px] bg-[#0076B4] border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-[#7a549c] border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-[#c83733] border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-[#D07021] border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-[#26999f] border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-[#4d7831] border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-white border rounded-full'>{color}</button>
-        <button className='h-[24px] w-[24px] bg-black border rounded-full'>{color}</button>
+        {colors?.map((item, index) => {
+          return (
+            <div key={index}>
+              <button style={{ backgroundColor: item }} className={`h-[24px] w-[24px] border rounded-full`} onClick={() => { onChangeColor(item); }}></button>
+
+            </div>
+          )
+        })}
+
       </div>
         : null
       }
-      <button className='mx-auto w-full mt-3'>{button}</button>
-    </div>
+      <button className='mx-auto w-full mt-3' onClick={() => onChangeColor("")}>{button}</button>
+    </div >
 
   )
 }

@@ -1,6 +1,17 @@
 import Link from "next/link"
+import { useEffect, useState } from "react";
 
 export function Footer() {
+
+  // const [back, setBack] = useState("")
+
+  // const backColor = localStorage.getItem("background-color")
+  // console.log('backColor: ', backColor);
+
+  // useEffect(() => {
+  //   setBack(backColor)
+  // }, [backColor])
+  // style={{ backgroundColor: back }}
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">

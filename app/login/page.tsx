@@ -53,7 +53,7 @@ export default function LoginPage() {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <Link 
+                <Link
                   href="/forgot-password"
                   className="text-sm text-gray-600 hover:text-gray-900"
                 >
@@ -68,9 +68,9 @@ export default function LoginPage() {
           <CardFooter>
             <p className="text-sm text-gray-600">
               Don&quot;t have an account?{""}
-              <Link 
-                href="/signup" 
-                className="text-blue-600 hover:text-blue-800 font-medium"
+              <Link
+                href="/signup"
+                className="text-#146FF8 hover:text-blue-800 font-medium"
               >
                 Sign up
               </Link>

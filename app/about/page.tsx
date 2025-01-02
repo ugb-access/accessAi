@@ -22,12 +22,12 @@ export default function AboutPage() {
           </div>
           <div className="bg-blue-100 p-8 rounded-lg flex items-center justify-center">
             <div className="text-center">
-              <Users className="h-24 w-24 text-blue-600 mx-auto mb-4" />
+              <Users className="h-24 w-24 text-#146FF8 mx-auto mb-4" />
               <p className="text-xl font-semibold text-blue-800">Making the Web Accessible for Everyone</p>
             </div>
           </div>
         </div>
-        
+
         <h2 className="text-3xl font-bold mb-6">Our Values</h2>
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {[
@@ -60,7 +60,7 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
-        
+
         <h2 className="text-3xl font-bold mb-6">Our Team</h2>
         <div className="grid md:grid-cols-4 gap-8">
           {[
@@ -71,7 +71,7 @@ export default function AboutPage() {
           ].map((member, index) => (
             <div key={index} className="text-center bg-gray-100 p-6 rounded-lg">
               <div className="w-20 h-20 bg-blue-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-10 w-10 text-blue-600" />
+                <Users className="h-10 w-10 text-#146FF8" />
               </div>
               <h3 className="font-semibold">{member.name}</h3>
               <p className="text-gray-600">{member.role}</p>

@@ -5,35 +5,35 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 const logos = [
-  { 
-    src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", 
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
     alt: "Amazon",
     width: 120,
-    className: "py-4" 
+    className: "py-4"
   },
-  { 
-    src: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", 
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
     alt: "Google",
     width: 120,
-    className: "py-4" 
+    className: "py-4"
   },
-  { 
-    src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", 
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
     alt: "Netflix",
     width: 120,
-    className: "py-4" 
+    className: "py-4"
   },
-  { 
-    src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg", 
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
     alt: "Apple",
     width: 40,
-    className: "py-4" 
+    className: "py-4"
   },
-  { 
-    src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", 
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
     alt: "Microsoft",
     width: 120,
-    className: "py-4" 
+    className: "py-4"
   },
 ]
 
@@ -48,7 +48,7 @@ export function LogoCarousel() {
   }, [])
 
   return (
-    <div className="py-16 bg-white">
+    <div className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-lg font-medium text-muted-foreground mb-8">
           Join 100k+ websites worldwide that are already accessible to everyone
