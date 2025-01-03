@@ -72,82 +72,122 @@ const Orientation = () => {
     }
 
 
+    // let isScriptAdded = false;
     const handleClick = () => {
-        toggleScript()
-    }
+        toggleScript();
 
-    let isScriptAdded = !!document.getElementById('dynamic-guide-script');
-    console.log('isScriptAdded-outer: ', isScriptAdded);
+    };
 
-
-    // const [isScriptAdded, setIsScriptAdded] = useState(false);
+    const isScriptAdded = document.getElementById("dynamic-guide-script");
+    console.log('isScriptAdded: ', isScriptAdded);
 
     const toggleScript = () => {
-        console.log('isScriptAdded: ', isScriptAdded);
-        if (isScriptAdded) {
+        const guideId = 'guide_element';
+        const scriptId = 'dynamic-guide-script';
+        const existingScript = document.getElementById(scriptId);
+        let container = document.getElementById("dynamic_id_container");
+        const childTextDiv = container.childNodes[1];
 
-            const scriptElement = document.getElementById('dynamic-guide-script');
-            const guideElement = document.getElementById('guide_element');
-            if (scriptElement) {
-                document.body.removeChild(scriptElement);
-                if (guideElement) document.body.removeChild(guideElement);
-                isScriptAdded = false;
-                console.log('Script removed.');
+        if (existingScript) {
+            // Remove script and guide element
+            document.body.removeChild(existingScript);
+            const existingGuide = document.getElementById(guideId);
+            if (existingGuide) {
+                document.body.removeChild(existingGuide);
+                container.classList.remove("!bg-[#146FF8]");
+                childTextDiv.classList.remove("!text-[#fff]");
+                childTextDiv.classList.add("!text-black");
+
             }
         } else {
-            // Create and add the script element
+            // Add script
             const scriptElement = document.createElement('script');
-            scriptElement.id = 'dynamic-guide-script';
+            scriptElement.id = scriptId;
             scriptElement.type = 'text/javascript';
             scriptElement.innerHTML = `
-                (function() {
-                    let guideElement = null;
-                    let isVisible = false;
+            (function() {
+                let guideElement = null;
+                let isVisible = false;
 
-                    const toggleGuide = () => {
-                        isVisible = !isVisible;
-                        if (!guideElement) {
-                            guideElement = document.createElement('div');
-                            guideElement.style.position = 'absolute';
-                            guideElement.style.width = '500px';
-                            guideElement.style.height = '10px';
-                            guideElement.style.backgroundColor = 'blue';
-                            guideElement.style.pointerEvents = 'none';
-                            guideElement.style.transition = 'opacity 0.3s ease';
-                            guideElement.style.zIndex='10'
-                            guideElement.style.opacity = '0';
-                            guideElement.id = 'guide_element';
-                            document.body.appendChild(guideElement);
+                const toggleGuide = () => {
+                    isVisible = !isVisible;
+                    if (!guideElement) {
+                        guideElement = document.createElement('div');
+                        guideElement.style.position = 'absolute';
+                        guideElement.style.width = '500px';
+                        guideElement.style.height = '10px';
+                        guideElement.style.backgroundColor = 'blue';
+                        guideElement.style.pointerEvents = 'none';
+                        guideElement.style.transition = 'opacity 0.3s ease';
+                        guideElement.style.zIndex = '10';
+                        guideElement.style.opacity = '0';
+                        guideElement.id = '${guideId}';
+                        document.body.appendChild(guideElement);
+                    }
+                    guideElement.style.opacity = isVisible ? '1' : '1';
+
+                    const handleMouseMove = (event) => {
+                        if (guideElement) {
+                            guideElement.style.left = \`\${event.pageX}px\`;
+                            guideElement.style.top = \`\${event.pageY}px\`;
                         }
-                        guideElement.style.opacity = isVisible ? '1' : '1';
 
-                        const handleMouseMove = (event) => {
-                            if (guideElement) {
-                                guideElement.style.left = \`\${event.pageX}px\`;
-                                guideElement.style.top = \`\${event.pageY}px\`;
+                         const scriptId = 'dynamic-guide-script';
+                        const scriptIsAdded = document.getElementById(scriptId);
+
+                        let container = document.getElementById("dynamic_id_container");
+                        const childTextDiv = container ? container.childNodes[1] :null; 
+
+                        if(scriptIsAdded){
+
+                          if(container)  {
+                          container.classList.remove("!text-black");
+                            container.classList.add("!bg-[#146FF8]");
+        }
+                            if(childTextDiv){
+                                childTextDiv.classList.remove("!text-black");
+                                childTextDiv.classList.add("!text-[#fff]");
+                                }
+
+                        }else{
+                         if(container)    container.classList.remove("!bg-[#146FF8]");
+                        if(childTextDiv){
+                            childTextDiv.classList.remove("!text-[#fff]");
+                            childTextDiv.classList.add("!text-black");
                             }
-                        };
-
-                        if (isVisible) {
-                            document.addEventListener('mousemove', handleMouseMove);
-                        } else {
-                            document.removeEventListener('mousemove', handleMouseMove);
                         }
-                
+
                     };
-                  
 
-                    document.addEventListener('click', toggleGuide);
-                    console.log("Script added. Click anywhere to toggle guide visibility.");
-                })();
-            `;
+                    if (isVisible) {
+                        document.addEventListener('mousemove', handleMouseMove);
+                    } else {
+                        document.removeEventListener('mousemove', handleMouseMove);
+                    }
+                };
+
+                // Call toggleGuide immediately to show the guide
+                toggleGuide();
+
+                document.addEventListener('click', toggleGuide);
+                console.log("Script added. Click anywhere to toggle guide visibility.");
+            })();
+        `;
             document.body.appendChild(scriptElement);
-            console.log('Script added.');
-            isScriptAdded = true;
+            container.classList.remove("!text-black");
+            container.classList.add("!bg-[#146FF8]");
+
+            childTextDiv.classList.remove("!text-black");
+            childTextDiv.classList.add("!text-[#fff]");
 
 
+            console.log('Script added and guide activated.');
         }
     };
+
+
+
+
 
     return (
         <div className='m-5 bg-[#fff] px-5 rounded-xl '>
@@ -159,15 +199,17 @@ const Orientation = () => {
                         imag={"/images/svgviewer-output (35).svg"}
                         heading={"Mute Sounds"}
                         onClick={mutemedia}
-                        customStyle={mute && "!bg-[#146FF8] "}
+                        customStyle={mute && "!bg-[#146FF8]  "}
                         customHeading={mute && "!text-[#fff]"}
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (38).svg"}
                         heading={"Reading Guide"}
                         onClick={handleClick}
-                        customStyle={isScriptAdded && "!bg-[#146FF8] "}
-                        customHeading={isScriptAdded && "!text-[#fff]"}
+                        // customStyle={isScriptAdded && "!bg-[#146FF8]"}
+                        // customHeading={isScriptAdded ? "!text-[#fff]" : "text-black"}
+                        id={"dynamic_id_container"}
+
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (40).svg"}
@@ -175,6 +217,7 @@ const Orientation = () => {
                         onClick={toggleAnimation}
                         customStyle={animationsDisabled && "!bg-[#146FF8] "}
                         customHeading={animationsDisabled && "!text-[#fff]"}
+
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (43).svg"}
