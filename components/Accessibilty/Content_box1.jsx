@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 
-const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, button, inputBar = false, img = true, color, colorButton = true, onClick, changeBackgroundColor, colors, onChangeColor, changeTitleColor, changeTextColor }) => {
+const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, button, inputBar = false, img = true, color, colorButton = true, onClick,handleImageClick, changeBackgroundColor, colors, onChangeColor, changeTitleColor, changeTextColor }) => {
 
   const options = [
     { value: "homepage" },
@@ -100,7 +100,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
         showBar ?
           <div className="flex justify-between items-center bg-white rounded-full ">
             <div className='p-3 bg-primary rounded-full flex justify-center items-center '>
-              <Image height={10} width={10} src={imag2} alt="" />
+              <Image height={10} width={10} src={imag2} alt="" onClick={handleImageClick} />
 
             </div>
             <div className='text-primary text-[13px] '>{para}</div>

@@ -1,6 +1,6 @@
 // import React from "react"
 
-import Contactbox from "./Contactbox";
+import Contactbox, { handleHighLight } from "./Contactbox";
 import ColorAdjustment from "./ColorAdjustment";
 import Orientation from "./Orientation";
 import Footer from "./Footer";
@@ -141,13 +141,12 @@ const SVG6 = () => (
 );
 const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
-  const [isCustomColor, setIsCustonColor] = useState(false);
+  const [isCustomColor, setIsCustomColor] = useState(false);
   const [activeTab, setActiveTab] = useState([])
 
 
   const changeColor = () => {
     const root = document.documentElement;
-    console.log({ root })
 
     if (isCustomColor) {
       root.style.setProperty('--#146FF8-color', '#146FF8');
@@ -157,7 +156,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
       root.style.setProperty('--#146FF8-color', '#3d6aaf');
       root.classList.add('sezure');
     }
-    setIsCustonColor(!isCustomColor)
+    setIsCustomColor(!isCustomColor)
   }
 
 
@@ -184,6 +183,32 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     }
 
   };
+
+
+  const [title, setTitle] = useState(false)
+  const titlelink = () => {
+    handleHighLight()
+  };
+
+  const changetab = (index, tabValue) => {
+    if (index === 3) {
+      titlelink();
+
+    }
+
+    setActiveTab((prevState) => {
+      const updatedTabs = { ...prevState, [index]: tabValue };
+      if (Object.keys(updatedTabs).length === 1) {
+        if (index === 0) {
+          setOpen(true);
+        }
+      } else {
+        return {};
+      }
+      return updatedTabs;
+    });
+  };
+
 
 
 
@@ -320,14 +345,14 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
                     <span
                       className={`flex justify-center transition-all !duration-200 ease-in-out items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
-                      onClick={() => handleTabChange(index)}
+                      onClick={() => { handleTabChange(index), changetab(index, false) }}
                     >
                       {item.of}
                     </span>
 
 
 
-                    <span className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`} onClick={() => handleTabChange(index, true)}>{item.on}
+                    <span className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`} onClick={() => { handleTabChange(index, true), changetab(index, true) }}>{item.on}
 
 
                     </span>

@@ -72,14 +72,19 @@ const Orientation = () => {
     }
 
 
-    // let isScriptAdded = false;
+
+
+
+
+
+
     const handleClick = () => {
         toggleScript();
 
     };
 
     const isScriptAdded = document.getElementById("dynamic-guide-script");
-    console.log('isScriptAdded: ', isScriptAdded);
+
 
     const toggleScript = () => {
         const guideId = 'guide_element';
@@ -114,11 +119,15 @@ const Orientation = () => {
                     if (!guideElement) {
                         guideElement = document.createElement('div');
                         guideElement.style.position = 'absolute';
-                        guideElement.style.width = '500px';
-                        guideElement.style.height = '10px';
-                        guideElement.style.backgroundColor = 'blue';
+                        guideElement.style.width = '400px';
+                        guideElement.style.height = '13px';
+                        guideElement.style.backgroundColor = '#146FF8';
+                        guideElement.style.border = '4px solid black';
+                        guideElement.style.borderRadius = '50px';
                         guideElement.style.pointerEvents = 'none';
                         guideElement.style.transition = 'opacity 0.3s ease';
+                        guideElement.style.overflowX = 'hidden';
+
                         guideElement.style.zIndex = '10';
                         guideElement.style.opacity = '0';
                         guideElement.id = '${guideId}';
@@ -128,7 +137,7 @@ const Orientation = () => {
 
                     const handleMouseMove = (event) => {
                         if (guideElement) {
-                            guideElement.style.left = \`\${event.pageX}px\`;
+                            guideElement.style.right = \`\${event.page20}px\`;
                             guideElement.style.top = \`\${event.pageY}px\`;
                         }
 
@@ -150,7 +159,8 @@ const Orientation = () => {
                                 }
 
                         }else{
-                         if(container)    container.classList.remove("!bg-[#146FF8]");
+                         if(container)   
+                         container.classList.remove("!bg-[#146FF8]");
                         if(childTextDiv){
                             childTextDiv.classList.remove("!text-[#fff]");
                             childTextDiv.classList.add("!text-black");
@@ -189,6 +199,129 @@ const Orientation = () => {
 
 
 
+
+
+
+    const handleMaskClick = () => {
+        istoggleScript();
+
+    };
+
+    const isScriptAdd = document.getElementById("dynamic-guide-script");
+
+
+    const istoggleScript = () => {
+        const guideId = 'guide_element';
+        const scriptId = 'dynamic-guide-script';
+        const existingScript = document.getElementById(scriptId);
+        let container = document.getElementById("dynamic_id");
+        const childTextDiv = container.childNodes[1];
+
+        if (existingScript) {
+            // Remove script and guide element
+            document.body.removeChild(existingScript);
+            const existingGuide = document.getElementById(guideId);
+            if (existingGuide) {
+                document.body.removeChild(existingGuide);
+                container.classList.remove("!bg-[#146FF8]");
+                childTextDiv.classList.remove("!text-[#fff]");
+                childTextDiv.classList.add("!text-black");
+
+            }
+        } else {
+            // Add script
+            const scriptElement = document.createElement('script');
+            scriptElement.id = scriptId;
+            scriptElement.type = 'text/javascript';
+            scriptElement.innerHTML = `
+            (function() {
+                let guideElement = null;
+                let isVisible = false;
+
+                const toggleGuide = () => {
+                    isVisible = !isVisible;
+                    if (!guideElement) {
+                        guideElement = document.createElement('div');
+                        guideElement.style.position = 'absolute';
+                        guideElement.style.width = '100%';
+                        guideElement.style.height = '200px';
+                        guideElement.style.backgroundColor = '#146FF8';
+                        guideElement.style.border = '4px solid black';
+                        guideElement.style.borderRadius = '50px';
+                        guideElement.style.pointerEvents = 'none';
+                        guideElement.style.transition = 'opacity 0.3s ease';
+                        guideElement.style.overflowX = 'hidden';
+
+                        guideElement.style.zIndex = '10';
+                        guideElement.style.opacity = '0';
+                        guideElement.id = '${guideId}';
+                        document.body.appendChild(guideElement);
+                    }
+                    guideElement.style.opacity = isVisible ? '1' : '1';
+
+                    const handleMouseMove = (event) => {
+                        if (guideElement) {
+                    
+                            guideElement.style.right = \`\${event.page20}px\`;
+                            guideElement.style.top = \`\${event.pageY}px\`;
+                        }
+
+                         const scriptId = 'dynamic-guide-script';
+                        const scriptIsAdded = document.getElementById(scriptId);
+
+                        let container = document.getElementById("dynamic_id");
+                        const childTextDiv = container ? container.childNodes[1] :null; 
+
+                        if(scriptIsAdded){
+
+                          if(container)  {
+                          container.classList.remove("!text-black");
+                            container.classList.add("!bg-[#146FF8]");
+        }
+                            if(childTextDiv){
+                                childTextDiv.classList.remove("!text-black");
+                                childTextDiv.classList.add("!text-[#fff]");
+                                }
+
+                        }else{
+                         if(container)   
+                         container.classList.remove("!bg-[#146FF8]");
+                        if(childTextDiv){
+                            childTextDiv.classList.remove("!text-[#fff]");
+                            childTextDiv.classList.add("!text-black");
+                            }
+                        }
+
+                    };
+
+                    if (isVisible) {
+                        document.addEventListener('mousemove', handleMouseMove);
+                    } else {
+                        document.removeEventListener('mousemove', handleMouseMove);
+                    }
+                };
+
+                // Call toggleGuide immediately to show the guide
+                toggleGuide();
+
+                document.addEventListener('click', toggleGuide);
+
+            })();
+        `;
+            document.body.appendChild(scriptElement);
+            container.classList.remove("!text-black");
+            container.classList.add("!bg-[#146FF8]");
+
+            childTextDiv.classList.remove("!text-black");
+            childTextDiv.classList.add("!text-[#fff]");
+
+        }
+    };
+
+
+
+
+
     return (
         <div className='m-5 bg-[#fff] px-5 rounded-xl '>
             <div className='text-[18px] pb-5'>Orientation Adjustments</div>
@@ -206,8 +339,6 @@ const Orientation = () => {
                         imag={"/images/svgviewer-output (38).svg"}
                         heading={"Reading Guide"}
                         onClick={handleClick}
-                        // customStyle={isScriptAdded && "!bg-[#146FF8]"}
-                        // customHeading={isScriptAdded ? "!text-[#fff]" : "text-black"}
                         id={"dynamic_id_container"}
 
                     />
@@ -254,6 +385,10 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (41).svg"}
                             heading={"Reading Mask"}
+                            onClick={handleMaskClick}
+                            id={"dynamic_id"}
+
+
                         />
                         <Content_box2
                             imag={"/images/svgviewer-output (42).svg"}
@@ -268,6 +403,7 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (44).svg"}
                             heading={"Big Black Cursor"}
+
                         />
                         <Content_box2
                             imag={"/images/svgviewer-output (45).svg"}
@@ -281,18 +417,7 @@ const Orientation = () => {
                 </div>
 
             </div>
-            {/* <div
-                className={`absolute pointer-events-none transition-opacity duration-300 `}
-                style={{
-                    left: `${position.x - 250}px`,
-                    top: `${position.y - 10}px`,
-                    width: '500px',
-                    height: '20px',
-                    background: 'red'
-                }}
-            >
-                <div className="absolute left-1/2 top-1/2 w-1 h-1 rounded-full bg-red-500 transform -translate-x-1/2 -translate-y-1/2" />
-            </div> */}
+
         </div>
     )
 }

@@ -22,39 +22,7 @@ const Contactbox = () => {
 
         }
     }
-    const [highlight, setHighlight] = useState(false)
-    const highlightAllTitles = () => {
-        setHighlight(!highlight)
-        const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
-        if (highlight) {
-            title.forEach((title) => {
-                title.style.border = '';
-                title.style.padding = '';
-            })
-        } else {
-            title.forEach((title) => {
-                title.style.border = '2px solid #146FF8';
-                title.style.padding = '5px';
-            })
-        }
-    }
-    const [link, setLink] = useState(false)
-    const highlightAllLink = () => {
-        setLink(!link)
-        const title = document.querySelectorAll('a')
-        if (link) {
-            title.forEach((title) => {
-                title.style.border = '';
-                title.style.padding = '';
 
-            })
-        } else {
-            title.forEach((title) => {
-                title.style.border = '2px solid #ff9a68';
-                title.style.padding = '5px';
-            })
-        }
-    }
     const [textcenter, setTextcenter] = useState(false)
     const allTextCenter = () => {
         setTextcenter(!textcenter)
@@ -90,6 +58,18 @@ const Contactbox = () => {
     }
 
 
+    const handleIncreaseFontSize = () => {
+        const body = document.body;
+        const currentFontSize = parseFloat(getComputedStyle(body).fontSize);
+        body.style.fontSize = `${currentFontSize + 5}px`;
+    };
+    const handleDecreaseFontSize = () => {
+        const body = document.body;
+        const currentFontSize = parseFloat(getComputedStyle(body).fontSize);
+        body.style.fontSize = `${currentFontSize - 5}px`;
+    };
+
+
 
     return (
         <div className='m-5 bg-[#fff] p-5 rounded-xl '>
@@ -111,27 +91,33 @@ const Contactbox = () => {
                             imag={"/images/svgviewer-output (27).svg"}
                             heading={"Highlight Titles"}
                             onClick={highlightAllTitles}
-                            customStyle={highlight && "!bg-[#146FF8] "}
-                            customHeading={highlight && "!text-[#fff]"}
+                            // customStyle={highLight && "!bg-[#146FF8] "}
+                            // customHeading={highLight && "!text-[#fff]"}
+                            id='highLighttitle'
+
 
                         />
                         <Content_box2
                             imag={"/images/svgviewer-output (28).svg"}
                             heading={"Highlight Links"}
                             onClick={highlightAllLink}
-                            customStyle={link && "!bg-[#146FF8] "}
-                            customHeading={link && "!text-[#fff]"}
+                            customStyle={Link && "!bg-[#146FF8] "}
+                            // customHeading={Link && "!text-[#fff]"}
+                            customHeading={"changeColor"}
+                            id='highLightLink'
                         />
 
 
                     </div>
                     <Content_box1
                         imag={"/images/svgviewer-output (24).svg"}
+                        handleImageClick={handleIncreaseFontSize}
                         heading={"Adjust Font Sizing"}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={"Default"}
                         imag3={"/images/svgviewer-output (17).svg"}
                         colorButton={false}
+
 
                     />
                     <Content_box1
@@ -197,3 +183,63 @@ const Contactbox = () => {
 }
 
 export default Contactbox
+
+
+export const handleHighLight = () => {
+    highlightAllLink()
+    highlightAllTitles()
+}
+let highLight = false
+const highlightAllTitles = () => {
+
+    const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+    const hightBackground = document.getElementById("highLighttitle")
+
+    if (highLight) {
+        title.forEach((title) => {
+            title.style.border = '';
+            title.style.padding = '';
+        })
+        hightBackground.style.backgroundColor = ""
+
+    } else {
+        title.forEach((title) => {
+            title.style.border = '2px solid #146FF8';
+            title.style.padding = '5px';
+
+        })
+        hightBackground.style.backgroundColor = "#146FF8"
+
+    }
+    highLight = !highLight
+}
+
+let Link = false
+const highlightAllLink = () => {
+
+    const title = document.querySelectorAll('a')
+    const hightBackground = document.getElementById("highLightLink")
+    // const textcolor = document.getElementsByClassName("changeColor")
+    if (Link) {
+        title.forEach((title) => {
+            title.style.border = '';
+
+
+        })
+        hightBackground.style.backgroundColor = ""
+        // hightBackground.style.color = ""
+
+
+
+
+    } else {
+        title.forEach((title) => {
+            title.style.border = '2px solid #ff9a68';
+
+        })
+        hightBackground.style.backgroundColor = "#146FF8"
+        // textcolor.style.color = "white"
+    }
+    Link = !Link
+
+}
