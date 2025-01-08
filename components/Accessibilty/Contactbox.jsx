@@ -57,22 +57,87 @@ const Contactbox = () => {
         }
     }
 
+    // increase/decrease fontsize
+
+
+    const handleIncreaseScale = () => {
+        const body = document.body;
+        const currentTransform = getComputedStyle(body).transform;
+
+        // Extract scale value from the transform matrix
+        let currentScale = 1; // Default scale
+        if (currentTransform !== 'none') {
+            const matrix = currentTransform.match(/matrix\((.+)\)/);
+            if (matrix) {
+                currentScale = parseFloat(matrix[1].split(', ')[0]);
+            }
+        }
+
+        // Increase scale
+        body.style.transform = `scale(${currentScale + 0.01})`;
+    };
+
+    const handleDecreaseScale = () => {
+        const body = document.body;
+        const currentTransform = getComputedStyle(body).transform;
+
+
+        let currentScale = 0.1; // Default scale
+        if (currentTransform !== 'none') {
+            const matrix = currentTransform.match(/matrix\((.+)\)/);
+            if (matrix) {
+                currentScale = parseFloat(matrix[1].split(', ')[0]);
+            }
+        }
+
+        // Decrease scale
+        if (currentScale > 0.1) { // Prevent scale from going below 0.1
+            body.style.transform = `scale(${currentScale - 0.01})`;
+        }
+    };
 
     const handleIncreaseFontSize = () => {
         const body = document.body;
         const currentFontSize = parseFloat(getComputedStyle(body).fontSize);
-        body.style.fontSize = `${currentFontSize + 5}px`;
+        body.style.fontSize = `${currentFontSize + 1}px`;
     };
     const handleDecreaseFontSize = () => {
         const body = document.body;
         const currentFontSize = parseFloat(getComputedStyle(body).fontSize);
-        body.style.fontSize = `${currentFontSize - 5}px`;
+        body.style.fontSize = `${currentFontSize - 1}px`;
+    };
+
+
+
+    // increase/decrease lineHeight
+    const handleIncreaseLingHight = () => {
+        const body = document.body;
+        const currentLineHeight = parseFloat(getComputedStyle(body).lineHeight)
+        body.style.lineHeight = `${currentLineHeight + 2}PX`;
+    }
+    const handleDecreaseLineHeight = () => {
+        const body = document.body
+        const currentLineHeight = parseFloat(getComputedStyle(body).lineHeight)
+        body.style.lineHeight = `${currentLineHeight - 2}PX`;
+    }
+    // increase/decrease letterspacing
+    const handleIncreaseLetterSpacing = () => {
+        const body = document.body;
+        let currentLetterSpacing = parseFloat(getComputedStyle(body).letterSpacing);
+        if (isNaN(currentLetterSpacing)) currentLetterSpacing = 0;
+        body.style.letterSpacing = `${currentLetterSpacing + 1}px`;
+    };
+    const handleDecreaseLetterSpacing = () => {
+        const body = document.body;
+        let currentLetterSpacing = parseFloat(getComputedStyle(body).letterSpacing);
+        if (isNaN(currentLetterSpacing)) currentLetterSpacing = 0;
+        body.style.letterSpacing = `${currentLetterSpacing - 1}px`;
     };
 
 
 
     return (
-        <div className='m-5 bg-[#fff] p-5 rounded-xl '>
+        <div className='m-5 bg-[#fff] p-4 rounded-xl '>
             <div className='text-[18px] pb-5'>Content Adjustments</div>
 
             <div className='flex flex-wrap lg:flex-nowrap gap-5'>
@@ -80,6 +145,8 @@ const Contactbox = () => {
                     <Content_box1
                         imag={"/images/svgviewer-output (16).svg"}
                         heading={"content Scaling"}
+                        handleImageClick={handleIncreaseScale}
+                        handleImagClick={handleDecreaseScale}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={"Default"}
                         imag3={"/images/svgviewer-output (17).svg"}
@@ -112,6 +179,7 @@ const Contactbox = () => {
                     <Content_box1
                         imag={"/images/svgviewer-output (24).svg"}
                         handleImageClick={handleIncreaseFontSize}
+                        handleImagClick={handleDecreaseFontSize}
                         heading={"Adjust Font Sizing"}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={"Default"}
@@ -123,6 +191,10 @@ const Contactbox = () => {
                     <Content_box1
                         imag={"/images/svgviewer-output (25).svg"}
                         heading={"Adjust Line Height"}
+                        handleImageClick={handleIncreaseLingHight}
+                        handleImagClick={handleDecreaseLineHeight}
+
+
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={"Default"}
                         imag3={"/images/svgviewer-output (17).svg"}
@@ -132,6 +204,8 @@ const Contactbox = () => {
                     <Content_box1
                         imag={"/images/svgviewer-output (26).svg"}
                         heading={"Adjust Letter Spacing"}
+                        handleImageClick={handleIncreaseLetterSpacing}
+                        handleImagClick={handleDecreaseLetterSpacing}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={"Default"}
                         imag3={"/images/svgviewer-output (17).svg"}

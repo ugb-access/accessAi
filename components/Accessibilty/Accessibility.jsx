@@ -296,7 +296,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     }
   ]
   return (
-    <div className={` w-full md:w-[50%] xl:w-[40%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none right-10  top-0 z-10 fixed  !h-screen `}>
+    <div className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none right-10  top-0 z-10 fixed  !h-screen `}>
       <div className="p-5 rounded-t-xl  bg-primary">
         <div className="flex justify-between items-center cursor-pointer">
           <div className="text-white transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
@@ -307,9 +307,6 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
             <Image width={12} height={12} src="/images/svgviewer-output (18).svg" alt="" />
           </div>
 
-          <div className="!text-#146FF8-foreground">
-
-          </div>
 
         </div>
         <h2 className="text-[24px] text-[#ffffff] text-center pb-[30px]">Accessibility Adjustments</h2>
@@ -388,7 +385,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
       <Orientation />
       <Footer />
 
-    </div>
+    </div >
 
   )
 }

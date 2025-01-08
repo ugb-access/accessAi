@@ -323,7 +323,7 @@ const Orientation = () => {
 
 
     return (
-        <div className='m-5 bg-[#fff] px-5 rounded-xl '>
+        <div className='m-5 bg-[#fff] px-4 rounded-xl '>
             <div className='text-[18px] pb-5'>Orientation Adjustments</div>
 
             <div className='flex flex-wrap lg:flex-nowrap gap-5'>

@@ -179,7 +179,7 @@ const ColorAdjustment = () => {
 
                 </div>
                 <div className='w-full lg:flex-1'>
-                    <div className='flex gap-5 '>
+                    <div className='flex gap-4 '>
                         <Content_box2
                             imag={"/images/svgviewer-output (30).svg"}
                             heading={"Light Contrast"}
