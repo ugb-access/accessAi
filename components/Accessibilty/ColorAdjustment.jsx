@@ -11,13 +11,20 @@ const ColorAdjustment = () => {
     const changeBackgroundColor = (color) => {
         localStorage.setItem("background-color", color)
         document.body.style.background = color
+        const id = document.getElementById('accessibilty')
+
+
         const footer = document.getElementsByTagName('footer');
+
         if (footer.length > 0) {
             // Add the class to the footer
             footer[0].classList.add('important-background');
 
             // Check if the style already exists
             let styleElement = document.getElementById('dynamic-styles');
+            if (color.id === "accessibilty") {
+
+            }
             if (!styleElement) {
                 // Create a <style> element if it doesn't exist
                 styleElement = document.createElement('style');
@@ -36,67 +43,125 @@ const ColorAdjustment = () => {
                 }
             `;
 
-            console.log(`Applied color: ${color}`);
         } else {
-            console.log("No footer element found.");
         }
     };
 
     const changeTitleColor = (color) => {
-        const heading = document.body.querySelectorAll('h1,h2,h3,h4,h5,h6');
-        heading.forEach((heading) => {
+        const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
+        const accessibilityElement = document.getElementById('accessibilty'); //
+
+        headings.forEach((heading) => {
+            // Skip elements that are the "accessibility" element or are inside it
+            if (accessibilityElement.contains(heading)) {
+                return;
+            }
+
+            // Change the color for other elements
             heading.style.color = color;
-        })
-    }
+        });
+    };
+
+
     const changeTextColor = (color) => {
-        const heading = document.body.querySelectorAll('p,a,button');
-        heading.forEach((heading) => {
-            heading.style.color = color;
-        })
-    }
+        const elements = document.body.querySelectorAll('p, a');
+        const accessibilityElement = document.getElementById('accessibilty');
+
+        elements.forEach((element) => {
+            // Skip the element if it is the #accessibilty element or is inside it
+            if (accessibilityElement.contains(element)) {
+                return;
+            }
+
+            // Change the text color for other elements
+            element.style.color = color;
+        });
+    };
 
 
-    const [lightContrast, setLightContrast] = useState(false)
+
+    //////////////////////////lightcontrast///////////////////////////
+    let lightContrast = false
     const LightContrast = () => {
-        setLightContrast(!lightContrast)
+        lightContrast = !lightContrast
         const body = document.body
-        if (!lightContrast) {
+        const titles = document.getElementsByClassName('light');
+        if (lightContrast) {
             body.style.background = '#f2f0f0';
             body.style.color = '#000000';
         } else {
             body.style.background = '#ffffff';
             body.style.color = '';
         }
+        Array.from(titles).forEach(title => {
+            if (lightContrast) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        });
     }
-    const [dark, setDark] = useState(false)
+
+    ////////////////////dark contrast///////////////////////////
+    let dark = false
     const DarkContrast = () => {
         const body = document.body
-        setDark(!dark)
-        if (!dark) {
+        const titles = document.getElementsByClassName('dark');
+        dark = !dark
+        if (dark) {
             body.style.background = '#181818'
         } else {
             body.style.background = '#ffffff';
 
         }
+        Array.from(titles).forEach(title => {
+            if (dark) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        })
 
     }
-    const [high, setHigh] = useState(false)
+    ///////////////////////////highcontrast///////////////////////////
+    let high = false
     const HighContrast = () => {
         const body = document.body
-        setHigh(!high)
-        if (!high) {
+        const titles = document.getElementsByClassName('high');
+        high = !high
+
+        if (high) {
             body.style.background = '#ffffff'
         } else {
             body.style.background = '';
 
         }
+        Array.from(titles).forEach(title => {
+            if (high) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        })
+
 
     }
-    const [highSaturation, setHighSaturation] = useState(false)
+    ///////////////////////////highsaturation///////////////////////////
+    let highSaturation = false
     const HighSaturation = () => {
         const body = document.body
-        setHighSaturation(!highSaturation)
-        if (!highSaturation) {
+        const titles = document.getElementsByClassName('highSaturation');
+        highSaturation = !highSaturation
+        if (highSaturation) {
             body.classList.add('saturate-200');
             body.classList.add('h-screen');
 
@@ -104,34 +169,65 @@ const ColorAdjustment = () => {
             body.classList.remove('saturate-200');
 
         }
+        Array.from(titles).forEach(title => {
+            if (highSaturation) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        })
     }
-    const [lowSaturation, setLowSaturation] = useState(false)
+    ///////////////////////////lowsaturation///////////////////////////
+    let lowSaturation = false
     const lowsaturation = () => {
         const body = document.body
-        setLowSaturation(!lowSaturation)
+        const titles = document.getElementsByClassName('lowSaturation');
+        lowSaturation = !lowSaturation
         console.log('body.classList:before ', body.classList);
-        if (!lowSaturation) {
+        if (lowSaturation) {
             body.classList.add('saturate-[0.4]');
 
         } else {
             body.classList.remove('saturate-[0.4]');
 
         }
-        console.log('body.classList: after ', body.classList);
+        Array.from(titles).forEach(title => {
+            if (lowSaturation) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        })
     }
-    const [monoChrome, setMonoChrome] = useState(false)
+    ///////////////////////////monochrome///////////////////////////
+    let monoChrome = false
     const monochrome = () => {
         const body = document.body
-        setMonoChrome(!monoChrome)
-        console.log('body.classList:before ', body.classList);
-        if (!monoChrome) {
+        const titles = document.getElementsByClassName('monochrom');
+        monoChrome = !monoChrome
+        if (monoChrome) {
             body.classList.add('grayscale');
 
         } else {
             body.classList.remove('grayscale');
 
         }
-        console.log('body.classList: after ', body.classList);
+        Array.from(titles).forEach(title => {
+            if (monoChrome) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        })
     }
 
     return (
@@ -141,58 +237,54 @@ const ColorAdjustment = () => {
 
 
 
-        <div className='m-5 bg-[#fff] p-5 rounded-xl '>
-            <div className='text-[18px] pb-5'>Color Adjustments</div>
+        <div id="accessibilty" className='m-5 bg-[#fff] p-5 rounded-xl '>
+            <div id="accessibilty" className='text-[18px] pb-5'>Color Adjustments</div>
 
-            <div className='flex flex-wrap lg:flex-nowrap gap-5'>
-                <div className=' flex flex-wrap gap-5 md:gap-0 lg w-full lg:w-[30%] '>
+            <div id="accessibilty" className='flex flex-wrap lg:flex-nowrap gap-5'>
+                <div id="accessibilty" className=' flex flex-wrap gap-5 md:gap-0 lg w-full lg:w-[30%] '>
                     <Content_box2
                         imag={"/images/svgviewer-output (29).svg"}
                         heading={"Dark Contrast"}
                         onClick={DarkContrast}
-                        customStyle={dark && "!bg-[#146FF8] "}
-                        customHeading={dark && "!text-[#fff]"}
+                        customStyle={"dark"}
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (32).svg"}
                         heading={"High Saturation"}
                         onClick={HighSaturation}
-                        customStyle={highSaturation && "!bg-[#146FF8] "}
-                        customHeading={highSaturation && "!text-[#fff]"}
+                        customStyle={"highSaturation"}
+
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (33).svg"}
                         heading={"Monochrome"}
                         onClick={monochrome}
-                        customStyle={monoChrome && "!bg-[#146FF8] "}
-                        customHeading={monoChrome && "!text-[#fff]"}
+                        customStyle={"monochrom"}
 
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (34).svg"}
                         heading={"Low Saturation"}
                         onClick={lowsaturation}
-                        customStyle={lowSaturation && "!bg-[#146FF8] "}
-                        customHeading={lowSaturation && "!text-[#fff]"}
+                        customStyle={"lowSaturation "}
                     />
 
 
                 </div>
-                <div className='w-full lg:flex-1'>
-                    <div className='flex gap-4 '>
+                <div id="accessibilty" className='w-full lg:flex-1'>
+                    <div id="accessibilty" className='flex gap-4 '>
                         <Content_box2
                             imag={"/images/svgviewer-output (30).svg"}
                             heading={"Light Contrast"}
                             onClick={LightContrast}
-                            customStyle={lightContrast && "!bg-[#146FF8] "}
-                            customHeading={lightContrast && "!text-[#fff]"}
+                            customStyle={'light'}
+
                         />
                         <Content_box2
                             imag={"/images/svgviewer-output (31).svg"}
                             heading={"High Contrast"}
                             onClick={HighContrast}
-                            customStyle={high && "!bg-[#146FF8] "}
-                            customHeading={high && "!text-[#fff]"}
+                            customStyle={'high'}
                         />
 
                     </div>

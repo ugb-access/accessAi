@@ -3,7 +3,6 @@
 import Contactbox, { handleHighLight } from "./Contactbox";
 import ColorAdjustment from "./ColorAdjustment";
 import Orientation from "./Orientation";
-import Footer from "./Footer";
 import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
@@ -142,13 +141,16 @@ const SVG6 = () => (
 const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
   const [isCustomColor, setIsCustomColor] = useState(false);
-  const [activeTab, setActiveTab] = useState([])
+  const [activeTab, setActiveTab] = useState(-1)
 
 
-  const changeColor = () => {
+
+
+  const saveProfileHandler = (active) => {
+    console.log('active: ', active);
     const root = document.documentElement;
 
-    if (isCustomColor) {
+    if (!active) {
       root.style.setProperty('--#146FF8-color', '#146FF8');
       root.classList.remove('sezure');
 
@@ -162,55 +164,126 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
 
 
+
+
+
   const handleTabChange = (index, tabValue) => {
     if (index === 0) {
-      changeColor()
+      saveProfileHandler()
     }
-    setActiveTab([])
+    if (index === 3) {
+      titlelink()
+    }
+    if (index === 1) {
+      scale()
+    }
+    setActiveTab(-1)
     if (activeTab.length === 0) {
-      setActiveTab(prevState => ({
-        ...prevState,
-        [index]: tabValue
-      }));
+      setActiveTab(index);
       if (index === 0) {
         setOpen(true)
 
       }
+
     }
     else {
-      setActiveTab([])
+      setActiveTab(-1)
 
     }
 
   };
 
 
-  const [title, setTitle] = useState(false)
-  const titlelink = () => {
-    handleHighLight()
+  /////////////titlelink////////////////
+  const titlelink = (active) => {
+    console.log('active: ', active);
+
+    handleHighLight(active)
+
   };
 
-  const changetab = (index, tabValue) => {
-    if (index === 3) {
-      titlelink();
+
+
+  //////////scale///////////
+  const DefaultScale = 1
+  const scale = (active) => {
+    const body = document.body
+    if (active) {
+
+      body.style.transform = 'scale(1.1)';
+    } else {
+      body.style.transform = `scale(${DefaultScale})`;
 
     }
+  }
 
-    setActiveTab((prevState) => {
-      const updatedTabs = { ...prevState, [index]: tabValue };
-      if (Object.keys(updatedTabs).length === 1) {
-        if (index === 0) {
-          setOpen(true);
-        }
+
+  /////////////////////keyboard//////////////////////
+  const keyboard = () => {
+    document.addEventListener("keydown", (event) => {
+      const buttons = document.querySelectorAll('button');
+      const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+
+
+      if (event.key.toLowerCase() === "b") {
+        buttons.forEach(button => {
+          button.style.border = "1px solid red";
+        });
       } else {
-        return {};
+        buttons.forEach(button => {
+          button.style.border = "none";
+        });
       }
-      return updatedTabs;
+      if (event.key.toLowerCase() === "h") {
+        headings.forEach(headings => {
+          headings.style.border = "1px solid red";
+        });
+      } else {
+        headings.forEach(headings => {
+          headings.style.border = "none";
+        });
+      }
+
+
+
     });
+  }
+  const changetab4 = (index, tabValue) => {
+    if (index === 4) {
+      keyboard();
+
+    }
+
+    setActiveTab(index);
   };
 
+  const handleOn = (index) => {
 
+    setActiveTab(index)
 
+    if (index === 0) {
+      saveProfileHandler(true)
+    }
+    if (index === 4) {
+      keyboard(true)
+    }
+    if (index === 1) {
+      scale(true)
+    }
+    if (index === 3) {
+      titlelink(true)
+    }
+
+  }
+
+  const handleOff = () => {
+    setActiveTab(-1)
+    saveProfileHandler(false)
+    keyboard(false)
+    scale(false)
+    titlelink(false)
+
+  }
 
 
 
@@ -296,78 +369,78 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     }
   ]
   return (
-    <div className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none right-10  top-0 z-10 fixed  !h-screen `}>
-      <div className="p-5 rounded-t-xl  bg-primary">
-        <div className="flex justify-between items-center cursor-pointer">
-          <div className="text-white transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
+    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10  top-0 z-10 fixed  !h-screen `}>
+      <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary">
+        <div id="accessibilty" className="flex justify-between items-center cursor-pointer">
+          <div id="accessibilty" className="text-white transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
             <Image height={12} width={12} src={'/images/svgviewer-output (1).svg'} />
           </div>
-          <div className="flex items-center gap-1 hover:bg-[#0041A4] px-3 py-1 rounded-full">
-            <span className="text-white uppercase">English</span>
+          <div id="accessibilty" className="flex items-center gap-1 hover:bg-[#0041A4] px-3 py-1 rounded-full">
+            <span id="accessibilty" className="text-white uppercase">English</span>
             <Image width={12} height={12} src="/images/svgviewer-output (18).svg" alt="" />
           </div>
 
 
         </div>
-        <h2 className="text-[24px] text-[#ffffff] text-center pb-[30px]">Accessibility Adjustments</h2>
-        <div className="flex justify-around  flex-wrap  w-full items-center gap-5">
+        <h2 id="accessibilty" className="text-[24px] text-[#ffffff] text-center pb-[30px]">Accessibility Adjustments</h2>
+        <div id="accessibilty" className="flex justify-around  flex-wrap  w-full items-center gap-5">
           {data.map((item, index) => {
             return (
-              <div key={index} className=" w-[70%] lg:w-[30%] ">
-                <button className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
+              <div key={index} id="accessibilty" className=" w-[70%] lg:w-[30%] ">
+                <button id="accessibilty" className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
                   <Image height={20} width={20} src={item.Image} alt="" />
                   {item.button}</button>
               </div>
             )
           })}
         </div>
-        <div className="flex bg-primary items-center p-3 my-10 gap-5 rounded-full  w-full">
+        <div id="accessibilty" className="flex bg-primary items-center p-3 my-10 gap-5 rounded-full  w-full">
           <Image height={15} width={15} src="/images/svgviewer-output (6).svg" alt="" />
-          <input className=" bg-primary  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
+          <input id="accessibilty" className=" bg-primary  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
           <Image height={10} width={10} src="/images/svgviewer-output (7).svg" alt="" />
         </div>
       </div>
       {/* on/off */}
 
-      <div className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
-        <div className="px-5">Choose  the right accessibilty profile for you</div>
+      <div id="accessibilty" id="accessibilty" className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
+        <div id="accessibilty" className="px-5">Choose  the right accessibilty profile for you</div>
         {data2.map((item, index) => {
-          const isTabActive = activeTab[index] === true; // 
-          const isTabInactive = activeTab[index] !== false;
+
+          const isTabActive = activeTab === index
+
           return (
             <>
-              <div key={index} className={`  border-b-2 py-[18px] px-2 group ${isTabActive && ' bg-gray-300 mx-5 rounded-xl'}`}>
-                <div className="flex justify-between">
-                  <div className=" h-[35px] bg-[#e1e5e7] shadow-2xl rounded-[50px] flex-1 flex justify-center transition-all !duration-1000 items-center">
+              <div key={index} id="accessibilty" className={`  border-b-2 py-[18px] px-2 group ${isTabActive && ' bg-gray-300 mx-5 rounded-xl'}`}>
+                <div id="accessibilty" className="flex justify-between">
+                  <div id="accessibilty" className=" h-[35px] bg-[#e1e5e7] shadow-2xl rounded-[50px] flex-1 flex justify-center transition-all !duration-1000 items-center">
 
                     <span
-                      className={`flex justify-center transition-all !duration-200 ease-in-out items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
-                      onClick={() => { handleTabChange(index), changetab(index, false) }}
+                      id="accessibilty" className={`flex justify-center transition-all !duration-200 ease-in-out items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
+                      onClick={() => { handleOff(index) }}
                     >
                       {item.of}
                     </span>
 
-
-
-                    <span className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`} onClick={() => { handleTabChange(index, true), changetab(index, true) }}>{item.on}
+                    <span id="accessibilty" className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`}
+                      onClick={() => handleOn(index)}>{item.on}
 
 
                     </span>
                   </div>
-                  <div className="w-[75%] pl-[7%] group ">
-                    <div className="text-[#1F2533] text-[16px] group-hover:text-primary font-semibold">{item.para1}</div>
-                    <div className="text-[#3e465d] text-[14px] group-hover:text-primary font-medium">{item.para2}r</div>
+                  <div id="accessibilty" className="w-[75%] pl-[7%] group ">
+                    <div id="accessibilty" className="text-[#1F2533] text-[16px] group-hover:text-primary font-semibold">{item.para1}</div>
+                    <div id="accessibilty" className="text-[#3e465d] text-[14px] group-hover:text-primary font-medium">{item.para2}r</div>
                   </div>
-                  <div className="bg-[#f2f7fa]  rounded-full hidden md:flex justify-center items-center h-[30px]  w-[30px]">
-                    <span className="group-hover:text-primary"> {item.svg}</span>
+                  <div id="accessibilty" className="bg-[#f2f7fa]  rounded-full hidden md:flex justify-center items-center h-[30px]  w-[30px]">
+                    <span id="accessibilty" className="group-hover:text-primary"> {item.svg}</span>
 
                   </div>
                 </div>
 
                 {isTabActive &&
                   <div>
-                    <div className="text-[15px] p-4 ">{item.para}</div>
-                    <strong className="pl-4 pt-4">{item.note}</strong>
+                    <div id="accessibilty" className="text-[15px] p-4 ">{item.para}</div>
+                    <strong id="accessibilty" className="pl-4 pt-4">{item.note}</strong>
                     <span>{item.Para3}</span>
 
                   </div>
@@ -383,7 +456,6 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
       <Contactbox />
       <ColorAdjustment />
       <Orientation />
-      <Footer />
 
     </div >
 

@@ -45,7 +45,7 @@ export default function Home({ }) {
         <Footer />
       </div>
       {toggle && <Accessibility handlePageClick={handlePageClick} setOpen={setOpen} open={open} />}
-      <div className="fixed  bottom-10 right-10 bg-primary h-[45px] w-[45px] rounded-full flex justify-center hover:scale-[1.1] cursor-pointer  hover:border border-orange-600 items-center transform transition-all !duration-1000 ease-in-out" onClick={handleButtonClick}>
+      <div id="accessibilty" className="fixed  bottom-10 right-10 bg-primary h-[45px] w-[45px] rounded-full flex justify-center hover:scale-[1.1] cursor-pointer  hover:border border-orange-600 items-center transform transition-all !duration-1000 ease-in-out" onClick={handleButtonClick}>
         <Image height={20} width={20} src={"/images/svgviewer-output (53).svg"} alt="Button icon" />
       </div>
     </div>

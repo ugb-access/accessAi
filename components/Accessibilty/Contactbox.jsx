@@ -137,11 +137,11 @@ const Contactbox = () => {
 
 
     return (
-        <div className='m-5 bg-[#fff] p-4 rounded-xl '>
-            <div className='text-[18px] pb-5'>Content Adjustments</div>
+        <div id="accessibilty" className='m-5 bg-[#fff] p-4 rounded-xl '>
+            <div id="accessibilty" className='text-[18px] pb-5'>Content Adjustments</div>
 
-            <div className='flex flex-wrap lg:flex-nowrap gap-5'>
-                <div className='w-full lg:flex-1'>
+            <div id="accessibilty" className='flex flex-wrap lg:flex-nowrap gap-5'>
+                <div id="accessibilty" className='w-full lg:flex-1'>
                     <Content_box1
                         imag={"/images/svgviewer-output (16).svg"}
                         heading={"content Scaling"}
@@ -153,7 +153,7 @@ const Contactbox = () => {
                         colorButton={false}
 
                     />
-                    <div className='flex gap-5 '>
+                    <div id="accessibilty" className='flex gap-5 '>
                         <Content_box2
                             imag={"/images/svgviewer-output (27).svg"}
                             heading={"Highlight Titles"}
@@ -214,7 +214,7 @@ const Contactbox = () => {
                     />
 
                 </div>
-                <div className=' flex flex-wrap gap-5 md:gap-0 lg w-full lg:w-[30%]'>
+                <div id="accessibilty" className=' flex flex-wrap gap-5 md:gap-0 lg w-full lg:w-[30%]'>
                     <Content_box2
                         imag={"/images/svgviewer-output (19).svg"}
                         heading={"Readable Font"}
@@ -259,42 +259,44 @@ const Contactbox = () => {
 export default Contactbox
 
 
-export const handleHighLight = () => {
-    highlightAllLink()
-    highlightAllTitles()
+export const handleHighLight = (active) => {
+    highlightAllLink(active)
+    highlightAllTitles(active)
 }
 let highLight = false
-const highlightAllTitles = () => {
+const highlightAllTitles = (active) => {
 
     const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
     const hightBackground = document.getElementById("highLighttitle")
 
-    if (highLight) {
+    if (active) {
         title.forEach((title) => {
             title.style.border = '';
             title.style.padding = '';
         })
         hightBackground.style.backgroundColor = ""
 
+
     } else {
-        title.forEach((title) => {
+        title.forEach(() => {
             title.style.border = '2px solid #146FF8';
             title.style.padding = '5px';
 
         })
         hightBackground.style.backgroundColor = "#146FF8"
+        highLight(true)
 
     }
-    highLight = !highLight
+
 }
 
 let Link = false
-const highlightAllLink = () => {
+const highlightAllLink = (active) => {
 
     const title = document.querySelectorAll('a')
     const hightBackground = document.getElementById("highLightLink")
     // const textcolor = document.getElementsByClassName("changeColor")
-    if (Link) {
+    if (active) {
         title.forEach((title) => {
             title.style.border = '';
 
@@ -314,6 +316,6 @@ const highlightAllLink = () => {
         hightBackground.style.backgroundColor = "#146FF8"
         // textcolor.style.color = "white"
     }
-    Link = !Link
+
 
 }

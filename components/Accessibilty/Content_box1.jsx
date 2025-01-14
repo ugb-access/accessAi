@@ -52,17 +52,17 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
     { value: "/accessscan", label: "Web accessibility audit" },
   ]
   return (
-    <div className="bg-[#F2F7FA] rounded-xl max-w-full  mb-5 py-[20px] px-[25px] cursor-pointer  " onClick={onClick}>
-      <div className="flex justify-center gap-3 mb-5">
+    <div id="accessibilty" className="bg-[#F2F7FA] rounded-xl max-w-full  mb-5 py-[20px] px-[25px] cursor-pointer  " onClick={onClick}>
+      <div id="accessibilty" className="flex justify-center gap-3 mb-5">
         {img ?
           <Image height={20} width={20} src={imag} alt="" />
           :
           null
         }
-        <div className='text-[14px]'>{heading} </div>
+        <div id="accessibilty" className='text-[14px]'>{heading} </div>
       </div>
       {inputBar ?
-        <div className='bg-white  p-2 rounded-full cursor-pointer '>
+        <div id="accessibilty" className='bg-white  p-2 rounded-full cursor-pointer '>
           <select name="" id="" className='outline-none flex justify-between w-full bg-white'>
             <option value="">select an option</option>
             {options.map((item, index) => {
@@ -83,30 +83,30 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
       }
       {
         showBar ?
-          <div className="flex justify-between items-center bg-white rounded-full ">
-            <div className='p-3 bg-primary rounded-full flex justify-center items-center ' onClick={handleImagClick} >
+          <div id="accessibilty" className="flex justify-between items-center bg-white rounded-full ">
+            <div id="accessibilty" className='p-3 bg-primary rounded-full flex justify-center items-center ' onClick={handleImagClick} >
               <Image height={10} width={10} src={imag2} alt="" />
             </div>
             <div id='font-size-indicator' className='text-primary text-[13px] '>{para}</div>
-            <div className='p-3 bg-primary rounded-full flex justify-center items-center ' onClick={handleImageClick}>
+            <div id="accessibilty" className='p-3 bg-primary rounded-full flex justify-center items-center ' onClick={handleImageClick}>
               <Image height={10} width={10} src={imag3} alt="" />
             </div>
           </div>
           :
           null
       }
-      {colorButton ? <div className='flex gap-1 justify-center'>
+      {colorButton ? <div id="accessibilty" className='flex gap-1 justify-center'>
         {colors?.map((item, index) => {
           return (
-            <div key={index}>
-              <button style={{ backgroundColor: item }} className={`h-[24px] w-[24px] border rounded-full`} onClick={() => { onChangeColor(item); }}></button>
+            <div key={index} id="accessibilty">
+              <button style={{ backgroundColor: item }} id="accessibilty" className={`h-[24px] w-[24px] border rounded-full`} onClick={() => { onChangeColor(item); }}></button>
             </div>
           )
         })}
       </div>
         : null
       }
-      <button className='mx-auto w-full mt-1' onClick={() => onChangeColor("")}>{button}</button>
+      <button id="accessibilty" className='mx-auto w-full mt-1' onClick={() => onChangeColor("")}>{button}</button>
     </div >
   )
 }
