@@ -110,11 +110,17 @@ const ColorAdjustment = () => {
     const DarkContrast = () => {
         const body = document.body
         const titles = document.getElementsByClassName('dark');
+        const elements = document.querySelectorAll('p,a,button,h1,h2,h3,h4,h5,h6')
         dark = !dark
         if (dark) {
             body.style.background = '#181818'
+            elements.forEach(ele => ele.style.color = '#fff')
+
+
         } else {
             body.style.background = '#ffffff';
+            elements.forEach(el => el.style.color = '');
+
 
         }
         Array.from(titles).forEach(title => {

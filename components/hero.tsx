@@ -16,6 +16,10 @@ export function Hero() {
                 <br />
                 ADA Compliance
               </h1>
+              <form action="">
+                <input type="text"
+                  placeholder='enter your name' />
+              </form>
               <div className="mt-8 space-y-4">
                 <div className="flex items-center gap-3">
                   <Check className="h-5 w-5 text-primary" />

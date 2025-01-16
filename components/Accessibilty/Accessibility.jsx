@@ -178,8 +178,10 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
       scale()
     }
     setActiveTab(-1)
+
     if (activeTab.length === 0) {
       setActiveTab(index);
+
       if (index === 0) {
         setOpen(true)
 
@@ -196,10 +198,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
   /////////////titlelink////////////////
   const titlelink = (active) => {
-    console.log('active: ', active);
-
     handleHighLight(active)
-
   };
 
 
@@ -219,35 +218,79 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
 
   /////////////////////keyboard//////////////////////
-  const keyboard = () => {
-    document.addEventListener("keydown", (event) => {
+  let keyBoardActive = false;
+
+  const keyboard = (() => {
+    let isListenerAdded = false;
+
+    const toggleBorder = (elements, key, borderStyle) => {
+      elements.forEach(element => {
+        if (element.style.border === borderStyle) {
+          // Remove border if it's already applied
+          element.style.border = "none";
+        } else {
+          // Apply border
+          element.style.border = borderStyle;
+        }
+      });
+    };
+
+    const resetStyles = () => {
       const buttons = document.querySelectorAll('button');
-      const headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      buttons.forEach(button => (button.style.border = "none"));
+      headings.forEach(heading => (heading.style.border = "none"));
+    };
 
+    const addKeydownListener = () => {
+      keyBoardActive = !keyBoardActive;
 
-      if (event.key.toLowerCase() === "b") {
-        buttons.forEach(button => {
-          button.style.border = "1px solid red";
-        });
-      } else {
-        buttons.forEach(button => {
-          button.style.border = "none";
-        });
-      }
-      if (event.key.toLowerCase() === "h") {
-        headings.forEach(headings => {
-          headings.style.border = "1px solid red";
-        });
-      } else {
-        headings.forEach(headings => {
-          headings.style.border = "none";
-        });
+      if (!keyBoardActive) {
+        resetStyles();
+        return;
       }
 
+      if (!isListenerAdded) {
+        document.addEventListener("keydown", (event) => {
+          const buttons = document.querySelectorAll('button');
+          const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+          const accessibilityElement = document.getElementById('accessibilty');
+
+          if (keyBoardActive) {
+            if (event.key.toLowerCase() === "b") {
+              toggleBorder(
+                Array.from(buttons).filter(button => !accessibilityElement.contains(button)),
+                "b",
+                "1px solid red"
+              );
+            }
+
+            if (event.key.toLowerCase() === "h") {
+              toggleBorder(
+                Array.from(headings).filter(heading => !accessibilityElement.contains(heading)),
+                "h",
+                "1px solid red"
+              );
+            }
+          }
+        });
+
+        isListenerAdded = true;
+      }
+    };
+
+    return addKeydownListener;
+  })();
+
+  // Example usage
+  keyboard();
 
 
-    });
-  }
+
+
+
+
+
   const changetab4 = (index, tabValue) => {
     if (index === 4) {
       keyboard();
@@ -372,7 +415,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10  top-0 z-10 fixed  !h-screen `}>
       <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary">
         <div id="accessibilty" className="flex justify-between items-center cursor-pointer">
-          <div id="accessibilty" className="text-white transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
+          <div id="accessibilty" className="text-white hover:transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
             <Image height={12} width={12} src={'/images/svgviewer-output (1).svg'} />
           </div>
           <div id="accessibilty" className="flex items-center gap-1 hover:bg-[#0041A4] px-3 py-1 rounded-full">

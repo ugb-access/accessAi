@@ -106,7 +106,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
       </div>
         : null
       }
-      <button id="accessibilty" className='mx-auto w-full mt-1' onClick={() => onChangeColor("")}>{button}</button>
+      <button id="accessibilty" className='mx-auto w-full mt-1 hover:border-b-2 ' onClick={() => onChangeColor("")}>{button}</button>
     </div >
   )
 }
