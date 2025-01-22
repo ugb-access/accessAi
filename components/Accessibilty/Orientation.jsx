@@ -62,13 +62,13 @@ const Orientation = () => {
         });
     }
 
-    let hoverHighlight = false; // Replace useState with a simple variable
+    let hoverHighlight = false;
 
     const toggleHoverHighlight = () => {
         hoverHighlight = !hoverHighlight;
 
         const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, img, span");
-        const titles = document.getElementsByClassName('highLight'); // Get all elements with class 'change'
+        const titles = document.getElementsByClassName('highLight');
 
 
         if (hoverHighlight) {
@@ -87,12 +87,59 @@ const Orientation = () => {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = 'white';
             } else {
-                title.style.backgroundColor = ''; // Reset to default
+                title.style.backgroundColor = '';
                 title.style.color = '';
 
             }
         });
     };
+
+    const handleclick = (event) => {
+        event.target.style.border = "2px solid orange"
+        event.target.style.outline = "2px solid blue"
+
+    }
+    let clickhighlight = false
+    const toggleclickhighlight = () => {
+        clickhighlight = !clickhighlight
+        console.log('clickhighlight:', clickhighlight);
+        const elements = document.querySelectorAll('form,a')
+        const titles = document.getElementsByClassName('HighLight')
+
+        if (clickhighlight) {
+            elements.forEach((ele) => {
+                ele.addEventListener("click", handleclick)
+            })
+        } else {
+            elements.forEach((ele) => {
+                ele.addEventListener("click", handleclick)
+            })
+        }
+        Array.from(titles).forEach(title => {
+            if (clickhighlight) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = 'white';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        });
+    }
+
+
+
+    const handleCursor = () => {
+
+    }
+
+
+
+
+
+
+
+
 
     const handleMouseOver = (event) => {
         event.target.style.border = "2px solid orange";
@@ -108,7 +155,7 @@ const Orientation = () => {
     let animations = false;
     const toggleAnimation = () => {
         animations = !animations;
-        const titles = document.getElementsByClassName('animation'); // Get all elements with class 'change'
+        const titles = document.getElementsByClassName('animation');
 
         const body = document.body
         if (animations) {
@@ -122,7 +169,7 @@ const Orientation = () => {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = 'white';
             } else {
-                title.style.backgroundColor = ''; // Reset to default
+                title.style.backgroundColor = '';
                 title.style.color = '';
 
             }
@@ -132,30 +179,26 @@ const Orientation = () => {
 
 
 
-    const handleClick = () => {
-        toggleScript();
-    };
+    const handleClick = () => toggleScript();
 
     const toggleScript = () => {
         const guideClass = 'guide-element';
         const scriptClass = 'custom-style';
         const existingScripts = document.getElementsByClassName(scriptClass);
         const container = document.querySelector('.customStyle');
-        const childTextDiv = container?.children[1]; // Use .children instead of .childNodes for element access.
+        const childTextDiv = container?.children[1];
+
+        const removeElements = (elements) => Array.from(elements).forEach(el => document.body.removeChild(el));
 
         if (existingScripts.length > 0) {
-            // Remove script and guide elements
-            Array.from(existingScripts).forEach(script => document.body.removeChild(script));
-            const existingGuides = document.getElementsByClassName(guideClass);
-            Array.from(existingGuides).forEach(guide => document.body.removeChild(guide));
+            removeElements(existingScripts);
+            removeElements(document.getElementsByClassName(guideClass));
 
             container?.classList.remove('!bg-[#146FF8]');
-            childTextDiv?.classList.remove('!text-[#fff]');
-            childTextDiv?.classList.add('!text-black');
+            childTextDiv?.classList.replace('!text-[#fff]', '!text-black');
         } else {
-            // Add script
             const scriptElement = document.createElement('script');
-            scriptElement.className = scriptClass; // Use className instead of id
+            scriptElement.className = scriptClass;
             scriptElement.type = 'text/javascript';
             scriptElement.innerHTML = `
                 (function() {
@@ -167,57 +210,32 @@ const Orientation = () => {
                         if (!guideElement) {
                             guideElement = document.createElement('div');
                             guideElement.className = '${guideClass}';
-                            guideElement.style.position = 'absolute';
-                            guideElement.style.width = '400px';
-                            guideElement.style.height = '13px';
-                            guideElement.style.backgroundColor = '#146FF8';
-                            guideElement.style.border = '4px solid black';
-                            guideElement.style.borderRadius = '50px';
-                            guideElement.style.pointerEvents = 'none';
-                            guideElement.style.transition = 'opacity 0.3s ease';
-                            guideElement.style.overflowX = 'hidden';
-                            guideElement.style.zIndex = '10';
-                            guideElement.style.opacity = '0';
+                            guideElement.style.cssText = 'position:absolute;width:400px;height:13px;background-color:#146FF8;border:4px solid black;border-radius:50px;pointer-events:none;transition:opacity 0.3s ease;overflow-x:hidden;z-index:10;opacity:0;';
                             document.body.appendChild(guideElement);
                         }
                         guideElement.style.opacity = isVisible ? '1' : '0';
-    
                         const handleMouseMove = (event) => {
-                            if (guideElement) {
-                                guideElement.style.left = \`\${event.pageX}px\`;
-                                guideElement.style.top = \`\${event.pageY}px\`;
-                            }
-                        };
+                               if (guideElement && isVisible) {
+                               const rect = guideElement.getBoundingClientRect();
+                                 const centerX = event.clientX - rect.width / 2;
+                                  const centerY = event.clientY - rect.height / 2;
+                                   guideElement.style.left = \`\${centerX}px\`;
+                                   guideElement.style.top = \`\${centerY}px\`;
+                                      }
+                                         };
     
-                        if (isVisible) {
-                            document.addEventListener('mousemove', handleMouseMove);
-                        } else {
-                            document.removeEventListener('mousemove', handleMouseMove);
-                            if (guideElement) {
-                                guideElement.style.opacity = '0'; // Ensure it's hidden
-                            }
-                        }
+                        if (isVisible) document.addEventListener('mousemove', handleMouseMove);
+                        else document.removeEventListener('mousemove', handleMouseMove);
                     };
     
-                    // Call toggleGuide immediately to show the guide
                     toggleGuide();
-    
-                    // Hide the guide on body click
-                    document.body.addEventListener('click', () => {
-                        if (isVisible) {
-                            toggleGuide();
-                        }
-                    });
-    
-                    console.log("Script added. Click anywhere on the body to toggle guide visibility.");
+                    document.body.addEventListener('click', () => isVisible && toggleGuide());
                 })();
             `;
             document.body.appendChild(scriptElement);
-            container?.classList.remove('!text-black');
-            container?.classList.add('!bg-[#146FF8]');
 
-            childTextDiv?.classList.remove('!text-black');
-            childTextDiv?.classList.add('!text-[#fff]');
+            container?.classList.replace('!text-black', '!bg-[#146FF8]');
+            childTextDiv?.classList.replace('!text-black', '!text-[#fff]');
 
             console.log('Script added and guide activated.');
         }
@@ -230,130 +248,14 @@ const Orientation = () => {
 
 
 
-
-    const handleMaskClick = () => {
-        istoggleScript();
-
-    };
-
-    const isScriptAdd = document.getElementById("dynamic-guide-script");
-
-
-    const istoggleScript = () => {
-        const guideId = 'guide_element';
-        const scriptId = 'dynamic-guide-script';
-        const existingScript = document.getElementById(scriptId);
-        let container = document.getElementById("dynamic_id");
-        const childTextDiv = container.childNodes[1];
-
-        if (existingScript) {
-            // Remove script and guide element
-            document.body.removeChild(existingScript);
-            const existingGuide = document.getElementById(guideId);
-            if (existingGuide) {
-                document.body.removeChild(existingGuide);
-                container.classList.remove("!bg-[#146FF8]");
-                childTextDiv.classList.remove("!text-[#fff]");
-                childTextDiv.classList.add("!text-black");
-
-            }
-        } else {
-            // Add script
-            const scriptElement = document.createElement('script');
-            scriptElement.id = scriptId;
-            scriptElement.type = 'text/javascript';
-            scriptElement.innerHTML = `
-            (function() {
-                let guideElement = null;
-                let isVisible = false;
-
-                const toggleGuide = () => {
-                    isVisible = !isVisible;
-                    if (!guideElement) {
-                        guideElement = document.createElement('div');
-                        guideElement.style.position = 'absolute';
-                        guideElement.style.width = '100%';
-                        guideElement.style.height = '200px';
-                        guideElement.style.backgroundColor = '#146FF8';
-                        guideElement.style.border = '4px solid black';
-                        guideElement.style.borderRadius = '50px';
-                        guideElement.style.pointerEvents = 'none';
-                        guideElement.style.transition = 'opacity 0.3s ease';
-                        guideElement.style.overflowX = 'hidden';
-
-                        guideElement.style.zIndex = '10';
-                        guideElement.style.opacity = '0';
-                        guideElement.id = '${guideId}';
-                        document.body.appendChild(guideElement);
-                    }
-                    guideElement.style.opacity = isVisible ? '1' : '1';
-
-                    const handleMouseMove = (event) => {
-                        if (guideElement) {
-                    
-                            guideElement.style.right = \`\${event.page20}px\`;
-                            guideElement.style.top = \`\${event.pageY}px\`;
-                        }
-
-                         const scriptId = 'dynamic-guide-script';
-                        const scriptIsAdded = document.getElementById(scriptId);
-
-                        let container = document.getElementById("dynamic_id");
-                        const childTextDiv = container ? container.childNodes[1] :null; 
-
-                        if(scriptIsAdded){
-
-                          if(container)  {
-                          container.classList.remove("!text-black");
-                            container.classList.add("!bg-[#146FF8]");
-        }
-                            if(childTextDiv){
-                                childTextDiv.classList.remove("!text-black");
-                                childTextDiv.classList.add("!text-[#fff]");
-                                }
-
-                        }else{
-                         if(container)   
-                         container.classList.remove("!bg-[#146FF8]");
-                        if(childTextDiv){
-                            childTextDiv.classList.remove("!text-[#fff]");
-                            childTextDiv.classList.add("!text-black");
-                            }
-                        }
-
-                    };
-
-                    if (isVisible) {
-                        document.addEventListener('mousemove', handleMouseMove);
-                    } else {
-                        document.removeEventListener('mousemove', handleMouseMove);
-                    }
-                };
-
-                // Call toggleGuide immediately to show the guide
-                toggleGuide();
-
-                document.addEventListener('click', toggleGuide);
-
-            })();
-        `;
-            document.body.appendChild(scriptElement);
-            container.classList.remove("!text-black");
-            container.classList.add("!bg-[#146FF8]");
-
-            childTextDiv.classList.remove("!text-black");
-            childTextDiv.classList.add("!text-[#fff]");
-
-        }
-    };
     /////////////////////////////readmode////////////////////////////
     let isEnabled = false;
-    const originalClasses = new Map(); // Move the map outside the function to persist data between calls
+    const originalClasses = new Map();
 
     const readMode = () => {
         const body = document.body;
         const id = document.getElementById("accessibilty");
-        const titles = document.getElementsByClassName('change'); // Get all elements with class 'change'
+        const titles = document.getElementsByClassName('change');
         const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, img.svg, li, ul, ol, table, th, td, blockquote, pre, code, em, strong, small, sub, sup, del, ins, mark, abbr, dfn, kbd, q, cite, var, nav, header, footer, aside, section, article, figure, figcaption, main, div, form, fieldset, legend, label, button, input, textarea, select, option, optgroup, progress, meter, output, details, summary, dialog, menu, menuitem, menuitemcheckbox, menuitemradio, script, style, link, meta, title, base, head, body, html');
 
         isEnabled = !isEnabled; // Toggle state
@@ -431,6 +333,8 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (43).svg"}
                             heading={"Highlight Focus"}
+                            onClick={toggleclickhighlight}
+                            customStyle={'HighLight'}
 
                         />
 
@@ -465,8 +369,8 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (41).svg"}
                                 heading={"Reading Mask"}
-                                onClick={handleMaskClick}
-                                id={"dynamic_id"}
+                            // onClick={handleMaskClick}
+                            // id={"dynamic_id"}
 
 
                             />

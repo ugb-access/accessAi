@@ -1,6 +1,6 @@
 import Content_box1 from './Content_box1'
 import Content_box2 from './Content_box2'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const Contactbox = () => {
@@ -8,25 +8,46 @@ const Contactbox = () => {
     let is_highlight_title = false
     let is_highlight_link = false
     let Bold = false
-    const textBold = () => {
-        Bold = !Bold
-        const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6,a,p')
+
+
+
+    useEffect(() => {
+        const isScriptEnable = document.body.classList.contains('read-mode')
         const titles = document.getElementsByClassName('textbold')
 
-        if (Bold) {
+        Array.from(titles).forEach(title => {
+            if (isScriptEnable) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        })
+    }, [])
+    const textBold = () => {
+        const body = document.body
+        const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6,a,p')
+        const titles = document.getElementsByClassName('textbold')
+        const isScriptEnable = document.body.classList.contains('read-mode')
+
+        if (!isScriptEnable) {
             document.body.style.fontWeight = '500'
             title.forEach((title) => {
                 title.style.fontWeight = '800';
+                body.classList.add('read-mode')
             })
         } else {
             document.body.style.fontWeight = ''
             title.forEach((title) => {
                 title.style.fontWeight = '';
+                body.classList.remove('read-mode')
             })
 
         }
         Array.from(titles).forEach(title => {
-            if (Bold) {
+            if (!isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
             } else {
@@ -36,40 +57,74 @@ const Contactbox = () => {
             }
         })
     }
-    let textCenter = false
+
+    useEffect(() => {
+        const isScriptEnable = document.body.classList.contains("center-text");
+        const titles = document.getElementsByClassName("textcenter");
+        Array.from(titles).forEach((title) => {
+            if (isScriptEnable) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = "#ffffff";
+            } else {
+                title.style.backgroundColor = "";
+                title.style.color = "";
+            }
+        });
+    }, []);
+
+
+
+
     const allTextCenter = () => {
-        textCenter = !textCenter
-        document.body.classList.add('center-text');
-        const titles = document.getElementsByClassName('textcenter')
+        const titles = document.getElementsByClassName("textcenter");
         const body = document.body;
-        if (textCenter) {
-            body.style.textAlign = 'center';
+        const isScriptEnable = body.classList.contains("center-text");
+        if (!isScriptEnable) {
+            body.style.textAlign = "center";
+            body.classList.add("center-text");
         } else {
-            body.style.textAlign = '';
+            body.style.textAlign = "";
+            body.classList.remove("center-text");
         }
-        Array.from(titles).forEach(title => {
-            if (textCenter) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+        Array.from(titles).forEach((title) => {
 
+            if (!isScriptEnable) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = "#ffffff";
+            } else {
+                title.style.backgroundColor = "";
+                title.style.color = "";
             }
         })
-    }
-    let textLeft = false
+    };
+
+    useEffect(() => {
+        const isScriptEnable = document.body.classList.contains('text-left')
+        const titles = document.getElementsByClassName('textleft')
+        Array.from(titles).forEach((title) => {
+            if (isScriptEnable) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = "#ffffff";
+            } else {
+                title.style.backgroundColor = "";
+                title.style.color = "";
+            }
+        });
+    }, [])
     const allTextLeft = () => {
-        textLeft = !textLeft
+
         const body = document.body;
         const titles = document.getElementsByClassName('textleft')
-        if (textLeft) {
-            body.style.textAlign = '';
-        } else {
+        const isScriptEnable = document.body.classList.contains('text-left')
+        if (!isScriptEnable) {
             body.style.textAlign = 'left';
+            body.classList.add("text-left");
+        } else {
+            body.style.textAlign = '';
+            body.classList.remove("text-left");
         }
         Array.from(titles).forEach(title => {
-            if (textLeft) {
+            if (!isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
             } else {
@@ -80,19 +135,56 @@ const Contactbox = () => {
         })
     }
 
-    let textRight = false
-    const allTextRight = () => {
-        textRight = !textRight
 
+    useEffect(() => {
+        const body = document.body;
+
+        const isScriptEnable = document.body.classList.contains('text-right')
+        const titles = document.getElementsByClassName('textright')
+        const idelement = document.getElementById('accessibilty')
+
+        if (idelement) {
+            if (isScriptEnable) {
+                idelement.style.textAlign = 'left';
+            }
+        } else {
+            idelement.style.textAlign = '';
+
+        }
+        Array.from(titles).forEach((title) => {
+            if (isScriptEnable) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = "#ffffff";
+            } else {
+                title.style.backgroundColor = "";
+                title.style.color = "";
+            }
+        });
+    }, [])
+    const allTextRight = () => {
         const body = document.body;
         const titles = document.getElementsByClassName('textright')
-        if (textRight) {
+        const idelement = document.getElementById('accessibilty')
+        const isScriptEnable = document.body.classList.contains('text-right')
+        if (idelement) {
+            if (!isScriptEnable) {
+                idelement.style.textAlign = 'left';
+            }
+        } else {
+            idelement.style.textAlign = '';
+
+        }
+
+        if (!isScriptEnable) {
             body.style.textAlign = 'right';
+            body.classList.add('text-right')
         } else {
             body.style.textAlign = '';
+            body.classList.remove('text-right')
         }
         Array.from(titles).forEach(title => {
-            if (textRight) {
+
+            if (!isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
             } else {
@@ -143,20 +235,7 @@ const Contactbox = () => {
         }
     };
 
-    // const changeTextColor = (color) => {
-    //     const elements = document.body.querySelectorAll('p, a');
-    //     const accessibilityElement = document.getElementById('accessibilty');
 
-    //     elements.forEach((element) => {
-    //         // Skip the element if it is the #accessibilty element or is inside it
-    //         if (accessibilityElement.contains(element)) {
-    //             return;
-    //         }
-
-    //         // Change the text color for other elements
-    //         element.style.color = color;
-    //     });
-    // };   
 
     const handleIncreaseFontSize = () => {
         const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button');
@@ -217,7 +296,7 @@ const Contactbox = () => {
 
     return (
         <div id="accessibilty" className='m-5 bg-[#fff] p-4 rounded-xl '>
-            <div id="accessibilty" className='text-[18px] pb-5'>Content Adjustments</div>
+            <div id="accessibilty" className='text-[18px] pb-5 !text-start'>Content Adjustments</div>
 
             <div id="accessibilty" className='flex flex-wrap lg:flex-nowrap gap-5'>
                 <div id="accessibilty" className='w-full lg:flex-1'>
@@ -377,21 +456,12 @@ const highlightAllLink = (active) => {
     // const textcolor = document.getElementsByClassName("changeColor")
     if (!active) {
         title.forEach((title) => {
-            title.style.border = '';
-
-
+            title.style.border = ''
         })
-        // hightBackground.style.color = ""
-
-
-
-
     } else {
         title.forEach((title) => {
             title.style.border = '2px solid #ff9a68';
-
         })
-
     }
     Array.from(titles).forEach((title) => {
         if (active) {
@@ -400,9 +470,6 @@ const highlightAllLink = (active) => {
         } else {
             title.style.backgroundColor = '';
             title.style.color = '';
-
         }
     })
-
-
 }

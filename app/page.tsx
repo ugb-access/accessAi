@@ -25,10 +25,8 @@ export default function Home({ }) {
   const handlePageClick = () => {
     setToggle(false);
   };
-
-
   return (
-    <div className='min-h-screen  relative h-screen ' >
+    <div className='min-h-screen  relative h-screen'>
       <div onClick={handlePageClick} >
         <Navigation />
 
@@ -37,7 +35,7 @@ export default function Home({ }) {
         {/* <video width="500" height="240" controls autoPlay>
           <source src="/images/testing-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video> */}
+        </video> */} 
         <LogoCarousel />
         <Features />
         <Testimonials />

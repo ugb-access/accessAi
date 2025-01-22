@@ -328,11 +328,6 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
   }
 
-
-
-
-
-
   const data = [{
     button: "Reset setting",
     Image: "/images/frame.svg"
@@ -411,9 +406,49 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
     }
   ]
+
+
+
+
+
+  let inputColor = false;
+
+  const changeBackground = () => {
+    inputColor = !inputColor;
+    const elements = document.getElementsByClassName('input');
+    const svgElements = document.getElementsByClassName('svg');
+
+    if (inputColor) {
+      Array.from(elements).forEach((ele) => {
+        ele.style.backgroundColor = 'white';
+        ele.style.color = 'black';
+        ele.classList.remove('placeholder-white');
+      });
+
+      Array.from(svgElements).forEach((svg) => {
+        svg.classList.remove('!fill-black'); // Optional: ensure toggling is consistent
+        svg.classList.add('!fill-black');
+      });
+    } else {
+      Array.from(elements).forEach((ele) => {
+        ele.style.backgroundColor = '';
+        ele.classList.add('placeholder-white');
+      });
+      Array.from(svgElements).forEach((svg) => {
+        svg.classList.remove('!fill-black');
+        svg.classList.add('fill-white'); // Optional: ensure toggling is consistent
+      });
+    }
+
+
+
+  }
+
+
+
   return (
-    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10  top-0 z-10 fixed  !h-screen `}>
-      <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary">
+    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10  top-0 z-10 fixed  !h-screen `} >
+      <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary"  >
         <div id="accessibilty" className="flex justify-between items-center cursor-pointer">
           <div id="accessibilty" className="text-white hover:transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
             <Image height={12} width={12} src={'/images/svgviewer-output (1).svg'} />
@@ -437,15 +472,16 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
             )
           })}
         </div>
-        <div id="accessibilty" className="flex bg-primary items-center p-3 my-10 gap-5 rounded-full  w-full">
-          <Image height={15} width={15} src="/images/svgviewer-output (6).svg" alt="" />
-          <input id="accessibilty" className=" bg-primary  outline-none text-white placeholder-white flex-1 " type="text" placeholder="Unclear contact?Search in dictionary..." />
-          <Image height={10} width={10} src="/images/svgviewer-output (7).svg" alt="" />
+        <div id="accessibilty" className="flex bg-[#0041A4] items-center py-2 px-4 my-10 gap-5 rounded-full  w-full input " onClick={() => { changeBackground() }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width={15} height={15} viewBox="0 0 1075 1024" className="prepended-icon svg fill-white" data-testid="base-icon-svg" style={{ display: "inline-flex" }}><path xmlns="http://www.w3.org/2000/svg" d="M461.977 103.143c-174.948 0-316.771 141.823-316.771 316.771s141.823 316.772 316.771 316.772c174.946 0 316.77-141.824 316.77-316.772s-141.824-316.771-316.77-316.771zM42.062 419.914C42.062 188.002 230.064 0 461.976 0s419.913 188.002 419.913 419.914c0 97.37-33.137 187-88.755 258.225l257.823 257.823c20.142 20.142 20.142 52.792 0 72.934-20.137 20.137-52.792 20.137-72.934 0L720.2 751.073c-71.224 55.613-160.855 88.755-258.223 88.755-231.912 0-419.914-188.001-419.914-419.914z"></path></svg>
+          <input id="accessibilty" className=" bg-[#0041A4]  outline-none text-white placeholder-white flex-1 input " type="text" placeholder="Unclear contact?Search in dictionary..."
+          />
+          <svg fill="white" xmlns="http://www.w3.org/2000/svg" width={10} height={10} viewBox="0 0 1024 1024" class="appended-icon svg fill-white" data-testid="base-icon-svg" style={{ display: "inline-flex;" }}><path xmlns="http://www.w3.org/2000/svg" d="M62.81 243.189c29.279-27.831 75.575-26.658 103.406 2.621l361.461 380.259L889.139 245.81c27.833-29.279 74.128-30.452 103.409-2.621 29.277 27.831 30.452 74.128 2.619 103.406L580.691 782.628c-13.804 14.526-32.973 22.747-53.014 22.747s-39.205-8.221-53.012-22.747L60.189 346.595c-27.831-29.279-26.658-75.575 2.621-103.406z"></path></svg>
         </div>
       </div>
       {/* on/off */}
 
-      <div id="accessibilty" id="accessibilty" className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
+      <div id="accessibilty" className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
         <div id="accessibilty" className="px-5">Choose  the right accessibilty profile for you</div>
         {data2.map((item, index) => {
 

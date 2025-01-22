@@ -68,7 +68,6 @@ const ColorAdjustment = () => {
         const accessibilityElement = document.getElementById('accessibilty');
 
         elements.forEach((element) => {
-            // Skip the element if it is the #accessibilty element or is inside it
             if (accessibilityElement.contains(element)) {
                 return;
             }
@@ -81,20 +80,37 @@ const ColorAdjustment = () => {
 
 
     //////////////////////////lightcontrast///////////////////////////
-    let lightContrast = false
-    const LightContrast = () => {
-        lightContrast = !lightContrast
-        const body = document.body
+    useEffect(() => {
+        const isScriptEnable = document.body.classList.contains("light-contrast")
         const titles = document.getElementsByClassName('light');
-        if (lightContrast) {
+
+        Array.from(titles).forEach(title => {
+            if (isScriptEnable) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        });
+
+    })
+    const LightContrast = () => {
+        const body = document.body
+        const isScriptEnable = document.body.classList.contains("light-contrast")
+        const titles = document.getElementsByClassName('light');
+        if (!isScriptEnable) {
             body.style.background = '#f2f0f0';
             body.style.color = '#000000';
+            body.classList.add("light-contrast")
         } else {
             body.style.background = '#ffffff';
             body.style.color = '';
+            body.classList.remove("light-contrast")
         }
         Array.from(titles).forEach(title => {
-            if (lightContrast) {
+            if (!isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
             } else {
