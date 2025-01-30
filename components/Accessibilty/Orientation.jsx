@@ -179,24 +179,26 @@ const Orientation = () => {
 
 
 
-    const handleClick = () => toggleScript();
+    // const handleClick = () => toggleScript();
 
     const toggleScript = () => {
         const guideClass = 'guide-element';
         const scriptClass = 'custom-style';
         const existingScripts = document.getElementsByClassName(scriptClass);
-        const container = document.querySelector('.customStyle');
-        const childTextDiv = container?.children[1];
 
-        const removeElements = (elements) => Array.from(elements).forEach(el => document.body.removeChild(el));
+        // Function to remove elements safely
+        const removeElements = (elements) => {
+            Array.from(elements).forEach(el => el.parentNode?.removeChild(el));
+        };
 
         if (existingScripts.length > 0) {
+            // Remove existing guide and script
             removeElements(existingScripts);
             removeElements(document.getElementsByClassName(guideClass));
 
-            container?.classList.remove('!bg-[#146FF8]');
-            childTextDiv?.classList.replace('!text-[#fff]', '!text-black');
+            console.log('Guide deactivated.');
         } else {
+            // Create new script
             const scriptElement = document.createElement('script');
             scriptElement.className = scriptClass;
             scriptElement.type = 'text/javascript';
@@ -207,6 +209,7 @@ const Orientation = () => {
     
                     const toggleGuide = () => {
                         isVisible = !isVisible;
+                        
                         if (!guideElement) {
                             guideElement = document.createElement('div');
                             guideElement.className = '${guideClass}';
@@ -214,18 +217,23 @@ const Orientation = () => {
                             document.body.appendChild(guideElement);
                         }
                         guideElement.style.opacity = isVisible ? '1' : '0';
-                        const handleMouseMove = (event) => {
-                               if (guideElement && isVisible) {
-                               const rect = guideElement.getBoundingClientRect();
-                                 const centerX = event.clientX - rect.width / 2;
-                                  const centerY = event.clientY - rect.height / 2;
-                                   guideElement.style.left = \`\${centerX}px\`;
-                                   guideElement.style.top = \`\${centerY}px\`;
-                                      }
-                                         };
     
-                        if (isVisible) document.addEventListener('mousemove', handleMouseMove);
-                        else document.removeEventListener('mousemove', handleMouseMove);
+                        const handleMouseMove = (event) => {
+                            if (guideElement && isVisible) {
+                                const rect = guideElement.getBoundingClientRect();
+                                const centerX = event.clientX - rect.width / 2;
+                                const centerY = event.clientY - rect.height / 2;
+                                guideElement.style.left = \`\${centerX}px\`;
+                                guideElement.style.top = \`\${centerY}px\`;
+                            }
+                        };
+    
+                        if (isVisible) {
+                            document.addEventListener('mousemove', handleMouseMove);
+                        } else {
+                            document.removeEventListener('mousemove', handleMouseMove);
+                            if (guideElement) guideElement.remove(); // Properly remove guide element
+                        }
                     };
     
                     toggleGuide();
@@ -234,13 +242,12 @@ const Orientation = () => {
             `;
             document.body.appendChild(scriptElement);
 
-            container?.classList.replace('!text-black', '!bg-[#146FF8]');
-            childTextDiv?.classList.replace('!text-black', '!text-[#fff]');
-
-            console.log('Script added and guide activated.');
+            console.log('Guide activated.');
         }
     };
 
+    // Ensure toggleScript is defined before handleClick
+    const handleClick = () => toggleScript();
 
 
 
@@ -305,7 +312,7 @@ const Orientation = () => {
     return (
         <>
             <div id="accessibilty" className='m-5 bg-[#fff] px-4 rounded-xl '>
-                <div id="accessibilty" className='text-[18px] pb-5'>Orientation Adjustments</div>
+                <div id="accessibilty" className='text-[18px] py-5'>Orientation Adjustments</div>
 
                 <div id="accessibilty" className='flex flex-wrap lg:flex-nowrap gap-5'>
                     <div id="accessibilty" className='flex flex-wrap gap-5 lg:gap-0 lg w-full lg:w-[30%]'>

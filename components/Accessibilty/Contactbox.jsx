@@ -14,28 +14,28 @@ const Contactbox = () => {
     useEffect(() => {
         const isScriptEnable = document.body.classList.contains('read-mode')
         const titles = document.getElementsByClassName('textbold')
-
         Array.from(titles).forEach(title => {
+
             if (isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
             } else {
                 title.style.backgroundColor = '';
                 title.style.color = '';
-
             }
         })
     }, [])
     const textBold = () => {
         const body = document.body
-        const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6,a,p')
+        const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6,a,p,span')
         const titles = document.getElementsByClassName('textbold')
         const isScriptEnable = document.body.classList.contains('read-mode')
-
+        const idelement = document.getElementById('accessibilty')
         if (!isScriptEnable) {
             document.body.style.fontWeight = '500'
             title.forEach((title) => {
-                title.style.fontWeight = '800';
+                if (title.id === 'accessibilty') return;
+                title.style.fontWeight = '600';
                 body.classList.add('read-mode')
             })
         } else {
@@ -47,6 +47,7 @@ const Contactbox = () => {
 
         }
         Array.from(titles).forEach(title => {
+
             if (!isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
@@ -61,6 +62,16 @@ const Contactbox = () => {
     useEffect(() => {
         const isScriptEnable = document.body.classList.contains("center-text");
         const titles = document.getElementsByClassName("textcenter");
+        const idelement = document.getElementById('accessibilty')
+
+        if (idelement) {
+            if (isScriptEnable) {
+                idelement.style.textAlign = 'left';
+            }
+        } else {
+            idelement.style.textAlign = '';
+
+        }
         Array.from(titles).forEach((title) => {
             if (isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
@@ -71,14 +82,20 @@ const Contactbox = () => {
             }
         });
     }, []);
-
-
-
-
     const allTextCenter = () => {
         const titles = document.getElementsByClassName("textcenter");
         const body = document.body;
         const isScriptEnable = body.classList.contains("center-text");
+        const idelement = document.getElementById('accessibilty')
+
+        if (idelement) {
+            if (!isScriptEnable) {
+                idelement.style.textAlign = 'left';
+            }
+        } else {
+            idelement.style.textAlign = '';
+
+        }
         if (!isScriptEnable) {
             body.style.textAlign = "center";
             body.classList.add("center-text");
@@ -137,7 +154,6 @@ const Contactbox = () => {
 
 
     useEffect(() => {
-        const body = document.body;
 
         const isScriptEnable = document.body.classList.contains('text-right')
         const titles = document.getElementsByClassName('textright')
@@ -230,67 +246,117 @@ const Contactbox = () => {
         }
 
         // Decrease scale
-        if (currentScale > 0.1) { // Prevent scale from going below 0.1
+        if (currentScale > 0.1) {
             body.style.transform = `scale(${currentScale - 0.01})`;
         }
     };
 
 
+    const originalFontSizes = new Map();
+    let percentage = "Default"; // Initially show "Default"
 
-    const handleIncreaseFontSize = () => {
-        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button');
-        const accessibilityElement = document.getElementById('accessibility');
+    const adjustFontSize = (isIncrease) => {
+        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
 
+        let maxPercentage = 0; // Track highest positive or negative percentage change
 
-        // Skip font size increase if the accessibility element exists
         elements.forEach((element) => {
-            console.log('element: ', element);
-            // Check if the element has the id 'accessibility' or is inside the accessibility element
-            if (element === 'accessibility' || (accessibilityElement && accessibilityElement.contains(element))) {
-                console.log(`Skipping font size increase for element with id "${element.id}"`);
-                return; // Skip this element
+            if (element.id === "accessibilty") return; // ✅ Skip this element
+
+            // Get current font size
+            const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
+
+            // Store original font size if not already stored
+            if (!originalFontSizes.has(element)) {
+                originalFontSizes.set(element, currentFontSize);
             }
 
-            // Increase the font size if it is not the accessibility element
-            const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-            element.style.fontSize = `${currentFontSize + 1}px`;
-            console.log(`Font size of ${element.tagName} increased to: ${element.style.fontSize}`);
+            // Get original size and calculate 10% change
+            const originalSize = originalFontSizes.get(element);
+            const changeAmount = (originalSize * 10) / 100; // 10% of original size
+
+            // Apply increase or decrease
+            const newFontSize = isIncrease ? currentFontSize + changeAmount : currentFontSize - changeAmount;
+
+            element.style.fontSize = `${newFontSize}px`;
+
+            // Calculate the percentage change
+            const percentageChange = ((newFontSize - originalSize) / originalSize) * 100;
+            maxPercentage = percentageChange; // Track last updated percentage
         });
+
+        // If percentage is exactly 0, show "Default", otherwise show percentage
+        percentage = maxPercentage === 0 ? "Default" : `${maxPercentage.toFixed(0)}%`;
+
+        // Select percentage element using className and update text
+        const percentageElement = document.querySelector(".font-percentage");
+        if (percentageElement) {
+            percentageElement.innerText = percentage;
+        }
     };
 
 
-    const handleDecreaseFontSize = () => {
-        const body = document.body;
-        const currentFontSize = parseFloat(getComputedStyle(body).fontSize);
-        body.style.fontSize = `${currentFontSize - 1}px`;
-    };
+
+
+
+
+
 
 
 
     // increase/decrease lineHeight
-    const handleIncreaseLingHight = () => {
-        const body = document.body;
-        const currentLineHeight = parseFloat(getComputedStyle(body).lineHeight)
-        body.style.lineHeight = `${currentLineHeight + 2}PX`;
-    }
-    const handleDecreaseLineHeight = () => {
-        const body = document.body
-        const currentLineHeight = parseFloat(getComputedStyle(body).lineHeight)
-        body.style.lineHeight = `${currentLineHeight - 2}PX`;
-    }
+    const originalLineHeights = new Map();
+    let lineHeightPercentage = "Default"; // Initially show "Default"
+
+    const adjustLineHeight = (isIncrease) => {
+        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
+        elements.forEach((element) => {
+            if (element.classList.contains("accessibilty")) return;
+            const currentLineHeight = parseFloat(getComputedStyle(element).lineHeight);
+            if (!originalLineHeights.has(element)) {
+                originalLineHeights.set(element, currentLineHeight);
+            }
+            if (!isNaN(newLineHeight) && newLineHeight > 0) {
+                element.style.lineHeight = `${newLineHeight}px`;
+            }
+        });
+        const percentageElement = document.querySelector(".line-height-percentage");
+        let current = percentageElement.innerText;
+        let percentage = current == "Default" ? 0 : current?.replace("%", "");
+
+        if (isIncrease) {
+            percentage = +percentage + 10
+        } else {
+            percentage = +percentage - 10
+        }
+
+        if (percentageElement) {
+            percentageElement.innerText = `${percentage}%` || "Default";
+        }
+    };
+
+
+
+
+
     // increase/decrease letterspacing
-    const handleIncreaseLetterSpacing = () => {
-        const body = document.body;
-        let currentLetterSpacing = parseFloat(getComputedStyle(body).letterSpacing);
-        if (isNaN(currentLetterSpacing)) currentLetterSpacing = 0;
-        body.style.letterSpacing = `${currentLetterSpacing + 1}px`;
+    const adjustLetterSpacing = (delta) => {
+        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button,span');
+        elements.forEach((element) => {
+            if (element.id === 'accessibilty') {
+                return; // Skip this element
+            }
+
+            let currentLetterSpacing = parseFloat(getComputedStyle(element).letterSpacing);
+            if (isNaN(currentLetterSpacing)) currentLetterSpacing = 0;
+            element.style.letterSpacing = `${currentLetterSpacing + delta}px`;
+        });
     };
-    const handleDecreaseLetterSpacing = () => {
-        const body = document.body;
-        let currentLetterSpacing = parseFloat(getComputedStyle(body).letterSpacing);
-        if (isNaN(currentLetterSpacing)) currentLetterSpacing = 0;
-        body.style.letterSpacing = `${currentLetterSpacing - 1}px`;
-    };
+
+    // Usage
+    const handleIncreaseLetterSpacing = () => adjustLetterSpacing(1); // Increase by 1px
+    const handleDecreaseLetterSpacing = () => adjustLetterSpacing(-1); // Decrease by 1px
+
 
 
 
@@ -338,28 +404,24 @@ const Contactbox = () => {
                     </div>
                     <Content_box1
                         imag={"/images/svgviewer-output (24).svg"}
-                        handleImageClick={handleIncreaseFontSize}
-                        handleImagClick={handleDecreaseFontSize}
+                        handleImageClick={() => adjustFontSize(true)} // Increase by 10%
+                        handleImagClick={() => adjustFontSize(false)} // Decrease by 10%
                         heading={"Adjust Font Sizing"}
                         imag2={"/images/svgviewer-output (18).svg"}
-                        para={"Default"}
+                        para={<span id='accessibilty' className="font-percentage">Default</span>} // Initially "Default"
                         imag3={"/images/svgviewer-output (17).svg"}
                         colorButton={false}
-
-
                     />
+
                     <Content_box1
-                        imag={"/images/svgviewer-output (25).svg"}
+                        imag={"/images/svgviewer-output (24).svg"}
+                        handleImageClick={() => adjustLineHeight(true)} // Increase by 10%
+                        handleImagClick={() => adjustLineHeight(false)} // Decrease by 10%
                         heading={"Adjust Line Height"}
-                        handleImageClick={handleIncreaseLingHight}
-                        handleImagClick={handleDecreaseLineHeight}
-
-
                         imag2={"/images/svgviewer-output (18).svg"}
-                        para={"Default"}
+                        para={<span id='accessibilty' className="line-height-percentage">Default</span>} // Initially "Default"
                         imag3={"/images/svgviewer-output (17).svg"}
                         colorButton={false}
-
                     />
                     <Content_box1
                         imag={"/images/svgviewer-output (26).svg"}

@@ -55,7 +55,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
     <div id="accessibilty" className="bg-[#F2F7FA] rounded-xl max-w-full  mb-5 py-[20px] px-[25px] cursor-pointer  " onClick={onClick}>
       <div id="accessibilty" className="flex justify-center gap-3 mb-5">
         {img ?
-          <Image height={20} width={20} src={imag} alt="" />
+          <Image height={20} width={20} src={imag} alt="" id="accessibilty" />
           :
           null
         }
@@ -87,7 +87,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
             <div id="accessibilty" className='p-3 bg-primary rounded-full flex justify-center items-center ' onClick={handleImagClick} >
               <Image height={10} width={10} src={imag2} alt="" />
             </div>
-            <div id='font-size-indicator' className='text-primary text-[13px] '>{para}</div>
+            <div id='accessibilty' className='text-primary text-[13px] '>{para}</div>
             <div id="accessibilty" className='p-3 bg-primary rounded-full flex justify-center items-center ' onClick={handleImageClick}>
               <Image height={10} width={10} src={imag3} alt="" />
             </div>
@@ -106,7 +106,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
       </div>
         : null
       }
-      <button id="accessibilty" className='mx-auto w-full mt-1 hover:border-b-2 ' onClick={() => onChangeColor("")}>{button}</button>
+      <button id="accessibilty" className='mx-auto w-full mt-1 ' onClick={() => onChangeColor("")}>{button}</button>
     </div >
   )
 }

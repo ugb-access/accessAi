@@ -3,6 +3,7 @@
 import Contactbox, { handleHighLight } from "./Contactbox";
 import ColorAdjustment from "./ColorAdjustment";
 import Orientation from "./Orientation";
+import Statment from "./Statment";
 import Image from "next/image";
 
 import React, { useState, useEffect } from 'react';
@@ -439,15 +440,37 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
         svg.classList.add('fill-white'); // Optional: ensure toggling is consistent
       });
     }
-
-
-
+  }
+  let show = false
+  const statment = () => {
+    const toggleId = document.getElementById("toggle")
+    show = !show
+    if (show) {
+      toggleId.style.display = 'block'
+    } else {
+      toggleId.style.display = 'none'
+    }
+  }
+  let hide = true
+  const hideinterface = () => {
+    const elements = document.querySelectorAll("[id ='accessibilty']")
+    hide = !hide
+    elements.forEach((element) => {
+      element.style.display = hide ? "block" : "none"
+    })
+  }
+  const handle = (index) => {
+    if (index === 1) {
+      statment()
+    }
+    if (index === 2) {
+      hideinterface()
+    }
   }
 
 
-
   return (
-    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%]  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10  top-0 z-10 fixed  !h-screen `} >
+    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%] select-none  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10   top-0 z-10 fixed  !h-screen `} >
       <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary"  >
         <div id="accessibilty" className="flex justify-between items-center cursor-pointer">
           <div id="accessibilty" className="text-white hover:transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
@@ -465,7 +488,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
           {data.map((item, index) => {
             return (
               <div key={index} id="accessibilty" className=" w-[70%] lg:w-[30%] ">
-                <button id="accessibilty" className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
+                <button onClick={() => { handle(index) }} id="accessibilty" className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
                   <Image height={20} width={20} src={item.Image} alt="" />
                   {item.button}</button>
               </div>
@@ -535,6 +558,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
       <Contactbox />
       <ColorAdjustment />
       <Orientation />
+      <Statment />
 
     </div >
 

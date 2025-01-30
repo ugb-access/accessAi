@@ -4,7 +4,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div id="accessibilty" className=' bg-primary flex justify-around py-1 rounded-b-lg fixed w-full md:w-[50%] lg:w-[38%]   bottom-0 z-10' >
+    <div id="accessibilty" className=' bg-primary flex justify-around py-1 rounded-b-lg fixed w-full md:w-[50%] lg:w-[48%] xl:w-[37%]   bottom-0 z-10' >
       <div id="accessibilty" className='flex '>
         <div id="accessibilty" className='text-white text-base'>Web Accessibility By</div>
         <FOOTER_ICON />
