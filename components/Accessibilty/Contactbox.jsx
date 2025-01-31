@@ -253,12 +253,10 @@ const Contactbox = () => {
 
 
     const originalFontSizes = new Map();
-    let percentage = "Default"; // Initially show "Default"
 
     const adjustFontSize = (isIncrease) => {
         const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
 
-        let maxPercentage = 0; // Track highest positive or negative percentage change
 
         elements.forEach((element) => {
             if (element.id === "accessibilty") return; // ✅ Skip this element
@@ -271,56 +269,14 @@ const Contactbox = () => {
                 originalFontSizes.set(element, currentFontSize);
             }
 
-            // Get original size and calculate 10% change
-            const originalSize = originalFontSizes.get(element);
-            const changeAmount = (originalSize * 10) / 100; // 10% of original size
 
-            // Apply increase or decrease
-            const newFontSize = isIncrease ? currentFontSize + changeAmount : currentFontSize - changeAmount;
+            const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
 
-            element.style.fontSize = `${newFontSize}px`;
-
-            // Calculate the percentage change
-            const percentageChange = ((newFontSize - originalSize) / originalSize) * 100;
-            maxPercentage = percentageChange; // Track last updated percentage
+            if (!isNaN(newFontSize) && newFontSize > 0) {
+                element.style.fontSize = `${newFontSize}px`;
+            }
         });
-
-        // If percentage is exactly 0, show "Default", otherwise show percentage
-        percentage = maxPercentage === 0 ? "Default" : `${maxPercentage.toFixed(0)}%`;
-
-        // Select percentage element using className and update text
         const percentageElement = document.querySelector(".font-percentage");
-        if (percentageElement) {
-            percentageElement.innerText = percentage;
-        }
-    };
-
-
-
-
-
-
-
-
-
-
-    // increase/decrease lineHeight
-    const originalLineHeights = new Map();
-    let lineHeightPercentage = "Default"; // Initially show "Default"
-
-    const adjustLineHeight = (isIncrease) => {
-        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-        elements.forEach((element) => {
-            if (element.classList.contains("accessibilty")) return;
-            const currentLineHeight = parseFloat(getComputedStyle(element).lineHeight);
-            if (!originalLineHeights.has(element)) {
-                originalLineHeights.set(element, currentLineHeight);
-            }
-            if (!isNaN(newLineHeight) && newLineHeight > 0) {
-                element.style.lineHeight = `${newLineHeight}px`;
-            }
-        });
-        const percentageElement = document.querySelector(".line-height-percentage");
         let current = percentageElement.innerText;
         let percentage = current == "Default" ? 0 : current?.replace("%", "");
 
@@ -329,33 +285,79 @@ const Contactbox = () => {
         } else {
             percentage = +percentage - 10
         }
-
         if (percentageElement) {
             percentageElement.innerText = `${percentage}%` || "Default";
         }
     };
-
-
-
-
-
-    // increase/decrease letterspacing
-    const adjustLetterSpacing = (delta) => {
-        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button,span');
+    // increase/decrease lineHeight
+    const originalLineHeights = new Map();
+    const adjustLineHeight = (isIncrease) => {
+        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
         elements.forEach((element) => {
-            if (element.id === 'accessibilty') {
-                return; // Skip this element
+            if (element.id === "accessibilty") return; // ✅ Skip this element
+            const currentLineHeight = parseFloat(getComputedStyle(element).lineHeight);
+            if (!originalLineHeights.has(element)) {
+                originalLineHeights.set(element, currentLineHeight);
+            }
+            const newLineHeight = isIncrease ? currentLineHeight + 1 : currentLineHeight - 1;
+            if (!isNaN(newLineHeight) && newLineHeight > 0) {
+                element.style.lineHeight = `${newLineHeight}px`;
+            }
+        });
+        const percentageElement = document.querySelector(".line-height-percentage");
+        let current = percentageElement.innerText;
+        let percentage = current == "Default" ? 0 : current?.replace("%", "");
+        if (isIncrease) {
+            percentage = +percentage + 10
+        } else {
+            percentage = +percentage - 10
+        }
+        if (percentageElement) {
+            if (percentage === 0) { percentageElement.innerText = "Default" }
+            else {
+                percentageElement.innerText = `${percentage}%`
+            };
+        }
+    };
+    // increase/decrease letterspacingconst originalLetterSpacing = new Map();
+    const originalLetterSpacing = new Map();
+
+    const adjustLetterSpacing = (isIncrease) => {
+        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
+
+        elements.forEach((element) => {
+            if (element.id === "accessibilty") return; // ✅ Skip this element
+
+            let currentLetterSpacing = getComputedStyle(element).letterSpacing;
+
+            // ✅ Convert "normal" to 0px
+            currentLetterSpacing = currentLetterSpacing === "normal" ? "0px" : currentLetterSpacing;
+            currentLetterSpacing = parseFloat(currentLetterSpacing); // Convert to number
+
+            if (!originalLetterSpacing.has(element)) {
+                originalLetterSpacing.set(element, currentLetterSpacing);
             }
 
-            let currentLetterSpacing = parseFloat(getComputedStyle(element).letterSpacing);
-            if (isNaN(currentLetterSpacing)) currentLetterSpacing = 0;
-            element.style.letterSpacing = `${currentLetterSpacing + delta}px`;
+            // ✅ Increase or Decrease by 1px
+            const newLetterSpacing = isIncrease ? currentLetterSpacing + 1 : currentLetterSpacing - 1;
+
+            if (!isNaN(newLetterSpacing)) {
+                element.style.letterSpacing = `${newLetterSpacing}px`;
+            }
         });
+
+        // ✅ Update the percentage display
+        const percentageElement = document.querySelector(".letter-spacing-percentage");
+        let current = percentageElement ? percentageElement.innerText : "Default";
+        let percentage = current === "Default" ? 0 : parseInt(current.replace("%", ""), 10);
+
+        percentage = isIncrease ? percentage + 10 : percentage - 10;
+
+        if (percentageElement) {
+            percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
+        }
     };
 
-    // Usage
-    const handleIncreaseLetterSpacing = () => adjustLetterSpacing(1); // Increase by 1px
-    const handleDecreaseLetterSpacing = () => adjustLetterSpacing(-1); // Decrease by 1px
 
 
 
@@ -426,10 +428,10 @@ const Contactbox = () => {
                     <Content_box1
                         imag={"/images/svgviewer-output (26).svg"}
                         heading={"Adjust Letter Spacing"}
-                        handleImageClick={handleIncreaseLetterSpacing}
-                        handleImagClick={handleDecreaseLetterSpacing}
+                        handleImageClick={() => adjustLetterSpacing(true)} // Increase by 10%
+                        handleImagClick={() => adjustLetterSpacing(false)}
                         imag2={"/images/svgviewer-output (18).svg"}
-                        para={"Default"}
+                        para={<span id='accessibilty' className='letter-spacing-percentage'>Default</span>}
                         imag3={"/images/svgviewer-output (17).svg"}
                         colorButton={false}
 
