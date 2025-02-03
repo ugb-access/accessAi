@@ -212,66 +212,59 @@ const Contactbox = () => {
 
     }
 
-    // increase/decrease fontsize
-
-
-    const handleIncreaseScale = () => {
+    const updateScale = (isIncrease) => {
         const body = document.body;
         const currentTransform = getComputedStyle(body).transform;
 
-        // Extract scale value from the transform matrix
-        let currentScale = 1; // Default scale
+        let currentScale = 1;
         if (currentTransform !== 'none') {
-            const matrix = currentTransform.match(/matrix\((.+)\)/);
+            const matrix = currentTransform.match(/matrix\(([^)]+)\)/);
             if (matrix) {
                 currentScale = parseFloat(matrix[1].split(', ')[0]);
             }
         }
 
-        // Increase scale
-        body.style.transform = `scale(${currentScale + 0.01})`;
-    };
+        // Adjust scale
+        let newScale = isIncrease ? currentScale + 0.01 : currentScale - 0.01;
+        // Limit min/max scale range (0.5 to 2)
+        newScale = Math.max(0.5, Math.min(2, newScale));
 
-    const handleDecreaseScale = () => {
-        const body = document.body;
-        const currentTransform = getComputedStyle(body).transform;
+        // Apply new scale
+        body.style.transform = `scale(${newScale.toFixed(2)})`;
 
-
-        let currentScale = 0.1; // Default scale
-        if (currentTransform !== 'none') {
-            const matrix = currentTransform.match(/matrix\((.+)\)/);
-            if (matrix) {
-                currentScale = parseFloat(matrix[1].split(', ')[0]);
+        const percentageElement = document.querySelector(".scale-percentage");
+        let current = percentageElement.innerText;
+        let percentage = current == "Default" ? 0 : current?.replace("%", "");
+        if (isIncrease) {
+            percentage = +percentage + 10
+        } else {
+            percentage = +percentage - 10
+        }
+        if (percentageElement) {
+            if (percentage === 0) {
+                percentageElement.innerText = "Default";
+            } else {
+                percentageElement.innerText = `${percentage}%`
             }
         }
 
-        // Decrease scale
-        if (currentScale > 0.1) {
-            body.style.transform = `scale(${currentScale - 0.01})`;
-        }
+
     };
+
 
 
     const originalFontSizes = new Map();
-
     const adjustFontSize = (isIncrease) => {
         const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-
-
         elements.forEach((element) => {
             if (element.id === "accessibilty") return; // ✅ Skip this element
-
             // Get current font size
             const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-
             // Store original font size if not already stored
             if (!originalFontSizes.has(element)) {
                 originalFontSizes.set(element, currentFontSize);
             }
-
-
             const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
-
             if (!isNaN(newFontSize) && newFontSize > 0) {
                 element.style.fontSize = `${newFontSize}px`;
             }
@@ -279,14 +272,17 @@ const Contactbox = () => {
         const percentageElement = document.querySelector(".font-percentage");
         let current = percentageElement.innerText;
         let percentage = current == "Default" ? 0 : current?.replace("%", "");
-
         if (isIncrease) {
             percentage = +percentage + 10
         } else {
             percentage = +percentage - 10
         }
         if (percentageElement) {
-            percentageElement.innerText = `${percentage}%` || "Default";
+            if (percentage === 0) {
+                percentageElement.innerText = "Default";
+            } else {
+                percentageElement.innerText = `${percentage}%`
+            }
         }
     };
     // increase/decrease lineHeight
@@ -369,16 +365,16 @@ const Contactbox = () => {
             <div id="accessibilty" className='flex flex-wrap lg:flex-nowrap gap-5'>
                 <div id="accessibilty" className='w-full lg:flex-1'>
                     <Content_box1
-                        imag={"/images/svgviewer-output (16).svg"}
-                        heading={"content Scaling"}
-                        handleImageClick={handleIncreaseScale}
-                        handleImagClick={handleDecreaseScale}
-                        imag2={"/images/svgviewer-output (18).svg"}
-                        para={"Default"}
-                        imag3={"/images/svgviewer-output (17).svg"}
+                        imag={"/images/svgviewer-output (16).svg"}  // Increase button image
+                        heading={"Content Scaling"}
+                        handleImageClick={() => updateScale(true)}   // Increase scale inline
+                        handleImagClick={() => updateScale(false)}  // Decrease scale inline ✅ Fixed typo
+                        imag2={"/images/svgviewer-output (18).svg"}  // Some other image
+                        para={<span className="scale-percentage">Default</span>} // Initially "Default"
+                        imag3={"/images/svgviewer-output (17).svg"}  // Another image
                         colorButton={false}
-
                     />
+
                     <div id="accessibilty" className='flex gap-5 '>
                         <Content_box2
                             imag={"/images/svgviewer-output (27).svg"}

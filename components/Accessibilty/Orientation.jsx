@@ -4,6 +4,7 @@ import Content_box1 from './Content_box1';
 import Footer from "./Footer";
 
 import React, { useState, useEffect } from 'react';
+import { title } from 'process';
 
 
 const Orientation = () => {
@@ -128,10 +129,87 @@ const Orientation = () => {
     }
 
 
+    let condition = false;
 
-    const handleCursor = () => {
+    function triggerFunction() {
+        condition = !condition;
+        const cursorPath = '/images/black-pointer.svg';
+        const autoPath = '/images/black-cursor.svg';
+        const allElements = document.querySelectorAll('*');
+        const titles = document.getElementsByClassName('black')
 
+        if (condition) {
+            allElements.forEach(ele => {
+                const computedStyle = window.getComputedStyle(ele);
+                if (computedStyle.cursor === "pointer") { // Check computed style, not inline style
+                    ele.style.cursor = `url(${cursorPath}) 10 10, pointer`;
+                }
+                else {
+                    ele.style.cursor = `url(${autoPath}) 10 10, auto`;
+                }
+            });
+        } else {
+            allElements.forEach(ele => {
+                const computedStyle = window.getComputedStyle(ele);
+                if (computedStyle.cursor.includes("url")) { // Reset only modified elements
+                    ele.style.cursor = ""; // Restore to original pointer
+                }
+            });
+            document.body.style.cursor = "default"; // Set the default cursor
+        }
+        Array.from(titles).forEach(title => {
+            if (condition) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = 'white';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        });
     }
+    let whitecondition = false;
+
+    function whiteFunction() {
+        whitecondition = !whitecondition;
+        const cursorPath = '/images/white-pointer.svg';
+        const autoPath = '/images/white.svg';
+        const allElements = document.querySelectorAll('*');
+        const titles = document.getElementsByClassName('white')
+
+        if (whitecondition) {
+            allElements.forEach(ele => {
+                const computedStyle = window.getComputedStyle(ele);
+                if (computedStyle.cursor === "pointer") { // Check computed style, not inline style
+                    ele.style.cursor = `url(${cursorPath}) 10 10, pointer`;
+                }
+                else {
+                    ele.style.cursor = `url(${autoPath}) 10 10, auto`;
+                }
+            });
+        } else {
+            allElements.forEach(ele => {
+                const computedStyle = window.getComputedStyle(ele);
+                if (computedStyle.cursor.includes("url")) { // Reset only modified elements
+                    ele.style.cursor = ""; // Restore to original pointer
+                }
+            });
+            document.body.style.cursor = "default"; // Set the default cursor
+        }
+        Array.from(titles).forEach(title => {
+            if (whitecondition) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = 'white';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+
+            }
+        });
+    }
+
+
+
 
 
 
@@ -393,11 +471,18 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (44).svg"}
                                 heading={"Big Black Cursor"}
+                                onClick={triggerFunction}
+                                customStyle={"black"}
+
+
 
                             />
                             <Content_box2
                                 imag={"/images/svgviewer-output (45).svg"}
                                 heading={"Big White Cursor"}
+                                onClick={whiteFunction}
+                                customStyle={"white"}
+
                             />
 
                         </div>
