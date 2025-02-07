@@ -15,7 +15,6 @@ import Image from "next/image"
 
 
 export default function Home({ }) {
-  const [open, setOpen] = useState(true)
 
   const [toggle, setToggle] = useState(true);
   const handleButtonClick = (e: React.MouseEvent) => {
@@ -42,7 +41,7 @@ export default function Home({ }) {
         <CTA />
         <Footer />
       </div>
-      {toggle && <Accessibility handlePageClick={handlePageClick} setOpen={setOpen} open={open} />}
+      {toggle && <Accessibility handlePageClick={handlePageClick} />}
       <div id="accessibilty" className="fixed  bottom-10 right-10 bg-primary h-[45px] w-[45px] rounded-full flex justify-center hover:scale-[1.1] cursor-pointer  hover:border border-orange-600 items-center transform transition-all !duration-1000 ease-in-out" onClick={handleButtonClick}>
         <Image id="accessibilty" height={20} width={20} src={"/images/svgviewer-output (53).svg"} alt="Button icon" />
       </div>

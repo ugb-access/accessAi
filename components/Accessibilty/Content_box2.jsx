@@ -1,8 +1,7 @@
-import { Accessibility } from 'lucide-react';
 import Image from 'next/image'
 import React from 'react'
 
-const Content_box2 = ({ imag, heading, onClick, customStyle, customHeading, onMouseOver, id }) => {
+const Content_box2 = ({ imag, heading, onClick, customStyle, onMouseOver, }) => {
 
   return (
 

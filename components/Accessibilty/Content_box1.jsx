@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 
-const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, button, inputBar = false, img = true, color, colorButton = true, handleImagClick, onClick, handleImageClick, changeBackgroundColor, colors, onChangeColor, changeTitleColor, changeTextColor }) => {
+const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, button, inputBar = false, img = true, colorButton = true, handleImagClick, onClick, handleImageClick, colors, onChangeColor, }) => {
 
   const options = [
     { value: "homepage" },

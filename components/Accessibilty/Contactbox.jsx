@@ -1,13 +1,12 @@
 import Content_box1 from './Content_box1'
 import Content_box2 from './Content_box2'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, } from 'react';
 
 
 const Contactbox = () => {
 
     let is_highlight_title = false
     let is_highlight_link = false
-    let Bold = false
 
 
 
@@ -30,7 +29,6 @@ const Contactbox = () => {
         const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6,a,p,span')
         const titles = document.getElementsByClassName('textbold')
         const isScriptEnable = document.body.classList.contains('read-mode')
-        const idelement = document.getElementById('accessibilty')
         if (!isScriptEnable) {
             document.body.style.fontWeight = '500'
             title.forEach((title) => {
@@ -317,42 +315,87 @@ const Contactbox = () => {
     };
     // increase/decrease letterspacingconst originalLetterSpacing = new Map();
     const originalLetterSpacing = new Map();
-
     const adjustLetterSpacing = (isIncrease) => {
         const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-
         elements.forEach((element) => {
-            if (element.id === "accessibilty") return; // ✅ Skip this element
-
+            if (element.id === "accessibilty") return;
             let currentLetterSpacing = getComputedStyle(element).letterSpacing;
-
-            // ✅ Convert "normal" to 0px
             currentLetterSpacing = currentLetterSpacing === "normal" ? "0px" : currentLetterSpacing;
-            currentLetterSpacing = parseFloat(currentLetterSpacing); // Convert to number
-
+            currentLetterSpacing = parseFloat(currentLetterSpacing);
             if (!originalLetterSpacing.has(element)) {
                 originalLetterSpacing.set(element, currentLetterSpacing);
             }
-
-            // ✅ Increase or Decrease by 1px
             const newLetterSpacing = isIncrease ? currentLetterSpacing + 1 : currentLetterSpacing - 1;
-
             if (!isNaN(newLetterSpacing)) {
                 element.style.letterSpacing = `${newLetterSpacing}px`;
             }
         });
-
-        // ✅ Update the percentage display
         const percentageElement = document.querySelector(".letter-spacing-percentage");
         let current = percentageElement ? percentageElement.innerText : "Default";
         let percentage = current === "Default" ? 0 : parseInt(current.replace("%", ""), 10);
-
         percentage = isIncrease ? percentage + 10 : percentage - 10;
-
         if (percentageElement) {
             percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
         }
     };
+
+
+    let magnified = false;
+    const textmagnified = () => {
+        magnified = !magnified;
+        const titles = document.getElementsByClassName('textmagnidied')
+        Array.from(titles).forEach(title => {
+            if (magnified) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+            }
+        })
+        document.removeEventListener("mouseover", handleMouseOver);
+
+        if (magnified) {
+            document.addEventListener("mouseover", handleMouseOver);
+        }
+    };
+
+    const handleMouseOver = (e) => {
+        if (!magnified) return; // Stop if magnification is off
+
+        let text = e.target?.innerText?.trim();
+        if (!text) return;
+
+        document.querySelector(".magnify")?.remove();
+
+        let magnifiedText = Object.assign(document.createElement("div"), {
+            className: "magnify",
+            innerText: text,
+            style: `
+            position: absolute; background: grey; font-weight: bold;
+            text-align: center; font-size: 32px; color: white; padding: 10px;
+            border-radius: 5px; pointer-events: none; white-space: normal;
+            word-wrap: break-word; display: flex; align-items: center;
+            justify-content: center; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            left: ${Math.min(e.pageX + 15, window.innerWidth - 310)}px;
+            top: ${e.pageY + 20}px; max-width: ${Math.min(300, window.innerWidth - e.pageX - 20)}px;
+        `,
+        });
+
+        document.body.appendChild(magnifiedText);
+
+    };
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -370,7 +413,7 @@ const Contactbox = () => {
                         handleImageClick={() => updateScale(true)}   // Increase scale inline
                         handleImagClick={() => updateScale(false)}  // Decrease scale inline ✅ Fixed typo
                         imag2={"/images/svgviewer-output (18).svg"}  // Some other image
-                        para={<span className="scale-percentage">Default</span>} // Initially "Default"
+                        para={<span id='accessibilty' className="scale-percentage">Default</span>} // Initially "Default"
                         imag3={"/images/svgviewer-output (17).svg"}  // Another image
                         colorButton={false}
                     />
@@ -444,6 +487,9 @@ const Contactbox = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (23).svg"}
                         heading={"Text Magnifier"}
+                        onClick={textmagnified}
+                        customStyle={"textmagnidied"}
+
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (20).svg"}
@@ -512,7 +558,6 @@ const highlightAllLink = (active) => {
     const title = document.querySelectorAll('a')
     const titles = document.getElementsByClassName('highlightlink')
 
-    const hightBackground = document.getElementById("highLightLink")
     // const textcolor = document.getElementsByClassName("changeColor")
     if (!active) {
         title.forEach((title) => {

@@ -1,7 +1,7 @@
 // import React from 'react'
 import Content_box2 from './Content_box2';
 import Content_box1 from './Content_box1';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, } from 'react';
 
 
 const ColorAdjustment = () => {
@@ -11,7 +11,6 @@ const ColorAdjustment = () => {
     const changeBackgroundColor = (color) => {
         localStorage.setItem("background-color", color)
         document.body.style.background = color
-        const id = document.getElementById('accessibilty')
 
 
         const footer = document.getElementsByTagName('footer');

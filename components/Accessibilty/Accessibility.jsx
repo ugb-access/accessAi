@@ -6,8 +6,7 @@ import Orientation from "./Orientation";
 import Statment from "./Statment";
 import Image from "next/image";
 
-import React, { useState, useEffect } from 'react';
-import { root } from "postcss";
+import React, { useState, } from 'react';
 
 
 
@@ -139,7 +138,7 @@ const SVG6 = () => (
     />
   </svg>
 );
-const Accessibility = ({ handlePageClick, setOpen, open }) => {
+const Accessibility = ({ handlePageClick }) => {
 
   const [isCustomColor, setIsCustomColor] = useState(false);
   const [activeTab, setActiveTab] = useState(-1)
@@ -168,33 +167,6 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
 
 
-  const handleTabChange = (index, tabValue) => {
-    if (index === 0) {
-      saveProfileHandler()
-    }
-    if (index === 3) {
-      titlelink()
-    }
-    if (index === 1) {
-      scale()
-    }
-    setActiveTab(-1)
-
-    if (activeTab.length === 0) {
-      setActiveTab(index);
-
-      if (index === 0) {
-        setOpen(true)
-
-      }
-
-    }
-    else {
-      setActiveTab(-1)
-
-    }
-
-  };
 
 
   /////////////titlelink////////////////
@@ -292,14 +264,9 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
 
 
 
-  const changetab4 = (index, tabValue) => {
-    if (index === 4) {
-      keyboard();
 
-    }
 
-    setActiveTab(index);
-  };
+
 
   const handleOn = (index) => {
 
@@ -317,6 +284,9 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     if (index === 3) {
       titlelink(true)
     }
+    // if (index === 2) {
+    //   readingmask(true)
+    // }
 
   }
 
@@ -326,6 +296,7 @@ const Accessibility = ({ handlePageClick, setOpen, open }) => {
     keyboard(false)
     scale(false)
     titlelink(false)
+    // readingmask(false)
 
   }
 

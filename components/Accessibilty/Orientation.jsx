@@ -3,8 +3,6 @@ import Content_box2 from './Content_box2';
 import Content_box1 from './Content_box1';
 import Footer from "./Footer";
 
-import React, { useState, useEffect } from 'react';
-import { title } from 'process';
 
 
 const Orientation = () => {
@@ -291,7 +289,7 @@ const Orientation = () => {
                         if (!guideElement) {
                             guideElement = document.createElement('div');
                             guideElement.className = '${guideClass}';
-                            guideElement.style.cssText = 'position:absolute;width:400px;height:13px;background-color:#146FF8;border:4px solid black;border-radius:50px;pointer-events:none;transition:opacity 0.3s ease;overflow-x:hidden;z-index:10;opacity:0;';
+                            guideElement.style.cssText = 'position:absolute; width:400px;height:13px;background-color:#146FF8;border:4px solid black;border-radius:50px;pointer-events:none;transition:opacity 0.3s ease;overflow-x:hidden;z-index:10;opacity:0;';
                             document.body.appendChild(guideElement);
                         }
                         guideElement.style.opacity = isVisible ? '1' : '0';
@@ -338,8 +336,6 @@ const Orientation = () => {
     const originalClasses = new Map();
 
     const readMode = () => {
-        const body = document.body;
-        const id = document.getElementById("accessibilty");
         const titles = document.getElementsByClassName('change');
         const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, img.svg, li, ul, ol, table, th, td, blockquote, pre, code, em, strong, small, sub, sup, del, ins, mark, abbr, dfn, kbd, q, cite, var, nav, header, footer, aside, section, article, figure, figcaption, main, div, form, fieldset, legend, label, button, input, textarea, select, option, optgroup, progress, meter, output, details, summary, dialog, menu, menuitem, menuitemcheckbox, menuitemradio, script, style, link, meta, title, base, head, body, html');
 
@@ -383,6 +379,53 @@ const Orientation = () => {
             originalClasses.clear();
         }
     };
+    let mask = false;
+    let Readingmask = null; // Declare the reference outside the function
+
+    const readingmask = () => {
+        mask = !mask;
+
+        if (mask) {
+            // Create the element when mask is true, if it doesn't already exist
+            if (!Readingmask) {
+                Readingmask = document.createElement("div");
+                Object.assign(Readingmask.style, {
+                    position: "fixed",
+                    backgroundColor: "transparent",
+                    boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
+                    height: "150px",
+                    width: "100%",
+                    zIndex: "9999",
+                    pointerEvents: "none"
+                });
+                document.body.appendChild(Readingmask);
+
+                document.addEventListener("mousemove", (event) => {
+                    if (Readingmask) { // Check if Readingmask exists before updating style
+                        let maskWidth = window.innerWidth;
+                        let maskHeight = 150; // Same height as above
+                        let newX = event.clientX - maskWidth / 2;
+                        let newY = event.clientY - maskHeight / 2;
+                        newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
+                        newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
+                        Readingmask.style.left = `${newX}px`;
+                        Readingmask.style.top = `${newY}px`;
+                    }
+                });
+            }
+        } else {
+            // Remove the mask element when mask is false
+            if (Readingmask) {
+                document.body.removeChild(Readingmask); // Remove the mask element
+                Readingmask = null; // Clear the reference
+            }
+        }
+    };
+
+
+
+
+
 
 
 
@@ -454,7 +497,7 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (41).svg"}
                                 heading={"Reading Mask"}
-                            // onClick={handleMaskClick}
+                                onClick={readingmask}
                             // id={"dynamic_id"}
 
 
