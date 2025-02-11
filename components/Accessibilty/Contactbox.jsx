@@ -11,66 +11,121 @@ const Contactbox = () => {
 
 
     useEffect(() => {
-        const isScriptEnable = document.body.classList.contains('read-mode')
-        const titles = document.getElementsByClassName('textbold')
-        Array.from(titles).forEach(title => {
+        const isScriptEnable = localStorage.getItem("read-mode") === "true";
+        const titles = document.getElementsByClassName("textbold");
 
-            if (isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-            }
-        })
-    }, [])
-    const textBold = () => {
-        const body = document.body
-        const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6,a,p,span')
-        const titles = document.getElementsByClassName('textbold')
-        const isScriptEnable = document.body.classList.contains('read-mode')
-        if (!isScriptEnable) {
-            document.body.style.fontWeight = '500'
-            title.forEach((title) => {
-                if (title.id === 'accessibilty') return;
-                title.style.fontWeight = '600';
-                body.classList.add('read-mode')
-            })
+        Array.from(titles).forEach((title) => {
+            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
+            title.style.color = isScriptEnable ? "#ffffff" : "";
+        });
+
+        if (isScriptEnable) {
+            document.body.style.fontWeight = "500";
+            document.body.classList.add("read-mode");
+
+            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
+                if (title.id !== "accessibilty") {
+                    title.style.fontWeight = "600";
+                }
+            });
         } else {
-            document.body.style.fontWeight = ''
-            title.forEach((title) => {
-                title.style.fontWeight = '';
-                body.classList.remove('read-mode')
-            })
+            document.body.style.fontWeight = "";
+            document.body.classList.remove("read-mode");
 
+            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
+                title.style.fontWeight = "";
+            });
         }
-        Array.from(titles).forEach(title => {
+    }, []);
+    const textBold = () => {
+        const isScriptEnable = document.body.classList.contains("read-mode");
+        const titles = document.getElementsByClassName("textbold");
+        Array.from(titles).forEach((title) => {
+            title.style.backgroundColor = !isScriptEnable ? "#146FF8" : "";
+            title.style.color = !isScriptEnable ? "#ffffff" : "";
+        });
+        if (!isScriptEnable) {
+            document.body.style.fontWeight = "500";
+            document.body.classList.add("read-mode");
+            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
+                if (title.id !== "accessibilty") {
+                    title.style.fontWeight = "600";
+                }
+            });
+        } else {
+            document.body.style.fontWeight = "";
+            document.body.classList.remove("read-mode");
+            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
+                title.style.fontWeight = "";
+            });
+        }
 
-            if (!isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        })
-    }
-
+        // LocalStorage me update
+        localStorage.setItem("read-mode", String(!isScriptEnable));
+    };
     useEffect(() => {
-        const isScriptEnable = document.body.classList.contains("center-text");
+        const isScriptEnable = localStorage.getItem("textCenter") === "true";
         const titles = document.getElementsByClassName("textcenter");
-        const idelement = document.getElementById('accessibilty')
+        const idelement = document.getElementById("accessibilty");
 
         if (idelement) {
-            if (isScriptEnable) {
-                idelement.style.textAlign = 'left';
-            }
-        } else {
-            idelement.style.textAlign = '';
-
+            idelement.style.textAlign = isScriptEnable ? "center" : "";
         }
+
         Array.from(titles).forEach((title) => {
+            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
+            title.style.color = isScriptEnable ? "#ffffff" : "";
+        });
+
+        if (isScriptEnable) {
+            document.body.classList.add("text-center");
+            document.body.style.textAlign = "center";
+        } else {
+            document.body.classList.remove("text-center");
+            document.body.style.textAlign = "";
+        }
+    }, []);
+    const allTextCenter = () => {
+        const titles = document.getElementsByClassName("textcenter");
+        const body = document.body;
+        const isScriptEnable = body.classList.contains("text-center");
+        const idelement = document.getElementById("accessibilty");
+
+        if (idelement) {
+            idelement.style.textAlign = !isScriptEnable ? "center" : "";
+        }
+
+        if (!isScriptEnable) {
+            body.style.textAlign = "center";
+            body.classList.add("text-center");
+        } else {
+            body.style.textAlign = "";
+            body.classList.remove("text-center");
+        }
+
+        Array.from(titles).forEach((title) => {
+            title.style.backgroundColor = !isScriptEnable ? "#146FF8" : "";
+            title.style.color = !isScriptEnable ? "#ffffff" : "";
+        });
+
+        // LocalStorage me string store karna
+        localStorage.setItem("textCenter", !isScriptEnable ? "true" : "false");
+    };
+    useEffect(() => {
+        // Local storage se value lena
+        let isScriptEnable = localStorage.getItem("textLeft") === "true";
+
+        const body = document.body;
+        const titles = document.getElementsByClassName("textleft");
+
+        if (isScriptEnable) {
+            body.classList.add("text-left");
+        } else {
+            body.classList.remove("text-left");
+        }
+
+        // Titles ke background aur color change karna
+        Array.from(titles).forEach(title => {
             if (isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = "#ffffff";
@@ -80,101 +135,59 @@ const Contactbox = () => {
             }
         });
     }, []);
-    const allTextCenter = () => {
-        const titles = document.getElementsByClassName("textcenter");
-        const body = document.body;
-        const isScriptEnable = body.classList.contains("center-text");
-        const idelement = document.getElementById('accessibilty')
-
-        if (idelement) {
-            if (!isScriptEnable) {
-                idelement.style.textAlign = 'left';
-            }
-        } else {
-            idelement.style.textAlign = '';
-
-        }
-        if (!isScriptEnable) {
-            body.style.textAlign = "center";
-            body.classList.add("center-text");
-        } else {
-            body.style.textAlign = "";
-            body.classList.remove("center-text");
-        }
-        Array.from(titles).forEach((title) => {
-
-            if (!isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = "#ffffff";
-            } else {
-                title.style.backgroundColor = "";
-                title.style.color = "";
-            }
-        })
-    };
-
-    useEffect(() => {
-        const isScriptEnable = document.body.classList.contains('text-left')
-        const titles = document.getElementsByClassName('textleft')
-        Array.from(titles).forEach((title) => {
-            if (isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = "#ffffff";
-            } else {
-                title.style.backgroundColor = "";
-                title.style.color = "";
-            }
-        });
-    }, [])
+    // Function to toggle text alignment and save to localStorage
     const allTextLeft = () => {
+        let isScriptEnable = document.body.classList.contains("text-left");
 
         const body = document.body;
-        const titles = document.getElementsByClassName('textleft')
-        const isScriptEnable = document.body.classList.contains('text-left')
+        const titles = document.getElementsByClassName("textleft");
+
         if (!isScriptEnable) {
-            body.style.textAlign = 'left';
             body.classList.add("text-left");
         } else {
-            body.style.textAlign = '';
             body.classList.remove("text-left");
         }
+
+        // Titles ke styles change karna
         Array.from(titles).forEach(title => {
             if (!isScriptEnable) {
                 title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        })
-    }
-
-
-    useEffect(() => {
-
-        const isScriptEnable = document.body.classList.contains('text-right')
-        const titles = document.getElementsByClassName('textright')
-        const idelement = document.getElementById('accessibilty')
-
-        if (idelement) {
-            if (isScriptEnable) {
-                idelement.style.textAlign = 'left';
-            }
-        } else {
-            idelement.style.textAlign = '';
-
-        }
-        Array.from(titles).forEach((title) => {
-            if (isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
                 title.style.color = "#ffffff";
             } else {
                 title.style.backgroundColor = "";
                 title.style.color = "";
             }
         });
-    }, [])
+
+        // Local storage update karna
+        localStorage.setItem("textLeft", !isScriptEnable);
+    };
+    useEffect(() => {
+
+        const isScriptEnable = localStorage.getItem("textright") === "true";
+        const titles = document.getElementsByClassName('textright')
+        const idelement = document.getElementById('accessibilty')
+
+
+        if (idelement) {
+            idelement.style.textAlign = isScriptEnable ? "left" : "";
+        }
+
+        Array.from(titles).forEach(title => {
+            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
+            title.style.color = isScriptEnable ? "#ffffff" : "";
+        });
+
+        // Body pe class lagani ya hatani
+        if (isScriptEnable) {
+            document.body.classList.add("text-right");
+            document.body.style.textAlign = "right";
+        } else {
+            document.body.classList.remove("text-right");
+            document.body.style.textAlign = "";
+        }
+    }, []); // Yeh sirf ek baar chalega
+
     const allTextRight = () => {
         const body = document.body;
         const titles = document.getElementsByClassName('textright')
@@ -207,6 +220,8 @@ const Contactbox = () => {
 
             }
         })
+        localStorage.setItem("textright", !isScriptEnable);
+
 
     }
 
@@ -252,13 +267,20 @@ const Contactbox = () => {
 
 
     const originalFontSizes = new Map();
+
+    // Load Saved Font Size from Local Storage on Page Load
+    window.addEventListener("DOMContentLoaded", () => {
+        let savedFontSize = localStorage.getItem("font-size");
+        if (savedFontSize) {
+            console.log('savedFontSize: ', savedFontSize);
+            document.body.style.fontSize = savedFontSize;
+        }
+    });
     const adjustFontSize = (isIncrease) => {
-        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
+        const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
         elements.forEach((element) => {
-            if (element.id === "accessibilty") return; // ✅ Skip this element
-            // Get current font size
+            if (element.id === "accessibilty") return;
             const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-            // Store original font size if not already stored
             if (!originalFontSizes.has(element)) {
                 originalFontSizes.set(element, currentFontSize);
             }
@@ -267,22 +289,23 @@ const Contactbox = () => {
                 element.style.fontSize = `${newFontSize}px`;
             }
         });
+        // Update Percentage Display
         const percentageElement = document.querySelector(".font-percentage");
         let current = percentageElement.innerText;
-        let percentage = current == "Default" ? 0 : current?.replace("%", "");
-        if (isIncrease) {
-            percentage = +percentage + 10
-        } else {
-            percentage = +percentage - 10
-        }
+        let percentage = current == "Default" ? 0 : parseInt(current.replace("%", ""));
+        percentage = isIncrease ? percentage + 10 : percentage - 10;
         if (percentageElement) {
-            if (percentage === 0) {
-                percentageElement.innerText = "Default";
-            } else {
-                percentageElement.innerText = `${percentage}%`
-            }
+            percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
         }
+        // Save New Font Size to Local Storage
+        let bodyFontSize = getComputedStyle(document.body).fontSize;
+        localStorage.setItem("font-size", bodyFontSize);
     };
+
+
+
+
+
     // increase/decrease lineHeight
     const originalLineHeights = new Map();
     const adjustLineHeight = (isIncrease) => {

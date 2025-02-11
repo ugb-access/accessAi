@@ -3,7 +3,9 @@
 import Contactbox, { handleHighLight } from "./Contactbox";
 import ColorAdjustment from "./ColorAdjustment";
 import Orientation from "./Orientation";
+import Footer from "./Footer";
 import Statment from "./Statment";
+// import Language from "./Language";
 import Image from "next/image";
 
 import React, { useState, } from 'react';
@@ -147,7 +149,6 @@ const Accessibility = ({ handlePageClick }) => {
 
 
   const saveProfileHandler = (active) => {
-    console.log('active: ', active);
     const root = document.documentElement;
 
     if (!active) {
@@ -259,6 +260,46 @@ const Accessibility = ({ handlePageClick }) => {
   keyboard();
 
 
+  let Readingmask = null; // Global variable to track the mask
+
+  const readingmask = (active) => {
+
+    if (!active) {  // ✅ Activate the mask
+      console.log('active: ', active);
+      if (!Readingmask) { // Only create if it doesn't exist
+        Readingmask = document.createElement("div");
+        Object.assign(Readingmask.style, {
+          position: "fixed",
+          backgroundColor: "transparent",
+          boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
+          height: "150px",
+          width: "100%",
+          zIndex: "9999",
+          pointerEvents: "none"
+        });
+        document.body.appendChild(Readingmask);
+
+        document.addEventListener("mousemove", (event) => {
+          if (Readingmask) {
+            let maskWidth = window.innerWidth;
+            let maskHeight = 150;
+            let newX = event.clientX - maskWidth / 2;
+            let newY = event.clientY - maskHeight / 2;
+            newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
+            newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
+            Readingmask.style.left = `${newX}px`;
+            Readingmask.style.top = `${newY}px`;
+          }
+        });
+      }
+    } else {  // ❌ Deactivate the mask
+      if (Readingmask) {
+        document.body.removeChild(Readingmask);
+        Readingmask = null;
+      }
+    }
+  };
+
 
 
 
@@ -284,21 +325,23 @@ const Accessibility = ({ handlePageClick }) => {
     if (index === 3) {
       titlelink(true)
     }
-    // if (index === 2) {
-    //   readingmask(true)
-    // }
+    if (index === 2) {
+      readingmask(true)
+      console.log(' readingmask: ', readingmask);
+    }
 
   }
-
   const handleOff = () => {
-    setActiveTab(-1)
-    saveProfileHandler(false)
-    keyboard(false)
-    scale(false)
-    titlelink(false)
-    // readingmask(false)
+    setActiveTab(-1);
+    saveProfileHandler(false);
+    keyboard(false);
+    scale(false);
+    titlelink(false);
+    readingmask(false); // This will toggle it OFF if it's currently ON
+    console.log('readingmask: ', readingmask);
 
-  }
+  };
+
 
   const data = [{
     button: "Reset setting",
@@ -440,6 +483,8 @@ const Accessibility = ({ handlePageClick }) => {
   }
 
 
+
+
   return (
     <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%] select-none  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10   top-0 z-10 fixed  !h-screen `} >
       <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary"  >
@@ -529,7 +574,10 @@ const Accessibility = ({ handlePageClick }) => {
       <Contactbox />
       <ColorAdjustment />
       <Orientation />
+      <Footer />
+
       <Statment />
+      {/* <Language /> */}
 
     </div >
 

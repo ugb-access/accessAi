@@ -1,7 +1,6 @@
 
 import Content_box2 from './Content_box2';
 import Content_box1 from './Content_box1';
-import Footer from "./Footer";
 
 
 
@@ -255,76 +254,6 @@ const Orientation = () => {
 
 
 
-    // const handleClick = () => toggleScript();
-
-    const toggleScript = () => {
-        const guideClass = 'guide-element';
-        const scriptClass = 'custom-style';
-        const existingScripts = document.getElementsByClassName(scriptClass);
-
-        // Function to remove elements safely
-        const removeElements = (elements) => {
-            Array.from(elements).forEach(el => el.parentNode?.removeChild(el));
-        };
-
-        if (existingScripts.length > 0) {
-            // Remove existing guide and script
-            removeElements(existingScripts);
-            removeElements(document.getElementsByClassName(guideClass));
-
-            console.log('Guide deactivated.');
-        } else {
-            // Create new script
-            const scriptElement = document.createElement('script');
-            scriptElement.className = scriptClass;
-            scriptElement.type = 'text/javascript';
-            scriptElement.innerHTML = `
-                (function() {
-                    let guideElement = null;
-                    let isVisible = false;
-    
-                    const toggleGuide = () => {
-                        isVisible = !isVisible;
-                        
-                        if (!guideElement) {
-                            guideElement = document.createElement('div');
-                            guideElement.className = '${guideClass}';
-                            guideElement.style.cssText = 'position:absolute; width:400px;height:13px;background-color:#146FF8;border:4px solid black;border-radius:50px;pointer-events:none;transition:opacity 0.3s ease;overflow-x:hidden;z-index:10;opacity:0;';
-                            document.body.appendChild(guideElement);
-                        }
-                        guideElement.style.opacity = isVisible ? '1' : '0';
-    
-                        const handleMouseMove = (event) => {
-                            if (guideElement && isVisible) {
-                                const rect = guideElement.getBoundingClientRect();
-                                const centerX = event.clientX - rect.width / 2;
-                                const centerY = event.clientY - rect.height / 2;
-                                guideElement.style.left = \`\${centerX}px\`;
-                                guideElement.style.top = \`\${centerY}px\`;
-                            }
-                        };
-    
-                        if (isVisible) {
-                            document.addEventListener('mousemove', handleMouseMove);
-                        } else {
-                            document.removeEventListener('mousemove', handleMouseMove);
-                            if (guideElement) guideElement.remove(); // Properly remove guide element
-                        }
-                    };
-    
-                    toggleGuide();
-                    document.body.addEventListener('click', () => isVisible && toggleGuide());
-                })();
-            `;
-            document.body.appendChild(scriptElement);
-
-            console.log('Guide activated.');
-        }
-    };
-
-    // Ensure toggleScript is defined before handleClick
-    const handleClick = () => toggleScript();
-
 
 
 
@@ -336,6 +265,8 @@ const Orientation = () => {
     const originalClasses = new Map();
 
     const readMode = () => {
+        const body = document.body; // Select the body element
+
         const titles = document.getElementsByClassName('change');
         const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, img.svg, li, ul, ol, table, th, td, blockquote, pre, code, em, strong, small, sub, sup, del, ins, mark, abbr, dfn, kbd, q, cite, var, nav, header, footer, aside, section, article, figure, figcaption, main, div, form, fieldset, legend, label, button, input, textarea, select, option, optgroup, progress, meter, output, details, summary, dialog, menu, menuitem, menuitemcheckbox, menuitemradio, script, style, link, meta, title, base, head, body, html');
 
@@ -379,11 +310,23 @@ const Orientation = () => {
             originalClasses.clear();
         }
     };
+
+
     let mask = false;
     let Readingmask = null; // Declare the reference outside the function
 
     const readingmask = () => {
         mask = !mask;
+        const titles = document.getElementsByClassName('readingmask');
+        Array.from(titles).forEach(title => {
+            if (mask) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+            }
+        })
 
         if (mask) {
             // Create the element when mask is true, if it doesn't already exist
@@ -423,6 +366,69 @@ const Orientation = () => {
     };
 
 
+    let Guide = false;
+    let Readingguide = null;
+
+    const readingGuide = (event) => {
+        Guide = !Guide; // Toggle guide
+        const titles = document.getElementsByClassName('readingguide');
+        Array.from(titles).forEach(title => {
+            if (Guide) {
+                title.style.backgroundColor = "#146FF8";
+                title.style.color = '#ffffff';
+            } else {
+                title.style.backgroundColor = '';
+                title.style.color = '';
+            }
+        })
+
+        if (Guide) {
+            if (!Readingguide) { // Only create if it doesn't exist
+                Readingguide = document.createElement('div');
+
+                Object.assign(Readingguide.style, {
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    width: '400px', // Guide Width
+                    height: '13px', // Guide Height
+                    backgroundColor: '#146FF8',
+                    zIndex: '9999',
+                    border: '4px solid #000',
+                    overflow: 'hidden',
+                    borderRadius: '50px',
+                    pointerEvents: 'none'
+                });
+
+                document.body.appendChild(Readingguide);
+                let startX = event.clientX - Readingguide.offsetWidth / 2;
+                let startY = event.clientY - Readingguide.offsetHeight / 2;
+                Readingguide.style.left = `${startX}px`;
+                Readingguide.style.top = `${startY}px`;
+                // Add mousemove event only once
+                document.addEventListener('mousemove', (event) => {
+                    if (Readingguide) {
+                        let newX = event.clientX - Readingguide.offsetWidth / 2;
+                        let newY = event.clientY - Readingguide.offsetHeight / 2;
+
+                        // Keep within screen bounds
+                        newX = Math.max(0, Math.min(newX, window.innerWidth - Readingguide.offsetWidth));
+                        newY = Math.max(0, Math.min(newY, window.innerHeight - Readingguide.offsetHeight));
+
+                        Readingguide.style.left = `${newX}px`;
+                        Readingguide.style.top = `${newY}px`;
+                    }
+                });
+            }
+        } else {
+            // Remove the guide
+            if (Readingguide) {
+                document.body.removeChild(Readingguide);
+                Readingguide = null;
+            }
+        }
+    };
+
 
 
 
@@ -447,8 +453,9 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (38).svg"}
                             heading={"Reading Guide"}
-                            onClick={handleClick}
-                            id={"dynamic_id_container"}
+                            onClick={readingGuide}
+                            // id={"dynamic_id_container"}
+                            customStyle={'readingguide'}
 
                         />
                         <Content_box2
@@ -498,7 +505,7 @@ const Orientation = () => {
                                 imag={"/images/svgviewer-output (41).svg"}
                                 heading={"Reading Mask"}
                                 onClick={readingmask}
-                            // id={"dynamic_id"}
+                                customStyle={'readingmask'}
 
 
                             />
@@ -538,7 +545,6 @@ const Orientation = () => {
 
 
             </div>
-            <Footer />
         </>
     )
 }
