@@ -443,98 +443,183 @@ const Contactbox = () => {
 
 
 
-    const script = document.createElement("script");
-    script.id = "textmagnified";
-    script.innerHTML = `
-    (function() {
-        let magnified = localStorage.getItem('magnified');
-        
-        const applyStyles = () => {
-            const titles = document.getElementsByClassName('textmagnidied');
-            Array.from(titles).forEach(title => {
+    //     const script = document.createElement("script");
+    //     script.id = "textmagnified";
+    //     script.innerHTML = `
+    //     (function() {
+    //         let magnified = localStorage.getItem('magnified');
+
+    //         const applyStyles = () => {
+    //             const titles = document.getElementsByClassName('textmagnidied');
+    //             Array.from(titles).forEach(title => {
+    //                 if (magnified) {
+    //                     title.style.backgroundColor = '#146FF8';
+    //                     title.style.color = '#ffffff';
+    //                 } else {
+    //                     title.style.backgroundColor = '';
+    //                     title.style.color = '';
+    //                 }
+    //             });
+    //         };
+
+    //         const textmagnified = () => {
+    //             magnified = !magnified;
+    //             localStorage.setItem('magnified', magnified);
+    //             applyStyles();
+    //             document.removeEventListener('mouseover', handleMouseOver);
+    //             if (magnified) {
+    //                 document.addEventListener('mouseover', handleMouseOver);
+    //             }
+    //         };
+
+    //         document.addEventListener('mousemove', applyStyles)
+
+    //         const handleMouseOver = (e) => {
+    //             if (!magnified) return;
+    //             let text = e.target?.innerText?.trim();
+    //             if (!text) return;
+    //             document.querySelector('.magnify')?.remove();
+
+    //             let magnifiedText = document.createElement('div');
+    //             magnifiedText.className = 'magnify';
+    //             magnifiedText.innerText = text;
+
+    //             Object.assign(magnifiedText.style, {
+    //                 position: 'absolute',
+    //                 background: 'grey',
+    //                 fontWeight: 'bold',
+    //                 textAlign: 'center',
+    //                 fontSize: '32px',
+    //                 color: 'white',
+    //                 padding: '10px',
+    //                 borderRadius: '5px',
+    //                 pointerEvents: 'none',
+    //                 whiteSpace: 'normal',
+    //                 wordWrap: 'break-word',
+    //                 display: 'flex',
+    //                 alignItems: 'center',
+    //                 justifyContent: 'center',
+    //                 boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+    //                 left: Math.min(e.pageX + 15, window.innerWidth - 310) + 'px',
+    //                 top: (e.pageY + 20) + 'px',
+    //                 maxWidth: Math.min(300, window.innerWidth - e.pageX - 20) + 'px'
+    //             });
+
+    //             document.body.appendChild(magnifiedText);
+    //         };
+
+    //         if (magnified) {
+    //             document.addEventListener('mouseover', handleMouseOver);
+    //             applyStyles();
+    //         } else {
+    //             applyStyles();
+    //         }
+
+    //         window.textmagnified = textmagnified;
+    //     })();
+    // `;
+
+    // document.body.appendChild(script);
+
+    //  ---------------- main script that handle all kind of functions in it ----------------------
+
+    const mainScript = document.createElement("script");
+    mainScript.id = "mainScript";
+    mainScript.innerHTML = `
+        const toggleMagnifideScript =()=> {
+            let isScriptInjected = document.getElementById('textmagnified');
+            console.log('isScriptInjected: ', isScriptInjected);
+    
+            if(isScriptInjected){
+                console.log('removing script...')
+            const insertedScript = document.getElementById('textmagnified');
+            if(insertedScript) document.body.removeChild(insertedScript);
+
+    
+            } else {
+            console.log('creating script...');
+            const script = document.createElement("script");
+            script.id = "textmagnified";
+            script.innerHTML = 
+            (function () {
+                let magnified = localStorage.getItem('magnified');
+    
+                const applyStyles = () => {
+                    const titles = document.getElementsByClassName('textmagnidied');
+                    Array.from(titles).forEach(title => {
+                        if (magnified) {
+                            title.style.backgroundColor = '#146FF8';
+                            title.style.color = '#ffffff';
+                        } else {
+                            title.style.backgroundColor = '';
+                            title.style.color = '';
+                        }
+                    });
+                };
+    
+                const textmagnified = () => {
+                    magnified = !magnified;
+                    localStorage.setItem('magnified', magnified);
+                    applyStyles();
+                    document.removeEventListener('mouseover', handleMouseOver);
+                    if (magnified) {
+                        document.addEventListener('mouseover', handleMouseOver);
+                    }
+                };
+    
+                document.addEventListener('mousemove', applyStyles)
+    
+                const handleMouseOver = (e) => {
+                    if (!magnified) return;
+                    let text = e.target?.innerText?.trim();
+                    if (!text) return;
+                    document.querySelector('.magnify')?.remove();
+    
+                    let magnifiedText = document.createElement('div');
+                    magnifiedText.className = 'magnify';
+                    magnifiedText.innerText = text;
+    
+                    Object.assign(magnifiedText.style, {
+                        position: 'absolute',
+                        background: 'grey',
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        fontSize: '32px',
+                        color: 'white',
+                        padding: '10px',
+                        borderRadius: '5px',
+                        pointerEvents: 'none',
+                        whiteSpace: 'normal',
+                        wordWrap: 'break-word',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+                        left: Math.min(e.pageX + 15, window.innerWidth - 310) + 'px',
+                        top: (e.pageY + 20) + 'px',
+                        maxWidth: Math.min(300, window.innerWidth - e.pageX - 20) + 'px'
+                    });
+    
+                    document.body.appendChild(magnifiedText);
+                };
+    
                 if (magnified) {
-                    title.style.backgroundColor = '#146FF8';
-                    title.style.color = '#ffffff';
+                    document.addEventListener('mouseover', handleMouseOver);
+                    applyStyles();
                 } else {
-                    title.style.backgroundColor = '';
-                    title.style.color = '';
+                    applyStyles();
                 }
-            });
-        };
-        
-        const textmagnified = () => {
-            magnified = !magnified;
-            localStorage.setItem('magnified', magnified);
-            applyStyles();
-            document.removeEventListener('mouseover', handleMouseOver);
-            if (magnified) {
-                document.addEventListener('mouseover', handleMouseOver);
+    
+                window.textmagnified = textmagnified;
+            })();
+        ;
+        document.body.appendChild(script);
             }
-        };
-
-        document.addEventListener('mousemove', applyStyles)
-        
-        const handleMouseOver = (e) => {
-            if (!magnified) return;
-            let text = e.target?.innerText?.trim();
-            if (!text) return;
-            document.querySelector('.magnify')?.remove();
-            
-            let magnifiedText = document.createElement('div');
-            magnifiedText.className = 'magnify';
-            magnifiedText.innerText = text;
-            
-            Object.assign(magnifiedText.style, {
-                position: 'absolute',
-                background: 'grey',
-                fontWeight: 'bold',
-                textAlign: 'center',
-                fontSize: '32px',
-                color: 'white',
-                padding: '10px',
-                borderRadius: '5px',
-                pointerEvents: 'none',
-                whiteSpace: 'normal',
-                wordWrap: 'break-word',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
-                left: Math.min(e.pageX + 15, window.innerWidth - 310) + 'px',
-                top: (e.pageY + 20) + 'px',
-                maxWidth: Math.min(300, window.innerWidth - e.pageX - 20) + 'px'
-            });
-            
-            document.body.appendChild(magnifiedText);
-        };
-        
-        if (magnified) {
-            document.addEventListener('mouseover', handleMouseOver);
-            applyStyles();
-        } else {
-            applyStyles();
+    
         }
-        
-        window.textmagnified = textmagnified;
-    })();
-`;
-
-    document.body.appendChild(script);
-
-
-
-
-
-    const toggleScriptMagnified = () => {
-
-    }
-
-
-
-
-
-
-
+        `
+    const isMainScriptInjected = document.getElementById("mainScript");
+    if (!isMainScriptInjected) document.body.appendChild(mainScript);
 
 
 
@@ -627,7 +712,7 @@ const Contactbox = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (23).svg"}
                         heading={"Text Magnifier"}
-                        onClick={textmagnified}
+                        onClick={toggleMagnifideScript}
                         customStyle={"textmagnidied"}
 
                     />
