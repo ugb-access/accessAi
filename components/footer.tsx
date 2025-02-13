@@ -21,8 +21,8 @@ export function Footer() {
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Products</h4>
-            <ul className="space-y-2">
-              <li><Link href="/products/ai-suite" className="text-gray-400 hover:text-white">AI Accessibility Suite</Link></li>
+            <ul className="space-y-2 ">
+              <li><Link href="/products/ai-suite" className="text-gray-400 hover:text-white ">AI Accessibility Suite</Link></li>
               <li><Link href="/products/widget" className="text-gray-400 hover:text-white">Accessibility Widget</Link></li>
               <li><Link href="/products/monitoring" className="text-gray-400 hover:text-white">Accessibility Monitoring</Link></li>
             </ul>

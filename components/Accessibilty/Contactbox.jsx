@@ -11,7 +11,10 @@ const Contactbox = () => {
 
 
     useEffect(() => {
-        const isScriptEnable = localStorage.getItem("read-mode") === "true";
+        const readmode = document.createElement("script");
+        readmode.innerHTML = `
+         (function() {
+         const isScriptEnable = localStorage.getItem("read-mode") === "true";
         const titles = document.getElementsByClassName("textbold");
 
         Array.from(titles).forEach((title) => {
@@ -36,6 +39,11 @@ const Contactbox = () => {
                 title.style.fontWeight = "";
             });
         }
+    })()
+         `
+        document.body.appendChild(readmode);
+        console.log('readmode: ', readmode);
+
     }, []);
     const textBold = () => {
         const isScriptEnable = document.body.classList.contains("read-mode");
@@ -63,27 +71,41 @@ const Contactbox = () => {
         // LocalStorage me update
         localStorage.setItem("read-mode", String(!isScriptEnable));
     };
+
+
+
+
+
+
     useEffect(() => {
-        const isScriptEnable = localStorage.getItem("textCenter") === "true";
-        const titles = document.getElementsByClassName("textcenter");
-        const idelement = document.getElementById("accessibilty");
+        if (typeof window === 'undefined') return;
+        const textcenter = document.createElement("script");
+        textcenter.innerHTML = `
+            (function() {
+                const isScriptEnable = localStorage.getItem("textCenter") === "true";
+                const titles = document.getElementsByClassName("textcenter");
+                const idelement = document.getElementById("accessibilty");
+  
+                if (idelement) {
+                    idelement.style.textAlign = isScriptEnable ? "left" : "center";
+                }
 
-        if (idelement) {
-            idelement.style.textAlign = isScriptEnable ? "center" : "";
-        }
+                Array.from(titles).forEach((title) => {
+                    title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
+                    title.style.color = isScriptEnable ? "#ffffff" : "";
+                });
 
-        Array.from(titles).forEach((title) => {
-            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
-            title.style.color = isScriptEnable ? "#ffffff" : "";
-        });
-
-        if (isScriptEnable) {
-            document.body.classList.add("text-center");
-            document.body.style.textAlign = "center";
-        } else {
-            document.body.classList.remove("text-center");
-            document.body.style.textAlign = "";
-        }
+                if (isScriptEnable) {
+                    document.body.classList.add("text-center");
+                    document.body.style.textAlign = "center";
+                } else {
+                    document.body.classList.remove("text-center");
+                    document.body.style.textAlign = "";
+                }
+            })();
+        `;
+        document.body.appendChild(textcenter);
+        console.log('textcenter: ', textcenter);
     }, []);
     const allTextCenter = () => {
         const titles = document.getElementsByClassName("textcenter");
@@ -92,7 +114,7 @@ const Contactbox = () => {
         const idelement = document.getElementById("accessibilty");
 
         if (idelement) {
-            idelement.style.textAlign = !isScriptEnable ? "center" : "";
+            idelement.style.textAlign = !isScriptEnable ? "left" : "";
         }
 
         if (!isScriptEnable) {
@@ -111,8 +133,33 @@ const Contactbox = () => {
         // LocalStorage me string store karna
         localStorage.setItem("textCenter", !isScriptEnable ? "true" : "false");
     };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     useEffect(() => {
-        // Local storage se value lena
+        if (typeof window === 'undefined') return;
+        const textleft = document.createElement("script");
+        textleft.innerHTML = `
+            (function() {
+               
         let isScriptEnable = localStorage.getItem("textLeft") === "true";
 
         const body = document.body;
@@ -124,17 +171,16 @@ const Contactbox = () => {
             body.classList.remove("text-left");
         }
 
-        // Titles ke background aur color change karna
         Array.from(titles).forEach(title => {
-            if (isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = "#ffffff";
-            } else {
-                title.style.backgroundColor = "";
-                title.style.color = "";
-            }
+            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
+            title.style.color = isScriptEnable ? "#ffffff" : "";
         });
+            })();
+        `;
+        document.body.appendChild(textleft);
+
     }, []);
+
     // Function to toggle text alignment and save to localStorage
     const allTextLeft = () => {
         let isScriptEnable = document.body.classList.contains("text-left");
@@ -143,28 +189,40 @@ const Contactbox = () => {
         const titles = document.getElementsByClassName("textleft");
 
         if (!isScriptEnable) {
+            body.style.textAlign = "left";
             body.classList.add("text-left");
         } else {
+            body.style.textAlign = "";
             body.classList.remove("text-left");
         }
 
         // Titles ke styles change karna
         Array.from(titles).forEach(title => {
-            if (!isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = "#ffffff";
-            } else {
-                title.style.backgroundColor = "";
-                title.style.color = "";
-            }
+            title.style.backgroundColor = !isScriptEnable ? "#146FF8" : "";
+            title.style.color = !isScriptEnable ? "#ffffff" : "";
         });
 
-        // Local storage update karna
+        // ✅ LocalStorage me correct format me store karna
         localStorage.setItem("textLeft", !isScriptEnable);
     };
-    useEffect(() => {
 
-        const isScriptEnable = localStorage.getItem("textright") === "true";
+
+
+
+
+
+
+
+
+
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const textright = document.createElement("script");
+        textright.innerHTML = `
+        (function(){
+       const isScriptEnable = localStorage.getItem("textright") === "true";
         const titles = document.getElementsByClassName('textright')
         const idelement = document.getElementById('accessibilty')
 
@@ -186,7 +244,10 @@ const Contactbox = () => {
             document.body.classList.remove("text-right");
             document.body.style.textAlign = "";
         }
-    }, []); // Yeh sirf ek baar chalega
+        })()
+        `
+        document.body.appendChild(textright)
+    }, []);
 
     const allTextRight = () => {
         const body = document.body;
@@ -224,6 +285,17 @@ const Contactbox = () => {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
 
     const updateScale = (isIncrease) => {
         const body = document.body;
@@ -263,6 +335,13 @@ const Contactbox = () => {
 
 
     };
+
+
+
+
+
+
+
 
 
 
@@ -363,54 +442,92 @@ const Contactbox = () => {
     };
 
 
-    let magnified = false;
-    const textmagnified = () => {
-        magnified = !magnified;
-        const titles = document.getElementsByClassName('textmagnidied')
-        Array.from(titles).forEach(title => {
+
+    const script = document.createElement("script");
+    script.id = "textmagnified";
+    script.innerHTML = `
+    (function() {
+        let magnified = localStorage.getItem('magnified');
+        
+        const applyStyles = () => {
+            const titles = document.getElementsByClassName('textmagnidied');
+            Array.from(titles).forEach(title => {
+                if (magnified) {
+                    title.style.backgroundColor = '#146FF8';
+                    title.style.color = '#ffffff';
+                } else {
+                    title.style.backgroundColor = '';
+                    title.style.color = '';
+                }
+            });
+        };
+        
+        const textmagnified = () => {
+            magnified = !magnified;
+            localStorage.setItem('magnified', magnified);
+            applyStyles();
+            document.removeEventListener('mouseover', handleMouseOver);
             if (magnified) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+                document.addEventListener('mouseover', handleMouseOver);
             }
-        })
-        document.removeEventListener("mouseover", handleMouseOver);
+        };
 
+        document.addEventListener('mousemove', applyStyles)
+        
+        const handleMouseOver = (e) => {
+            if (!magnified) return;
+            let text = e.target?.innerText?.trim();
+            if (!text) return;
+            document.querySelector('.magnify')?.remove();
+            
+            let magnifiedText = document.createElement('div');
+            magnifiedText.className = 'magnify';
+            magnifiedText.innerText = text;
+            
+            Object.assign(magnifiedText.style, {
+                position: 'absolute',
+                background: 'grey',
+                fontWeight: 'bold',
+                textAlign: 'center',
+                fontSize: '32px',
+                color: 'white',
+                padding: '10px',
+                borderRadius: '5px',
+                pointerEvents: 'none',
+                whiteSpace: 'normal',
+                wordWrap: 'break-word',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+                left: Math.min(e.pageX + 15, window.innerWidth - 310) + 'px',
+                top: (e.pageY + 20) + 'px',
+                maxWidth: Math.min(300, window.innerWidth - e.pageX - 20) + 'px'
+            });
+            
+            document.body.appendChild(magnifiedText);
+        };
+        
         if (magnified) {
-            document.addEventListener("mouseover", handleMouseOver);
+            document.addEventListener('mouseover', handleMouseOver);
+            applyStyles();
+        } else {
+            applyStyles();
         }
-    };
+        
+        window.textmagnified = textmagnified;
+    })();
+`;
 
-    const handleMouseOver = (e) => {
-        if (!magnified) return; // Stop if magnification is off
-
-        let text = e.target?.innerText?.trim();
-        if (!text) return;
-
-        document.querySelector(".magnify")?.remove();
-
-        let magnifiedText = Object.assign(document.createElement("div"), {
-            className: "magnify",
-            innerText: text,
-            style: `
-            position: absolute; background: grey; font-weight: bold;
-            text-align: center; font-size: 32px; color: white; padding: 10px;
-            border-radius: 5px; pointer-events: none; white-space: normal;
-            word-wrap: break-word; display: flex; align-items: center;
-            justify-content: center; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-            left: ${Math.min(e.pageX + 15, window.innerWidth - 310)}px;
-            top: ${e.pageY + 20}px; max-width: ${Math.min(300, window.innerWidth - e.pageX - 20)}px;
-        `,
-        });
-
-        document.body.appendChild(magnifiedText);
-
-    };
+    document.body.appendChild(script);
 
 
 
+
+
+    const toggleScriptMagnified = () => {
+
+    }
 
 
 
