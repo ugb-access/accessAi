@@ -486,7 +486,7 @@ const Accessibility = ({ handlePageClick }) => {
 
 
   return (
-    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%] select-none  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10   top-0 z-10 fixed  !h-screen `} >
+    <div id="accessibilty" className={` w-full md:w-[50%] xl:w-[38%] select-none  bg-[#EEEFFF] rounded-xl overflow-y-scroll border-none md:right-10   top-0 z-10 fixed  !h-full `} >
       <div id="accessibilty" className="p-5 rounded-t-xl  bg-primary"  >
         <div id="accessibilty" className="flex justify-between items-center cursor-pointer">
           <div id="accessibilty" className="text-white hover:transition-all !duration-1000 ease-in-out" onClick={handlePageClick}  >
