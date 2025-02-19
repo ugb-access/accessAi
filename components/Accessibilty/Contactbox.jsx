@@ -3,6 +3,8 @@ import Content_box2 from './Content_box2'
 import React, { useEffect, } from 'react';
 import { SCRIPT_MAGINIFIED } from "../../utils/scripts/maginified"
 import { SCRIPT_CENTER } from "../../utils/scripts/textcenter"
+import { SCRIPT_TEXTLEFT } from "../../utils/scripts/textleft"
+// import { SCRIPT_TEXTRIGHT } from "../../utils/scripts/textright"
 
 
 const Contactbox = () => {
@@ -205,30 +207,32 @@ const Contactbox = () => {
 
     }, []);
 
-    // Function to toggle text alignment and save to localStorage
-    const allTextLeft = () => {
-        let isScriptEnable = document.body.classList.contains("text-left");
+    // Function to toggle text alignment and save to localStorage7
+    // let left = true
+    // const allTextLeft = () => {
+    //     left = !left
+    //     let isScriptEnable = document.body.classList.contains("text-left");
 
-        const body = document.body;
-        const titles = document.getElementsByClassName("textleft");
+    //     const body = document.body;
+    //     const titles = document.getElementsByClassName("textleft");
 
-        if (!isScriptEnable) {
-            body.style.textAlign = "left";
-            body.classList.add("text-left");
-        } else {
-            body.style.textAlign = "";
-            body.classList.remove("text-left");
-        }
+    //     if (left) {
+    //         body.style.textAlign = "left";
+    //         body.classList.add("text-left");
+    //     } else {
+    //         body.style.textAlign = "";
+    //         body.classList.remove("text-left");
+    //     }
 
-        // Titles ke styles change karna
-        Array.from(titles).forEach(title => {
-            title.style.backgroundColor = !isScriptEnable ? "#146FF8" : "";
-            title.style.color = !isScriptEnable ? "#ffffff" : "";
-        });
+    //     // Titles ke styles change karna
+    //     Array.from(titles).forEach(title => {
+    //         title.style.backgroundColor = left ? "#146FF8" : "";
+    //         title.style.color = left ? "#ffffff" : "";
+    //     });
 
-        // ✅ LocalStorage me correct format me store karna
-        localStorage.setItem("textLeft", !isScriptEnable);
-    };
+    //     // ✅ LocalStorage me correct format me store karna
+    //     // localStorage.setItem("textLeft", !isScriptEnable);
+    // };
 
 
 
@@ -480,10 +484,17 @@ const Contactbox = () => {
         if (localStorage.getItem('magnified') === 'true') {
             toggleMagnifideScript();
         }
-            ${SCRIPT_CENTER()}
-            if (localStorage.getItem('textCenter') === 'true') {
-                allTextCenter();}
-        `;
+
+        ${SCRIPT_CENTER()}
+        if (localStorage.getItem('textCenter') === 'true') {
+            // toggleTextcenter();
+        }
+
+        // ${SCRIPT_TEXTLEFT()}
+        // if (localStorage.getItem('textLeftlocal') === 'true') {
+        //         toggleTextLeft();
+        // }
+            `;
 
     const isMainScriptInjected = document.getElementById("mainScript");
     if (!isMainScriptInjected) document.body.appendChild(mainScript);
@@ -582,7 +593,7 @@ const Contactbox = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (20).svg"}
                         heading={"Text Center"}
-                        onClick={toggleTextCenter}
+                        onClick={toggleTextcenter}
                         customStyle={"textcenter"}
 
                     />
@@ -590,7 +601,7 @@ const Contactbox = () => {
                         imag={"/images/svgviewer-output (22).svg"}
                         heading={"Align Left"}
 
-                        onClick={allTextLeft}
+                        // onClick={toggleTextLeft}
                         customStyle={"textleft "}
                     />
                     <Content_box2
