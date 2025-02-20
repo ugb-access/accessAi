@@ -4,7 +4,7 @@ import React, { useEffect, } from 'react';
 import { SCRIPT_MAGINIFIED } from "../../utils/scripts/maginified"
 import { SCRIPT_CENTER } from "../../utils/scripts/textcenter"
 import { SCRIPT_TEXTLEFT } from "../../utils/scripts/textleft"
-// import { SCRIPT_TEXTRIGHT } from "../../utils/scripts/textright"
+import { SCRIPT_TEXTRIGHT } from "../../utils/scripts/textright"
 
 
 const Contactbox = () => {
@@ -75,255 +75,6 @@ const Contactbox = () => {
         // LocalStorage me update
         localStorage.setItem("read-mode", String(!isScriptEnable));
     };
-
-
-
-
-
-
-    // useEffect(() => {
-    //     if (typeof window === 'undefined') return;
-    //     const textcenter = document.createElement("script");
-    //     textcenter.innerHTML = `
-    //         (function() {
-    //             const isScriptEnable = localStorage.getItem("textCenter") === "true";
-    //             const titles = document.getElementsByClassName("textcenter");
-    //             const idelement = document.getElementById("accessibilty");
-
-    //             if (idelement) {
-    //                 idelement.style.textAlign = isScriptEnable ? "left" : "center";
-    //             }
-
-    //             Array.from(titles).forEach((title) => {
-    //                 title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
-    //                 title.style.color = isScriptEnable ? "#ffffff" : "";
-    //             });
-
-    //             if (isScriptEnable) {
-    //                 document.body.classList.add("text-center");
-    //                 document.body.style.textAlign = "center";
-    //             } else {
-    //                 document.body.classList.remove("text-center");
-    //                 document.body.style.textAlign = "";
-    //             }
-    //         })();
-    //     `;
-    //     document.body.appendChild(textcenter);
-    //     console.log('textcenter: ', textcenter);
-    // }, []);
-
-
-
-    // const textcenter = document.createElement("script");
-    // script.id = "textcenter";
-    // textcenter.innerHTML = `
-    // (function() {                                                                                                   
-    //     let center = localStorage.getItem("textCenter") === "false";
-
-    //     const applyTextCenter = () => {
-    //         const titles = document.getElementsByClassName("textcenter");
-    //         const body = document.body;
-    //         const idelement = document.getElementById("accessibilty");
-
-    //         if (idelement) {
-    //             idelement.style.textAlign = center ? "left" : "";
-    //         }
-
-    //         if (center) {
-    //             body.style.textAlign = "center";
-    //             body.classList.add("text-center");
-    //         } else {
-    //             body.style.textAlign = "";
-    //             body.classList.remove("text-center");
-    //         }
-
-    //         Array.from(titles).forEach((title) => {
-    //             title.style.backgroundColor = center ? "#146FF8" : "";
-    //             title.style.color = center ? "#ffffff" : "";
-    //         });
-    //     };
-
-    //     const allTextCenter = () => {
-    //         center = !center;
-    //         localStorage.setItem("textCenter", center ? "true" : "false");
-    //         applyTextCenter();
-    //     };
-
-    //     // Apply saved state on page load
-    //     document.addEventListener("DOMContentLoaded", applyTextCenter);
-
-    //     // Make function globally available
-    //     window.allTextCenter = allTextCenter;
-    // })();
-    // `;
-
-    // document.head.appendChild(textcenter);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const textleft = document.createElement("script");
-        textleft.innerHTML = `
-            (function() {
-               
-        let isScriptEnable = localStorage.getItem("textLeft") === "true";
-
-        const body = document.body;
-        const titles = document.getElementsByClassName("textleft");
-
-        if (isScriptEnable) {
-            body.classList.add("text-left");
-        } else {
-            body.classList.remove("text-left");
-        }
-
-        Array.from(titles).forEach(title => {
-            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
-            title.style.color = isScriptEnable ? "#ffffff" : "";
-        });
-            })();
-        `;
-        document.body.appendChild(textleft);
-
-    }, []);
-
-    // Function to toggle text alignment and save to localStorage7
-    // let left = true
-    // const allTextLeft = () => {
-    //     left = !left
-    //     let isScriptEnable = document.body.classList.contains("text-left");
-
-    //     const body = document.body;
-    //     const titles = document.getElementsByClassName("textleft");
-
-    //     if (left) {
-    //         body.style.textAlign = "left";
-    //         body.classList.add("text-left");
-    //     } else {
-    //         body.style.textAlign = "";
-    //         body.classList.remove("text-left");
-    //     }
-
-    //     // Titles ke styles change karna
-    //     Array.from(titles).forEach(title => {
-    //         title.style.backgroundColor = left ? "#146FF8" : "";
-    //         title.style.color = left ? "#ffffff" : "";
-    //     });
-
-    //     // ✅ LocalStorage me correct format me store karna
-    //     // localStorage.setItem("textLeft", !isScriptEnable);
-    // };
-
-
-
-
-
-
-
-
-
-
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const textright = document.createElement("script");
-        textright.innerHTML = `
-        (function(){
-       const isScriptEnable = localStorage.getItem("textright") === "true";
-        const titles = document.getElementsByClassName('textright')
-        const idelement = document.getElementById('accessibilty')
-
-
-        if (idelement) {
-            idelement.style.textAlign = isScriptEnable ? "left" : "";
-        }
-
-        Array.from(titles).forEach(title => {
-            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
-            title.style.color = isScriptEnable ? "#ffffff" : "";
-        });
-
-        // Body pe class lagani ya hatani
-        if (isScriptEnable) {
-            document.body.classList.add("text-right");
-            document.body.style.textAlign = "right";
-        } else {
-            document.body.classList.remove("text-right");
-            document.body.style.textAlign = "";
-        }
-        })()
-        `
-        document.body.appendChild(textright)
-    }, []);
-
-    const allTextRight = () => {
-        const body = document.body;
-        const titles = document.getElementsByClassName('textright')
-        const idelement = document.getElementById('accessibilty')
-        const isScriptEnable = document.body.classList.contains('text-right')
-        if (idelement) {
-            if (!isScriptEnable) {
-                idelement.style.textAlign = 'left';
-            }
-        } else {
-            idelement.style.textAlign = '';
-
-        }
-
-        if (!isScriptEnable) {
-            body.style.textAlign = 'right';
-            body.classList.add('text-right')
-        } else {
-            body.style.textAlign = '';
-            body.classList.remove('text-right')
-        }
-        Array.from(titles).forEach(title => {
-
-            if (!isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        })
-        localStorage.setItem("textright", !isScriptEnable);
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
 
     const updateScale = (isIncrease) => {
         const body = document.body;
@@ -480,20 +231,25 @@ const Contactbox = () => {
     mainScript.innerHTML = `
     
         ${SCRIPT_MAGINIFIED()}
-        // Initialize on page load if needed
         if (localStorage.getItem('magnified') === 'true') {
             toggleMagnifideScript();
         }
 
         ${SCRIPT_CENTER()}
         if (localStorage.getItem('textCenter') === 'true') {
-            // toggleTextcenter();
+            toggleTextcenter();
         }
 
-        // ${SCRIPT_TEXTLEFT()}
-        // if (localStorage.getItem('textLeftlocal') === 'true') {
-        //         toggleTextLeft();
-        // }
+        ${SCRIPT_TEXTLEFT()}
+        if (localStorage.getItem('textLeftlocal') === 'true') {
+                toggleTextLeft();
+        }
+
+        ${SCRIPT_TEXTRIGHT()}
+        if (localStorage.getItem('textrightlocal') === 'true') {
+              toggleTextRight();
+        }
+
             `;
 
     const isMainScriptInjected = document.getElementById("mainScript");
@@ -588,7 +344,6 @@ const Contactbox = () => {
                         heading={"Text Magnifier"}
                         onClick={toggleMagnifideScript}
                         customStyle={"textmagnidied"}
-
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (20).svg"}
@@ -600,14 +355,13 @@ const Contactbox = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (22).svg"}
                         heading={"Align Left"}
-
-                        // onClick={toggleTextLeft}
+                        onClick={toggleTextLeft}
                         customStyle={"textleft "}
                     />
                     <Content_box2
                         imag={"/images/svgviewer-output (21).svg"}
                         heading={"Align Right"}
-                        onClick={allTextRight}
+                        onClick={toggleTextRight}
                         customStyle={"textright"}
                     />
 
