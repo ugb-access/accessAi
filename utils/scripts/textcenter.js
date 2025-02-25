@@ -10,20 +10,16 @@ export const SCRIPT_CENTER = () => {
                 localStorage.setItem("textCenter", "false");
                 document.body.style.textAlign = "";
                 document.body.classList.remove("text-center");
-
                 document.querySelectorAll(".textcenter").forEach((title) => {
                     title.style.backgroundColor = "";
                     title.style.color = "";
                 });
-
                 let idelement = document.getElementById("accessibilty");
                 if (idelement) {
                     idelement.style.textAlign = "";
                 }
-
                 return;
             }
-
             console.log("Injecting script...");
             const textcenter= document.createElement("script");
             textcenter.id = "textcenter";
