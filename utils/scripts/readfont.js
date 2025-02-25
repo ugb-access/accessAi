@@ -34,8 +34,8 @@ export const SCRIPT_READ = () => {
             (function () {
                 let read = localStorage.getItem("readfontlocal") === "true";
                 const readfont = () => {
+                    localStorage.setItem("readfontlocal","true");    
                     read = !read;
-                    localStorage.setItem("readfontlocal", read.toString());    
                     
                     const titles = document.getElementsByClassName("textbold");
                     Array.from(titles).forEach((title) => {
@@ -62,21 +62,19 @@ export const SCRIPT_READ = () => {
                 };
                  window.Allreadmode = () =>{
                         read = !read;
-                     localStorage.setItem("readfontlocal", read);
+                    localStorage.setItem("readfontlocal","true");
                         readfont()
                  }
 
                 readfont()
             })();
             \`;
-           localStorage.setItem("readfontlocal",read);
+           localStorage.setItem("readfontlocal",read.toString());
             document.body.appendChild(Readfont);
         };
 
-                window.addEventListener("load", () => {    
-                                let isScriptInjected = document.getElementById("readfontscript");
-
-            if (isScriptInjected) {
+                window.addEventListener("load", () => {         
+            if (localStorage.getItem("readfontlocal") === "true") {
                  document.body.style.fontWeight = "500";
                         document.body.classList.add("read-mode");
                         document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
