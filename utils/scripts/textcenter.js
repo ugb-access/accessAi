@@ -1,71 +1,90 @@
 export const SCRIPT_CENTER = () => {
     return `
-            const toggleTextcenter = () => {
-                const body = document.body;
-                let isScriptInjected = document.getElementById("textcenter");
-                let center = localStorage.getItem("textCenter") === "true";
-                if (isScriptInjected) {
-                    console.log('Removing script...');
-                    isScriptInjected.remove();
-                    body.style.textAlign = "";
-                    body.classList.remove("text-center");
-                    document.querySelectorAll('.textcenter').forEach(title => {
-                    title.style.backgroundColor = '';
-                    title.style.color = '';
-                    });
-                    localStorage.setItem("textCenter", "false");
-                    return;
+        const toggleTextcenter = () => {
+            let isScriptInjected = document.getElementById("textcenter");
+            let center = localStorage.getItem("textCenter") === "true";
+            
+            if (isScriptInjected) {
+                console.log("Removing script...");
+                isScriptInjected.remove();
+                localStorage.setItem("textCenter", "false");
+                document.body.style.textAlign = "";
+                document.body.classList.remove("text-center");
+
+                document.querySelectorAll(".textcenter").forEach((title) => {
+                    title.style.backgroundColor = "";
+                    title.style.color = "";
+                });
+
+                let idelement = document.getElementById("accessibilty");
+                if (idelement) {
+                    idelement.style.textAlign = "";
                 }
 
-                console.log('Creating script...');
+                return;
+            }
 
-                const textcenter = document.createElement("script");
-                textcenter.id = "textcenter";
-                // Use textContent instead of innerHTML to ensure script execution
-                textcenter.textContent = \`
-                    (function() {                                                                                                   
-                        let center = localStorage.getItem("textCenter") === "true";
-                        const applyTextCenter = () => {
-                            const titles = document.getElementsByClassName("textcenter");
-                            const body = document.body;
-                            const idelement = document.getElementById("accessibility");
+            console.log("Injecting script...");
+            const textcenter= document.createElement("script");
+            textcenter.id = "textcenter";
+            textcenter.innerHTML = \`
+                (function() {
+                    let center = localStorage.getItem("textCenter") === "true";
 
-                            if (idelement) {
-                                idelement.style.textAlign = center ? "left" : "";
-                            }
-                            if (center) {
-                                body.style.textAlign = "center";
-                                body.classList.add("text-center");
-                            } else {
-                                body.style.textAlign = "";
-                                body.classList.remove("text-center");
-                            }
+                    const applyTextCenter = () => {
+                        const titles = document.querySelectorAll(".textcenter");
+                        const body = document.body;
+                        const idelement = document.getElementById("accessibilty");
 
-                            Array.from(titles).forEach((title) => {
-                                title.style.backgroundColor = center ? "#146FF8" : "";
-                                title.style.color = center ? "#ffffff" : "";
-                            });
-                        };
+                        if (center) {
+                            body.style.textAlign = "center";
+                            body.classList.add("text-center");
+                        } else {
+                            body.style.textAlign = "";
+                            body.classList.remove("text-center");
+                        }
 
-                    })();
-                \`;
+                        titles.forEach((title) => {
+                            title.style.backgroundColor = center ? "#146FF8" : "";
+                            title.style.color = center ? "#ffffff" : "";
+                        });
 
-                localStorage.setItem("textCenter", "true");
-                document.body.appendChild(textcenter);
-            };
-            
-        // Ensure styles are applied on page load
+                        // Ensure #accessibilty is NOT affected
+                        if (idelement) {
+                            idelement.style.textAlign = "left";
+                        }
+                    };
+
+                    window.allTextCenter = () => {
+                        center = !center;
+                        localStorage.setItem("textCenter", center);
+                        applyTextCenter();
+                    };
+
+                    applyTextCenter();
+                })();
+            \`;
+
+            localStorage.setItem("textCenter", "true");
+            document.body.appendChild(textcenter);
+        };
+
         window.addEventListener("load", () => {
             if (localStorage.getItem("textCenter") === "true") {
                 document.body.style.textAlign = "center";
                 document.body.classList.add("text-center");
+                
                 document.querySelectorAll('.textcenter').forEach(title => {
                     title.style.backgroundColor = "#146FF8";
                     title.style.color = "#ffffff";
                 });
+
+                let idelement = document.getElementById("accessibilty");
+                if (idelement) {
+                    idelement.style.textAlign = "left";
+                }
             }
         });
     `;
 };
-
 

@@ -1,11 +1,10 @@
 import Content_box1 from './Content_box1'
 import Content_box2 from './Content_box2'
-import React, { useEffect, } from 'react';
 import { SCRIPT_MAGINIFIED } from "../../utils/scripts/maginified"
 import { SCRIPT_CENTER } from "../../utils/scripts/textcenter"
 import { SCRIPT_TEXTLEFT } from "../../utils/scripts/textleft"
 import { SCRIPT_TEXTRIGHT } from "../../utils/scripts/textright"
-
+import { SCRIPT_READ } from "../../utils/scripts/readfont"
 
 const Contactbox = () => {
 
@@ -14,67 +13,38 @@ const Contactbox = () => {
 
 
 
-    useEffect(() => {
-        const readmode = document.createElement("script");
-        readmode.innerHTML = `
-         (function() {
-         const isScriptEnable = localStorage.getItem("read-mode") === "true";
-        const titles = document.getElementsByClassName("textbold");
 
-        Array.from(titles).forEach((title) => {
-            title.style.backgroundColor = isScriptEnable ? "#146FF8" : "";
-            title.style.color = isScriptEnable ? "#ffffff" : "";
-        });
+    // let read = false
+    // const readfont = () => {
+    //     read = !read
+    //     const titles = document.getElementsByClassName("textbold");
+    //     Array.from(titles).forEach((title) => {
+    //         title.style.backgroundColor = read ? "#146FF8" : "";
+    //         title.style.color = read ? "#ffffff" : "";
+    //     });
+    //     if (read) {
+    //         document.body.style.fontWeight = "500";
+    //         document.body.classList.add("read-mode");
+    //         document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
+    //             if (title.id !== "accessibilty") {
+    //                 title.style.fontWeight = "600";
+    //             }
+    //         });
+    //     } else {
+    //         document.body.style.fontWeight = "";
+    //         document.body.classList.remove("read-mode");
+    //         document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
+    //             title.style.fontWeight = "";
+    //         });
+    //     }
 
-        if (isScriptEnable) {
-            document.body.style.fontWeight = "500";
-            document.body.classList.add("read-mode");
+    // };
 
-            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
-                if (title.id !== "accessibilty") {
-                    title.style.fontWeight = "600";
-                }
-            });
-        } else {
-            document.body.style.fontWeight = "";
-            document.body.classList.remove("read-mode");
 
-            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
-                title.style.fontWeight = "";
-            });
-        }
-    })()
-         `
-        document.body.appendChild(readmode);
-        console.log('readmode: ', readmode);
 
-    }, []);
-    const textBold = () => {
-        const isScriptEnable = document.body.classList.contains("read-mode");
-        const titles = document.getElementsByClassName("textbold");
-        Array.from(titles).forEach((title) => {
-            title.style.backgroundColor = !isScriptEnable ? "#146FF8" : "";
-            title.style.color = !isScriptEnable ? "#ffffff" : "";
-        });
-        if (!isScriptEnable) {
-            document.body.style.fontWeight = "500";
-            document.body.classList.add("read-mode");
-            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
-                if (title.id !== "accessibilty") {
-                    title.style.fontWeight = "600";
-                }
-            });
-        } else {
-            document.body.style.fontWeight = "";
-            document.body.classList.remove("read-mode");
-            document.querySelectorAll("h1,h2,h3,h4,h5,h6,a,p,span").forEach((title) => {
-                title.style.fontWeight = "";
-            });
-        }
 
-        // LocalStorage me update
-        localStorage.setItem("read-mode", String(!isScriptEnable));
-    };
+
+
 
     const updateScale = (isIncrease) => {
         const body = document.body;
@@ -250,6 +220,13 @@ const Contactbox = () => {
               toggleTextRight();
         }
 
+        
+        ${SCRIPT_READ()}
+        if (localStorage.getItem('readfontlocal') === 'true') {
+              toggleReadMode()
+        }
+        
+
             `;
 
     const isMainScriptInjected = document.getElementById("mainScript");
@@ -336,7 +313,7 @@ const Contactbox = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (19).svg"}
                         heading={"Readable Font"}
-                        onClick={textBold}
+                        onClick={toggleReadMode}
                         customStyle={"textbold "}
                     />
                     <Content_box2
