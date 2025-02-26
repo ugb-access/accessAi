@@ -23,9 +23,9 @@ export const SCRIPT_HIGH = () => {
             }
 
             console.log("Injecting script...");
-            const darkcontrast = document.createElement('script');
-            darkcontrast.id = "HighContrast";
-            darkcontrast.innerHTML = \`
+            const highcontrast = document.createElement('script');
+            hightcontrast.id = "HighContrast";
+            highcontrast.innerHTML = \`
             (function (){
                 let high = localStorage.getItem("highcontrastlocal") === "true";
                 localStorage.setItem("highcontrastlocal", "true");

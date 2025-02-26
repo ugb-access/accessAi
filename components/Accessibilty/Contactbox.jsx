@@ -8,6 +8,7 @@ import { SCRIPT_READ } from "../../utils/scripts/readfont"
 import { SCRIPT_DARK } from "../../utils/scripts/darkcontrast"
 import { SCRIPT_HIGH } from "../../utils/scripts/highcontrast"
 import { SCRIPT_LIGHT } from "../../utils/scripts/lightcontrast"
+import { SCRIPT_HIGHSATURATION } from "../../utils/scripts/highsaturation"
 
 const Contactbox = () => {
 
@@ -217,6 +218,11 @@ const Contactbox = () => {
         ${SCRIPT_LIGHT()}
         if (localStorage.getItem('lightcontrastlocal') === 'true') {
                togglelightcontrast()
+        }
+        
+        ${SCRIPT_HIGHSATURATION()}
+        if (localStorage.getItem('lightcontrastlocal') === 'true') {
+                togglehighsaturation()
         }
         
 

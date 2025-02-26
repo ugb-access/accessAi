@@ -106,30 +106,30 @@ const ColorAdjustment = () => {
 
 
     ///////////////////////////highsaturation///////////////////////////
-    let highSaturation = false
-    const HighSaturation = () => {
-        const body = document.body
-        const titles = document.getElementsByClassName('highSaturation');
-        highSaturation = !highSaturation
-        if (highSaturation) {
-            body.classList.add('saturate-200');
-            body.classList.add('h-screen');
+    // let high = false
+    // const HighSaturation = () => {
+    //     const body = document.body
+    //     const titles = document.getElementsByClassName('highSaturation');
+    //     high = !high
+    //     if (high) {
+    //         body.classList.add('saturate-200');
 
-        } else {
-            body.classList.remove('saturate-200');
 
-        }
-        Array.from(titles).forEach(title => {
-            if (highSaturation) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+    //     } else {
+    //         body.classList.remove('saturate-200');
 
-            }
-        })
-    }
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (high) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = '#ffffff';
+    //         } else {
+    //             title.style.backgroundColor = '';
+    //             title.style.color = '';
+
+    //         }
+    //     })
+    // }
     ///////////////////////////lowsaturation///////////////////////////
     let lowSaturation = false
     const lowsaturation = () => {
@@ -201,8 +201,8 @@ const ColorAdjustment = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (32).svg"}
                         heading={"High Saturation"}
-                        onClick={HighSaturation}
-                        customStyle={"highSaturation"}
+                        onClick={togglehighsaturation}
+                        customStyle={"Saturation"}
 
                     />
                     <Content_box2
