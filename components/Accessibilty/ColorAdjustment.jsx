@@ -78,49 +78,21 @@ const ColorAdjustment = () => {
 
 
 
-    //////////////////////////lightcontrast///////////////////////////
-    let light = false
-    const LightContrast = () => {
-        light = !light
-        const body = document.body
-        const titles = document.getElementsByClassName('light');
-        if (light) {
-            body.style.background = '#f2f0f0';
-            body.style.color = '#000000';
-        } else {
-            body.style.background = '#ffffff';
-            body.style.color = '';
-        }
-        Array.from(titles).forEach(title => {
-            if (light) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        });
-    }
-
-
-
-    ///////////////////////////highsaturation///////////////////////////
-    // let high = false
-    // const HighSaturation = () => {
+    // //////////////////////////lightcontrast///////////////////////////
+    // let light = false
+    // const LightContrast = () => {
+    //     light = !light
     //     const body = document.body
-    //     const titles = document.getElementsByClassName('highSaturation');
-    //     high = !high
-    //     if (high) {
-    //         body.classList.add('saturate-200');
-
-
+    //     const titles = document.getElementsByClassName('light');
+    //     if (light) {
+    //         body.style.background = '#f2f0f0';
+    //         body.style.color = '#000000';
     //     } else {
-    //         body.classList.remove('saturate-200');
-
+    //         body.style.background = '#ffffff';
+    //         body.style.color = '';
     //     }
     //     Array.from(titles).forEach(title => {
-    //         if (high) {
+    //         if (light) {
     //             title.style.backgroundColor = "#146FF8";
     //             title.style.color = '#ffffff';
     //         } else {
@@ -128,8 +100,12 @@ const ColorAdjustment = () => {
     //             title.style.color = '';
 
     //         }
-    //     })
+    //     });
     // }
+
+
+
+
     ///////////////////////////lowsaturation///////////////////////////
     let lowSaturation = false
     const lowsaturation = () => {
@@ -156,29 +132,29 @@ const ColorAdjustment = () => {
         })
     }
     ///////////////////////////monochrome///////////////////////////
-    let monoChrome = false
-    const monochrome = () => {
-        const body = document.body
-        const titles = document.getElementsByClassName('monochrom');
-        monoChrome = !monoChrome
-        if (monoChrome) {
-            body.classList.add('grayscale');
+    // let monoChrome = false
+    // const monochrome = () => {
+    //     const body = document.body
+    //     const titles = document.getElementsByClassName('monochrom');
+    //     monoChrome = !monoChrome
+    //     if (monoChrome) {
+    //         body.classList.add('grayscale');
 
-        } else {
-            body.classList.remove('grayscale');
+    //     } else {
+    //         body.classList.remove('grayscale');
 
-        }
-        Array.from(titles).forEach(title => {
-            if (monoChrome) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (monoChrome) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = '#ffffff';
+    //         } else {
+    //             title.style.backgroundColor = '';
+    //             title.style.color = '';
 
-            }
-        })
-    }
+    //         }
+    //     })
+    // }
 
     return (
 
@@ -208,7 +184,7 @@ const ColorAdjustment = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (33).svg"}
                         heading={"Monochrome"}
-                        onClick={monochrome}
+                        onClick={togglemonocorome}
                         customStyle={"monochrom"}
 
                     />

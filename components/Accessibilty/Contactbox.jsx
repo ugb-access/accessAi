@@ -9,6 +9,7 @@ import { SCRIPT_DARK } from "../../utils/scripts/darkcontrast"
 import { SCRIPT_HIGH } from "../../utils/scripts/highcontrast"
 import { SCRIPT_LIGHT } from "../../utils/scripts/lightcontrast"
 import { SCRIPT_HIGHSATURATION } from "../../utils/scripts/highsaturation"
+import { MONOCROME } from "../../utils/scripts/monochorome"
 
 const Contactbox = () => {
 
@@ -221,8 +222,12 @@ const Contactbox = () => {
         }
         
         ${SCRIPT_HIGHSATURATION()}
-        if (localStorage.getItem('lightcontrastlocal') === 'true') {
+        if (localStorage.getItem('highsaturationlocal') === 'true') {
                 togglehighsaturation()
+        }
+        ${MONOCROME()}
+        if (localStorage.getItem('monocromelocal') === 'true') {
+                togglemonocorome()
         }
         
 
