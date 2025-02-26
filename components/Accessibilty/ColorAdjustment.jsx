@@ -266,7 +266,7 @@ const ColorAdjustment = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (29).svg"}
                         heading={"Dark Contrast"}
-                        onClick={DarkContrast}
+                        onClick={toggledarkcontrast}
                         customStyle={"dark"}
                     />
                     <Content_box2

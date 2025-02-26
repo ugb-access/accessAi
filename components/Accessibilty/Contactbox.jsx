@@ -5,6 +5,7 @@ import { SCRIPT_CENTER } from "../../utils/scripts/textcenter"
 import { SCRIPT_TEXTLEFT } from "../../utils/scripts/textleft"
 import { SCRIPT_TEXTRIGHT } from "../../utils/scripts/textright"
 import { SCRIPT_READ } from "../../utils/scripts/readfont"
+import { SCRIPT_DARK } from "../../utils/scripts/darkcontrast"
 
 const Contactbox = () => {
 
@@ -200,6 +201,11 @@ const Contactbox = () => {
         ${SCRIPT_READ()}
         if (localStorage.getItem('readfontlocal') === 'true') {
               toggleReadMode()
+        }
+
+        ${SCRIPT_DARK()}
+        if (localStorage.getItem('darkcontrastlocal') === 'true') {
+               toggledarkcontrast()
         }
         
 

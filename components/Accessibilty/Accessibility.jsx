@@ -504,9 +504,9 @@ const Accessibility = ({ handlePageClick }) => {
           {data.map((item, index) => {
             return (
               <div key={index} id="accessibilty" className=" w-[70%] lg:w-[30%] ">
-                <button onClick={() => { handle(index) }} id="accessibilty" className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
+                <div onClick={() => { handle(index) }} id="accessibilty" className="flex bg-white text-primary hover:scale-[1.1]  text-[15px] gap-1 justify-center items-center py-2  rounded-full w-full">
                   <Image height={20} width={20} src={item.Image} alt="" />
-                  {item.button}</button>
+                  {item.button}</div>
               </div>
             )
           })}
