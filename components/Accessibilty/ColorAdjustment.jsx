@@ -79,37 +79,20 @@ const ColorAdjustment = () => {
 
 
     //////////////////////////lightcontrast///////////////////////////
-    useEffect(() => {
-        const isScriptEnable = document.body.classList.contains("light-contrast")
-        const titles = document.getElementsByClassName('light');
-
-        Array.from(titles).forEach(title => {
-            if (isScriptEnable) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        });
-
-    })
+    let light = false
     const LightContrast = () => {
+        light = !light
         const body = document.body
-        const isScriptEnable = document.body.classList.contains("light-contrast")
         const titles = document.getElementsByClassName('light');
-        if (!isScriptEnable) {
+        if (light) {
             body.style.background = '#f2f0f0';
             body.style.color = '#000000';
-            body.classList.add("light-contrast")
         } else {
             body.style.background = '#ffffff';
             body.style.color = '';
-            body.classList.remove("light-contrast")
         }
         Array.from(titles).forEach(title => {
-            if (!isScriptEnable) {
+            if (light) {
                 title.style.backgroundColor = "#146FF8";
                 title.style.color = '#ffffff';
             } else {
@@ -243,8 +226,8 @@ const ColorAdjustment = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (30).svg"}
                             heading={"Light Contrast"}
-                            onClick={LightContrast}
-                            customStyle={'light'}
+                            onClick={togglelightcontrast}
+                            customStyle={'lightcolor'}
 
                         />
                         <Content_box2
