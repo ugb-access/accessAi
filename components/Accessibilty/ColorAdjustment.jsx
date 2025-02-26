@@ -120,26 +120,22 @@ const ColorAdjustment = () => {
         });
     }
 
-    ////////////////////dark contrast///////////////////////////
-    // let dark = false
-    // const DarkContrast = () => {
+
+    ///////////////////////////highcontrast///////////////////////////
+    // let high = false
+    // const HighContrast = () => {
     //     const body = document.body
-    //     const titles = document.getElementsByClassName('dark');
-    //     const elements = document.querySelectorAll('p,a,button,h1,h2,h3,h4,h5,h6')
-    //     dark = !dark
-    //     if (dark) {
-    //         body.style.background = '#181818'
-    //         elements.forEach(ele => ele.style.color = '#fff')
+    //     const titles = document.getElementsByClassName('high');
+    //     high = !high
 
-
+    //     if (high) {
+    //         body.style.background = '#ffffff'
     //     } else {
-    //         body.style.background = '#ffffff';
-    //         elements.forEach(el => el.style.color = '');
-
+    //         body.style.background = '';
 
     //     }
     //     Array.from(titles).forEach(title => {
-    //         if (dark) {
+    //         if (high) {
     //             title.style.backgroundColor = "#146FF8";
     //             title.style.color = '#ffffff';
     //         } else {
@@ -149,33 +145,8 @@ const ColorAdjustment = () => {
     //         }
     //     })
 
+
     // }
-    ///////////////////////////highcontrast///////////////////////////
-    let high = false
-    const HighContrast = () => {
-        const body = document.body
-        const titles = document.getElementsByClassName('high');
-        high = !high
-
-        if (high) {
-            body.style.background = '#ffffff'
-        } else {
-            body.style.background = '';
-
-        }
-        Array.from(titles).forEach(title => {
-            if (high) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        })
-
-
-    }
     ///////////////////////////highsaturation///////////////////////////
     let highSaturation = false
     const HighSaturation = () => {
@@ -301,12 +272,12 @@ const ColorAdjustment = () => {
                             customStyle={'light'}
 
                         />
-                        <Content_box2
+                        {/* <Content_box2
                             imag={"/images/svgviewer-output (31).svg"}
                             heading={"High Contrast"}
-                            onClick={HighContrast}
+                            onClick={togglehighcontrast}
                             customStyle={'high'}
-                        />
+                        /> */}
 
                     </div>
                     <Content_box1

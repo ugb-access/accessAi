@@ -30,11 +30,7 @@ export const SCRIPT_DARK = () => {
                 title.style.color = "#ffffff";
             });
 
-            // const elements = document.querySelectorAll('#accessibilty')
-            //         elements.forEach(element => {
-            //     element.style.backgroundColor = "";
-            //     element.style.color = "";
-            // });
+      
 
             const darkcontrast = document.createElement("script");
             darkcontrast.id = "DarkContrast";
