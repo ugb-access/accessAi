@@ -30,7 +30,7 @@ export const SCRIPT_DARK = () => {
                 title.style.color = "#ffffff";
             });
 
-      
+       
 
             const darkcontrast = document.createElement("script");
             darkcontrast.id = "DarkContrast";

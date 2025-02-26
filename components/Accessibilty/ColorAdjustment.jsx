@@ -121,32 +121,7 @@ const ColorAdjustment = () => {
     }
 
 
-    ///////////////////////////highcontrast///////////////////////////
-    // let high = false
-    // const HighContrast = () => {
-    //     const body = document.body
-    //     const titles = document.getElementsByClassName('high');
-    //     high = !high
 
-    //     if (high) {
-    //         body.style.background = '#ffffff'
-    //     } else {
-    //         body.style.background = '';
-
-    //     }
-    //     Array.from(titles).forEach(title => {
-    //         if (high) {
-    //             title.style.backgroundColor = "#146FF8";
-    //             title.style.color = '#ffffff';
-    //         } else {
-    //             title.style.backgroundColor = '';
-    //             title.style.color = '';
-
-    //         }
-    //     })
-
-
-    // }
     ///////////////////////////highsaturation///////////////////////////
     let highSaturation = false
     const HighSaturation = () => {
@@ -272,12 +247,12 @@ const ColorAdjustment = () => {
                             customStyle={'light'}
 
                         />
-                        {/* <Content_box2
+                        <Content_box2
                             imag={"/images/svgviewer-output (31).svg"}
                             heading={"High Contrast"}
                             onClick={togglehighcontrast}
-                            customStyle={'high'}
-                        /> */}
+                            customStyle={'highcolor'}
+                        />
 
                     </div>
                     <Content_box1
