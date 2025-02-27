@@ -24,7 +24,7 @@ export const SCRIPT_HIGH = () => {
 
             console.log("Injecting script...");
             const highcontrast = document.createElement('script');
-            hightcontrast.id = "HighContrast";
+            highcontrast.id = "HighContrast";
             highcontrast.innerHTML = \`
             (function (){
                 let high = localStorage.getItem("highcontrastlocal") === "true";
@@ -56,7 +56,7 @@ export const SCRIPT_HIGH = () => {
             })();
             \`;
 
-            document.body.appendChild(darkcontrast);
+            document.body.appendChild(highcontrast);
         };
 
           window.addEventListener("load", () => {         

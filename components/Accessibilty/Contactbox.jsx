@@ -11,6 +11,7 @@ import { SCRIPT_LIGHT } from "../../utils/scripts/lightcontrast"
 import { SCRIPT_HIGHSATURATION } from "../../utils/scripts/highsaturation"
 import { MONOCROME } from "../../utils/scripts/monochorome"
 import { SCRIPT_LOWSATURATION } from "../../utils/scripts/lowsaturation"
+import { MUTE_SOUND } from "../../utils/scripts/mutesound"
 
 
 const Contactbox = () => {
@@ -234,6 +235,10 @@ const Contactbox = () => {
         ${SCRIPT_LOWSATURATION()}
         if (localStorage.getItem('lowsaturationlocal') === 'true') {
                 togglelowsaturation()
+        }
+        ${MUTE_SOUND()}
+        if (localStorage.getItem('mutesoundlocal') === 'true') {
+                togglemutesound()
         }
         
 

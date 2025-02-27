@@ -32,33 +32,31 @@ const Orientation = () => {
         });
     };
     //  mutesound///////////////////////////////////////////////////////////////////
-    let muteSound = false
-    const mutemedia = () => {
-        muteSound = !muteSound
-        const media = document.querySelectorAll('audio,video')
-        const titles = document.getElementsByClassName('sound'); // Get all elements with class 'change'
+    // let muteSound = false
+    // const mutemedia = () => {
+    //     muteSound = !muteSound
+    //     const media = document.querySelectorAll('audio,video')
+    //     const titles = document.getElementsByClassName('sound'); // Get all elements with class 'change'
+    //     if (muteSound) {
+    //         media.forEach((med) => {
+    //             med.muted = true
+    //         })
+    //     } else {
+    //         media.forEach((med) => {
+    //             med.muted = false
+    //         })
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (muteSound) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = 'white';
+    //         } else {
+    //             title.style.backgroundColor = ''; // Reset to default
+    //             title.style.color = '';
 
-
-        if (muteSound) {
-            media.forEach((med) => {
-                med.muted = true
-            })
-        } else {
-            media.forEach((med) => {
-                med.muted = false
-            })
-        }
-        Array.from(titles).forEach(title => {
-            if (muteSound) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = ''; // Reset to default
-                title.style.color = '';
-
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
 
     let hoverHighlight = false;
 
@@ -446,7 +444,7 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (35).svg"}
                             heading={"Mute Sounds"}
-                            onClick={mutemedia}
+                            onClick={togglemutesound}
                             customStyle={'sound'}
 
                         />
