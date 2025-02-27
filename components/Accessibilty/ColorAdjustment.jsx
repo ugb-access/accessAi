@@ -107,30 +107,30 @@ const ColorAdjustment = () => {
 
 
     ///////////////////////////lowsaturation///////////////////////////
-    let lowSaturation = false
-    const lowsaturation = () => {
-        const body = document.body
-        const titles = document.getElementsByClassName('lowSaturation');
-        lowSaturation = !lowSaturation
-        console.log('body.classList:before ', body.classList);
-        if (lowSaturation) {
-            body.classList.add('saturate-[0.4]');
+    // let lowSaturation = false
+    // const lowsaturation = () => {
+    //     const body = document.body
+    //     const titles = document.getElementsByClassName('lowSaturation');
+    //     lowSaturation = !lowSaturation
+    //     console.log('body.classList:before ', body.classList);
+    //     if (lowSaturation) {
+    //         body.classList.add('saturate-[0.4]');
 
-        } else {
-            body.classList.remove('saturate-[0.4]');
+    //     } else {
+    //         body.classList.remove('saturate-[0.4]');
 
-        }
-        Array.from(titles).forEach(title => {
-            if (lowSaturation) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (lowSaturation) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = '#ffffff';
+    //         } else {
+    //             title.style.backgroundColor = '';
+    //             title.style.color = '';
 
-            }
-        })
-    }
+    //         }
+    //     })
+    // }
     ///////////////////////////monochrome///////////////////////////
     // let monoChrome = false
     // const monochrome = () => {
@@ -191,7 +191,7 @@ const ColorAdjustment = () => {
                     <Content_box2
                         imag={"/images/svgviewer-output (34).svg"}
                         heading={"Low Saturation"}
-                        onClick={lowsaturation}
+                        onClick={togglelowsaturation}
                         customStyle={"lowSaturation "}
                     />
 
