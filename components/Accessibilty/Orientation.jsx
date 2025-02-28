@@ -58,37 +58,37 @@ const Orientation = () => {
     //     });
     // }
 
-    let hoverHighlight = false;
+    // let hoverHighlight = false;
 
-    const toggleHoverHighlight = () => {
-        hoverHighlight = !hoverHighlight;
+    // const toggleHoverHighlight = () => {
+    //     hoverHighlight = !hoverHighlight;
 
-        const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, img, span");
-        const titles = document.getElementsByClassName('highLight');
+    //     const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, img, span");
+    //     const titles = document.getElementsByClassName('highLight');
 
 
-        if (hoverHighlight) {
-            elements.forEach((ele) => {
-                ele.addEventListener("mouseover", handleMouseOver);
-                ele.addEventListener("mouseleave", handleMouseLeave);
-            });
-        } else {
-            elements.forEach((ele) => {
-                ele.removeEventListener("mouseover", handleMouseOver);
-                ele.removeEventListener("mouseleave", handleMouseLeave);
-            });
-        }
-        Array.from(titles).forEach(title => {
-            if (hoverHighlight) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+    //     if (hoverHighlight) {
+    //         elements.forEach((ele) => {
+    //             ele.addEventListener("mouseover", handleMouseOver);
+    //             ele.addEventListener("mouseleave", handleMouseLeave);
+    //         });
+    //     } else {
+    //         elements.forEach((ele) => {
+    //             ele.removeEventListener("mouseover", handleMouseOver);
+    //             ele.removeEventListener("mouseleave", handleMouseLeave);
+    //         });
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (hoverHighlight) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = 'white';
+    //         } else {
+    //             title.style.backgroundColor = '';
+    //             title.style.color = '';
 
-            }
-        });
-    };
+    //         }
+    //     });
+    // };
 
     const handleclick = (event) => {
         event.target.style.border = "2px solid orange"
@@ -489,7 +489,7 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (42).svg"}
                                 heading={"HighLight Hover"}
-                                onClick={toggleHoverHighlight}
+                                onClick={togglehoverhighlight}
                                 customStyle={'highLight'}
                             />
 

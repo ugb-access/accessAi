@@ -15,6 +15,7 @@ import { MUTE_SOUND } from "../../utils/scripts/mutesound"
 import { STOP_ANIMATION } from "../../utils/scripts/stopanimation"
 import { READ_MODE } from "../../utils/scripts/readmode"
 import { HIDE_IMAGE } from "../../utils/scripts/hideimage"
+import { HOVER_HIGHLIGHT } from "../../utils/scripts/hoverhighlight"
 
 
 
@@ -257,6 +258,10 @@ const Contactbox = () => {
         
         if (localStorage.getItem('hideimagelocal') === 'true') {
                  togglehideimage()
+         }
+        ${HOVER_HIGHLIGHT()}
+        if (localStorage.getItem('hoverhighlightlocal') === 'true') {
+                 togglehoverhighlight()
          }
         
 
