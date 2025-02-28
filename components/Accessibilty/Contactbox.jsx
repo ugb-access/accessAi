@@ -13,6 +13,8 @@ import { MONOCROME } from "../../utils/scripts/monochorome"
 import { SCRIPT_LOWSATURATION } from "../../utils/scripts/lowsaturation"
 import { MUTE_SOUND } from "../../utils/scripts/mutesound"
 import { STOP_ANIMATION } from "../../utils/scripts/stopanimation"
+import { READ_MODE } from "../../utils/scripts/readmode"
+
 
 
 const Contactbox = () => {
@@ -245,6 +247,11 @@ const Contactbox = () => {
         if (localStorage.getItem('animationlocal') === 'true') {
                 togglestopanimation()
         }
+        ${READ_MODE()}
+        const originalClasses = new Map();
+        if (localStorage.getItem('Readmodelocal') === 'true') {
+                 togglereadmode()
+         }
         
 
             `;

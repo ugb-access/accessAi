@@ -1,7 +1,7 @@
 export const STOP_ANIMATION = () => {
     return `
         const togglestopanimation = () => {
-            let isScriptInjected = document.getElementById("MuteSound");
+            let isScriptInjected = document.getElementById("Animation");
             let  animations = localStorage.getItem("animationlocal") === "true";
                     const body = document.body;
 
@@ -24,7 +24,7 @@ export const STOP_ANIMATION = () => {
             }
             console.log("Injecting script...");
             const stopanimation = document.createElement('script');
-            stopanimation.id = "MuteSound";
+            stopanimation.id = "Animation";
             stopanimation.innerHTML = \`
             (function (){
                 let animations= localStorage.getItem("animationlocal") === "true";
