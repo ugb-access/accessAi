@@ -14,6 +14,7 @@ import { SCRIPT_LOWSATURATION } from "../../utils/scripts/lowsaturation"
 import { MUTE_SOUND } from "../../utils/scripts/mutesound"
 import { STOP_ANIMATION } from "../../utils/scripts/stopanimation"
 import { READ_MODE } from "../../utils/scripts/readmode"
+import { HIDE_IMAGE } from "../../utils/scripts/hideimage"
 
 
 
@@ -251,6 +252,11 @@ const Contactbox = () => {
         const originalClasses = new Map();
         if (localStorage.getItem('Readmodelocal') === 'true') {
                  togglereadmode()
+         }
+        ${HIDE_IMAGE()}
+        
+        if (localStorage.getItem('hideimagelocal') === 'true') {
+                 togglehideimage()
          }
         
 

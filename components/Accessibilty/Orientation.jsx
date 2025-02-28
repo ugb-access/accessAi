@@ -6,31 +6,31 @@ import Content_box1 from './Content_box1';
 
 const Orientation = () => {
 
-    let hideImageState = false;
-    const hideImage = () => {
-        hideImageState = !hideImageState;
-        const images = document.querySelectorAll('img, Image');
-        const titles = document.getElementsByClassName('image'); // Get all elements with class 'change'
-        images.forEach((img) => {
-            if (!img.closest("#accessibilty")) {
-                if (hideImageState) {
-                    img.style.display = 'none';
-                } else {
-                    img.style.display = 'block';
-                }
-            }
-        });
-        Array.from(titles).forEach(title => {
-            if (hideImageState) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = ''; // Reset to default
-                title.style.color = '';
+    // let hideImageState = false;
+    // const hideImage = () => {
+    //     hideImageState = !hideImageState;
+    //     const images = document.querySelectorAll('img, Image');
+    //     const titles = document.getElementsByClassName('image'); // Get all elements with class 'change'
+    //     images.forEach((img) => {
+    //         if (!img.closest("#accessibilty")) {
+    //             if (hideImageState) {
+    //                 img.style.display = 'none';
+    //             } else {
+    //                 img.style.display = 'block';
+    //             }
+    //         }
+    //     });
+    //     Array.from(titles).forEach(title => {
+    //         if (hideImageState) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = 'white';
+    //         } else {
+    //             title.style.backgroundColor = ''; // Reset to default
+    //             title.style.color = '';
 
-            }
-        });
-    };
+    //         }
+    //     });
+    // };
     //  mutesound///////////////////////////////////////////////////////////////////
     // let muteSound = false
     // const mutemedia = () => {
@@ -457,7 +457,7 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (36).svg"}
                                 heading={"Hide Images"}
-                                onClick={hideImage}
+                                onClick={togglehideimage}
                                 customStyle={"image"}
                             />
                             <Content_box2
