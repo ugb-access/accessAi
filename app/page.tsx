@@ -31,10 +31,10 @@ export default function Home({ }) {
 
         <Hero />
 
-        <video width="500" height="240" controls autoPlay>
+        {/* <video width="500" height="240" controls autoPlay>
           <source src="/images/testing-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
         <LogoCarousel />
         <Features />
         <Testimonials />

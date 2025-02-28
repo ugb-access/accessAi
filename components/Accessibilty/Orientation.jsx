@@ -225,29 +225,29 @@ const Orientation = () => {
 
 
 
-    let animations = false;
-    const toggleAnimation = () => {
-        animations = !animations;
-        const titles = document.getElementsByClassName('animation');
+    // let animations = false;
+    // const toggleAnimation = () => {
+    //     animations = !animations;
+    //     const titles = document.getElementsByClassName('animation');
 
-        const body = document.body
-        if (animations) {
-            body.classList.add('stop-animations')
-        } else {
-            body.classList.remove('stop-animations')
+    //     const body = document.body
+    //     if (animations) {
+    //         body.classList.add('stop-animations')
+    //     } else {
+    //         body.classList.remove('stop-animations')
 
-        }
-        Array.from(titles).forEach(title => {
-            if (animations) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (animations) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = 'white';
+    //         } else {
+    //             title.style.backgroundColor = '';
+    //             title.style.color = '';
 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
 
 
 
@@ -459,7 +459,7 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (40).svg"}
                             heading={"Stop Animations"}
-                            onClick={toggleAnimation}
+                            onClick={togglestopanimation}
                             customStyle={'animation'}
 
                         />

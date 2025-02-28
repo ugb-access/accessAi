@@ -12,6 +12,7 @@ import { SCRIPT_HIGHSATURATION } from "../../utils/scripts/highsaturation"
 import { MONOCROME } from "../../utils/scripts/monochorome"
 import { SCRIPT_LOWSATURATION } from "../../utils/scripts/lowsaturation"
 import { MUTE_SOUND } from "../../utils/scripts/mutesound"
+import { STOP_ANIMATION } from "../../utils/scripts/stopanimation"
 
 
 const Contactbox = () => {
@@ -239,6 +240,10 @@ const Contactbox = () => {
         ${MUTE_SOUND()}
         if (localStorage.getItem('mutesoundlocal') === 'true') {
                 togglemutesound()
+        }
+        ${STOP_ANIMATION()}
+        if (localStorage.getItem('animationlocal') === 'true') {
+                togglestopanimation()
         }
         
 
