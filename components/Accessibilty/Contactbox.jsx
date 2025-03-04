@@ -17,6 +17,7 @@ import { READ_MODE } from "../../utils/scripts/readmode"
 import { HIDE_IMAGE } from "../../utils/scripts/hideimage"
 import { HOVER_HIGHLIGHT } from "../../utils/scripts/hoverhighlight"
 import { READ_GUIDE } from "../../utils/scripts/readingguide"
+import { READ_MASK } from "../../utils/scripts/readingmask"
 
 
 
@@ -267,6 +268,10 @@ const Contactbox = () => {
         ${READ_GUIDE()}
         if (localStorage.getItem('readingguidelocal') === 'true') {
                  togglereadingguide()
+         }
+        ${READ_MASK()}
+        if (localStorage.getItem('readingmasklocal') === 'true') {
+                 togglereadingmask()
          }
         
 

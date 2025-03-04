@@ -204,68 +204,14 @@ const Orientation = () => {
     // };
 
 
-    let mask = false;
-    let Readingmask = null; // Declare the reference outside the function
+    // let mask = false;
+    // let Readingmask = null; // Declare the reference outside the function
 
-    const readingmask = () => {
-        mask = !mask;
-        const titles = document.getElementsByClassName('readingmask');
-        Array.from(titles).forEach(title => {
-            if (mask) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-            }
-        })
-
-        if (mask) {
-            // Create the element when mask is true, if it doesn't already exist
-            if (!Readingmask) {
-                Readingmask = document.createElement("div");
-                Object.assign(Readingmask.style, {
-                    position: "fixed",
-                    backgroundColor: "transparent",
-                    boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
-                    height: "150px",
-                    width: "100%",
-                    zIndex: "9999",
-                    pointerEvents: "none"
-                });
-                document.body.appendChild(Readingmask);
-
-                document.addEventListener("mousemove", (event) => {
-                    if (Readingmask) { // Check if Readingmask exists before updating style
-                        let maskWidth = window.innerWidth;
-                        let maskHeight = 150; // Same height as above
-                        let newX = event.clientX - maskWidth / 2;
-                        let newY = event.clientY - maskHeight / 2;
-                        newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
-                        newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
-                        Readingmask.style.left = `${newX}px`;
-                        Readingmask.style.top = `${newY}px`;
-                    }
-                });
-            }
-        } else {
-            // Remove the mask element when mask is false
-            if (Readingmask) {
-                document.body.removeChild(Readingmask); // Remove the mask element
-                Readingmask = null; // Clear the reference
-            }
-        }
-    };
-
-
-    // let Guide = false;
-    // let Readingguide = null;
-
-    // const readingGuide = (event) => {
-    //     Guide = !Guide; // Toggle guide
-    //     const titles = document.getElementsByClassName('readingguide');
+    // const readingmask = () => {
+    //     mask = !mask;
+    //     const titles = document.getElementsByClassName('readingmask');
     //     Array.from(titles).forEach(title => {
-    //         if (Guide) {
+    //         if (mask) {
     //             title.style.backgroundColor = "#146FF8";
     //             title.style.color = '#ffffff';
     //         } else {
@@ -274,52 +220,45 @@ const Orientation = () => {
     //         }
     //     })
 
-    //     if (Guide) {
-    //         if (!Readingguide) { // Only create if it doesn't exist
-    //             Readingguide = document.createElement('div');
-
-    //             Object.assign(Readingguide.style, {
-    //                 position: 'fixed',
-    //                 top: '0',
-    //                 left: '0',
-    //                 width: '400px', // Guide Width
-    //                 height: '13px', // Guide Height
-    //                 backgroundColor: '#146FF8',
-    //                 zIndex: '9999',
-    //                 border: '4px solid #000',
-    //                 overflow: 'hidden',
-    //                 borderRadius: '50px',
-    //                 pointerEvents: 'none'
+    //     if (mask) {
+    //         // Create the element when mask is true, if it doesn't already exist
+    //         if (!Readingmask) {
+    //             Readingmask = document.createElement("div");
+    //             Object.assign(Readingmask.style, {
+    //                 position: "fixed",
+    //                 backgroundColor: "transparent",
+    //                 boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
+    //                 height: "150px",
+    //                 width: "100%",
+    //                 zIndex: "9999",
+    //                 pointerEvents: "none"
     //             });
+    //             document.body.appendChild(Readingmask);
 
-    //             document.body.appendChild(Readingguide);
-    //             let startX = event.clientX - Readingguide.offsetWidth / 2;
-    //             let startY = event.clientY - Readingguide.offsetHeight / 2;
-    //             Readingguide.style.left = `${startX}px`;
-    //             Readingguide.style.top = `${startY}px`;
-    //             // Add mousemove event only once
-    //             document.addEventListener('mousemove', (event) => {
-    //                 if (Readingguide) {
-    //                     let newX = event.clientX - Readingguide.offsetWidth / 2;
-    //                     let newY = event.clientY - Readingguide.offsetHeight / 2;
-
-    //                     // Keep within screen bounds
-    //                     newX = Math.max(0, Math.min(newX, window.innerWidth - Readingguide.offsetWidth));
-    //                     newY = Math.max(0, Math.min(newY, window.innerHeight - Readingguide.offsetHeight));
-
-    //                     Readingguide.style.left = `${newX}px`;
-    //                     Readingguide.style.top = `${newY}px`;
+    //             document.addEventListener("mousemove", (event) => {
+    //                 if (Readingmask) { // Check if Readingmask exists before updating style
+    //                     let maskWidth = window.innerWidth;
+    //                     let maskHeight = 150; // Same height as above
+    //                     let newX = event.clientX - maskWidth / 2;
+    //                     let newY = event.clientY - maskHeight / 2;
+    //                     newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
+    //                     newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
+    //                     Readingmask.style.left = `${newX}px`;
+    //                     Readingmask.style.top = `${newY}px`;
     //                 }
     //             });
     //         }
     //     } else {
-    //         // Remove the guide
-    //         if (Readingguide) {
-    //             document.body.removeChild(Readingguide);
-    //             Readingguide = null;
+    //         // Remove the mask element when mask is false
+    //         if (Readingmask) {
+    //             document.body.removeChild(Readingmask); // Remove the mask element
+    //             Readingmask = null; // Clear the reference
     //         }
     //     }
     // };
+
+
+
 
 
 
@@ -395,7 +334,7 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (41).svg"}
                                 heading={"Reading Mask"}
-                                onClick={readingmask}
+                                onClick={togglereadingmask}
                                 customStyle={'readingmask'}
 
 
