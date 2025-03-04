@@ -6,89 +6,10 @@ import Content_box1 from './Content_box1';
 
 const Orientation = () => {
 
-    // let hideImageState = false;
-    // const hideImage = () => {
-    //     hideImageState = !hideImageState;
-    //     const images = document.querySelectorAll('img, Image');
-    //     const titles = document.getElementsByClassName('image'); // Get all elements with class 'change'
-    //     images.forEach((img) => {
-    //         if (!img.closest("#accessibilty")) {
-    //             if (hideImageState) {
-    //                 img.style.display = 'none';
-    //             } else {
-    //                 img.style.display = 'block';
-    //             }
-    //         }
-    //     });
-    //     Array.from(titles).forEach(title => {
-    //         if (hideImageState) {
-    //             title.style.backgroundColor = "#146FF8";
-    //             title.style.color = 'white';
-    //         } else {
-    //             title.style.backgroundColor = ''; // Reset to default
-    //             title.style.color = '';
-
-    //         }
-    //     });
-    // };
-    //  mutesound///////////////////////////////////////////////////////////////////
-    // let muteSound = false
-    // const mutemedia = () => {
-    //     muteSound = !muteSound
-    //     const media = document.querySelectorAll('audio,video')
-    //     const titles = document.getElementsByClassName('sound'); // Get all elements with class 'change'
-    //     if (muteSound) {
-    //         media.forEach((med) => {
-    //             med.muted = true
-    //         })
-    //     } else {
-    //         media.forEach((med) => {
-    //             med.muted = false
-    //         })
-    //     }
-    //     Array.from(titles).forEach(title => {
-    //         if (muteSound) {
-    //             title.style.backgroundColor = "#146FF8";
-    //             title.style.color = 'white';
-    //         } else {
-    //             title.style.backgroundColor = ''; // Reset to default
-    //             title.style.color = '';
-
-    //         }
-    //     });
-    // }
-
-    // let hoverHighlight = false;
-
-    // const toggleHoverHighlight = () => {
-    //     hoverHighlight = !hoverHighlight;
-
-    //     const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, img, span");
-    //     const titles = document.getElementsByClassName('highLight');
 
 
-    //     if (hoverHighlight) {
-    //         elements.forEach((ele) => {
-    //             ele.addEventListener("mouseover", handleMouseOver);
-    //             ele.addEventListener("mouseleave", handleMouseLeave);
-    //         });
-    //     } else {
-    //         elements.forEach((ele) => {
-    //             ele.removeEventListener("mouseover", handleMouseOver);
-    //             ele.removeEventListener("mouseleave", handleMouseLeave);
-    //         });
-    //     }
-    //     Array.from(titles).forEach(title => {
-    //         if (hoverHighlight) {
-    //             title.style.backgroundColor = "#146FF8";
-    //             title.style.color = 'white';
-    //         } else {
-    //             title.style.backgroundColor = '';
-    //             title.style.color = '';
 
-    //         }
-    //     });
-    // };
+
 
     const handleclick = (event) => {
         event.target.style.border = "2px solid orange"
@@ -214,13 +135,7 @@ const Orientation = () => {
 
 
 
-    const handleMouseOver = (event) => {
-        event.target.style.border = "2px solid orange";
-    };
 
-    const handleMouseLeave = (event) => {
-        event.target.style.border = "";
-    };
 
 
 
@@ -343,68 +258,68 @@ const Orientation = () => {
     };
 
 
-    let Guide = false;
-    let Readingguide = null;
+    // let Guide = false;
+    // let Readingguide = null;
 
-    const readingGuide = (event) => {
-        Guide = !Guide; // Toggle guide
-        const titles = document.getElementsByClassName('readingguide');
-        Array.from(titles).forEach(title => {
-            if (Guide) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = '#ffffff';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-            }
-        })
+    // const readingGuide = (event) => {
+    //     Guide = !Guide; // Toggle guide
+    //     const titles = document.getElementsByClassName('readingguide');
+    //     Array.from(titles).forEach(title => {
+    //         if (Guide) {
+    //             title.style.backgroundColor = "#146FF8";
+    //             title.style.color = '#ffffff';
+    //         } else {
+    //             title.style.backgroundColor = '';
+    //             title.style.color = '';
+    //         }
+    //     })
 
-        if (Guide) {
-            if (!Readingguide) { // Only create if it doesn't exist
-                Readingguide = document.createElement('div');
+    //     if (Guide) {
+    //         if (!Readingguide) { // Only create if it doesn't exist
+    //             Readingguide = document.createElement('div');
 
-                Object.assign(Readingguide.style, {
-                    position: 'fixed',
-                    top: '0',
-                    left: '0',
-                    width: '400px', // Guide Width
-                    height: '13px', // Guide Height
-                    backgroundColor: '#146FF8',
-                    zIndex: '9999',
-                    border: '4px solid #000',
-                    overflow: 'hidden',
-                    borderRadius: '50px',
-                    pointerEvents: 'none'
-                });
+    //             Object.assign(Readingguide.style, {
+    //                 position: 'fixed',
+    //                 top: '0',
+    //                 left: '0',
+    //                 width: '400px', // Guide Width
+    //                 height: '13px', // Guide Height
+    //                 backgroundColor: '#146FF8',
+    //                 zIndex: '9999',
+    //                 border: '4px solid #000',
+    //                 overflow: 'hidden',
+    //                 borderRadius: '50px',
+    //                 pointerEvents: 'none'
+    //             });
 
-                document.body.appendChild(Readingguide);
-                let startX = event.clientX - Readingguide.offsetWidth / 2;
-                let startY = event.clientY - Readingguide.offsetHeight / 2;
-                Readingguide.style.left = `${startX}px`;
-                Readingguide.style.top = `${startY}px`;
-                // Add mousemove event only once
-                document.addEventListener('mousemove', (event) => {
-                    if (Readingguide) {
-                        let newX = event.clientX - Readingguide.offsetWidth / 2;
-                        let newY = event.clientY - Readingguide.offsetHeight / 2;
+    //             document.body.appendChild(Readingguide);
+    //             let startX = event.clientX - Readingguide.offsetWidth / 2;
+    //             let startY = event.clientY - Readingguide.offsetHeight / 2;
+    //             Readingguide.style.left = `${startX}px`;
+    //             Readingguide.style.top = `${startY}px`;
+    //             // Add mousemove event only once
+    //             document.addEventListener('mousemove', (event) => {
+    //                 if (Readingguide) {
+    //                     let newX = event.clientX - Readingguide.offsetWidth / 2;
+    //                     let newY = event.clientY - Readingguide.offsetHeight / 2;
 
-                        // Keep within screen bounds
-                        newX = Math.max(0, Math.min(newX, window.innerWidth - Readingguide.offsetWidth));
-                        newY = Math.max(0, Math.min(newY, window.innerHeight - Readingguide.offsetHeight));
+    //                     // Keep within screen bounds
+    //                     newX = Math.max(0, Math.min(newX, window.innerWidth - Readingguide.offsetWidth));
+    //                     newY = Math.max(0, Math.min(newY, window.innerHeight - Readingguide.offsetHeight));
 
-                        Readingguide.style.left = `${newX}px`;
-                        Readingguide.style.top = `${newY}px`;
-                    }
-                });
-            }
-        } else {
-            // Remove the guide
-            if (Readingguide) {
-                document.body.removeChild(Readingguide);
-                Readingguide = null;
-            }
-        }
-    };
+    //                     Readingguide.style.left = `${newX}px`;
+    //                     Readingguide.style.top = `${newY}px`;
+    //                 }
+    //             });
+    //         }
+    //     } else {
+    //         // Remove the guide
+    //         if (Readingguide) {
+    //             document.body.removeChild(Readingguide);
+    //             Readingguide = null;
+    //         }
+    //     }
+    // };
 
 
 
@@ -430,8 +345,7 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (38).svg"}
                             heading={"Reading Guide"}
-                            onClick={readingGuide}
-                            // id={"dynamic_id_container"}
+                            onClick={togglereadingguide}
                             customStyle={'readingguide'}
 
                         />

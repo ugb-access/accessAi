@@ -9,11 +9,10 @@ export const STOP_ANIMATION = () => {
                 console.log("Removing script...");
                 localStorage.setItem("animationlocal", "false");
                 isScriptInjected.remove();
-            body.classList.remove('stop-animations')
+                body.classList.remove('stop-animations')
 
 
                 const titles = document.getElementsByClassName('animation');
-
                   Array.from(titles).forEach(title => {
                         if (animations) {
                             title.style.backgroundColor = "";

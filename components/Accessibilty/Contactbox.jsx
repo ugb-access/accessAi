@@ -16,6 +16,7 @@ import { STOP_ANIMATION } from "../../utils/scripts/stopanimation"
 import { READ_MODE } from "../../utils/scripts/readmode"
 import { HIDE_IMAGE } from "../../utils/scripts/hideimage"
 import { HOVER_HIGHLIGHT } from "../../utils/scripts/hoverhighlight"
+import { READ_GUIDE } from "../../utils/scripts/readingguide"
 
 
 
@@ -262,6 +263,10 @@ const Contactbox = () => {
         ${HOVER_HIGHLIGHT()}
         if (localStorage.getItem('hoverhighlightlocal') === 'true') {
                  togglehoverhighlight()
+         }
+        ${READ_GUIDE()}
+        if (localStorage.getItem('readingguidelocal') === 'true') {
+                 togglereadingguide()
          }
         
 
