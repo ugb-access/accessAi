@@ -18,6 +18,7 @@ import { HIDE_IMAGE } from "../../utils/scripts/hideimage"
 import { HOVER_HIGHLIGHT } from "../../utils/scripts/hoverhighlight"
 import { READ_GUIDE } from "../../utils/scripts/readingguide"
 import { READ_MASK } from "../../utils/scripts/readingmask"
+import { WHITE_CURSOR } from "../../utils/scripts/whitecursor"
 
 
 
@@ -272,6 +273,11 @@ const Contactbox = () => {
         ${READ_MASK()}
         if (localStorage.getItem('readingmasklocal') === 'true') {
                  togglereadingmask()
+         }
+        
+        ${WHITE_CURSOR()}
+        if (localStorage.getItem('whitecursorlocal') === 'true') {
+                 togglewhitecursor()
          }
         
 

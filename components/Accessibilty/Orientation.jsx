@@ -84,178 +84,79 @@ const Orientation = () => {
             }
         });
     }
-    let whitecondition = false;
-
-    function whiteFunction() {
-        whitecondition = !whitecondition;
-        const cursorPath = '/images/white-pointer.svg';
-        const autoPath = '/images/white.svg';
-        const allElements = document.querySelectorAll('*');
-        const titles = document.getElementsByClassName('white')
-
-        if (whitecondition) {
-            allElements.forEach(ele => {
-                const computedStyle = window.getComputedStyle(ele);
-                if (computedStyle.cursor === "pointer") { // Check computed style, not inline style
-                    ele.style.cursor = `url(${cursorPath}) 10 10, pointer`;
-                }
-                else {
-                    ele.style.cursor = `url(${autoPath}) 10 10, auto`;
-                }
-            });
-        } else {
-            allElements.forEach(ele => {
-                const computedStyle = window.getComputedStyle(ele);
-                if (computedStyle.cursor.includes("url")) { // Reset only modified elements
-                    ele.style.cursor = ""; // Restore to original pointer
-                }
-            });
-            document.body.style.cursor = "default"; // Set the default cursor
-        }
-        Array.from(titles).forEach(title => {
-            if (whitecondition) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        });
-    }
 
 
 
 
 
+    // let whitecondition = false;
 
+    // function whiteFunction() {
+    //     whitecondition = !whitecondition;
+    //     const cursorPath = '/images/white-pointer.svg';
+    //     const autoPath = '/images/white.svg';
+    //     const allElements = document.querySelectorAll('*');
+    //     const titles = document.getElementsByClassName('white')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /////////////////////////////readmode////////////////////////////
-    // let isEnabled = false;
-    // const originalClasses = new Map();
-
-    // const readMode = () => {
-    //     console.log('originalClasses: ', originalClasses);
-    //     const body = document.body; // Select the body element
-
-    //     const titles = document.getElementsByClassName('change');
-    //     const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, span, img.svg, li, ul, ol, table, th, td, blockquote, pre, code, em, strong, small, sub, sup, del, ins, mark, abbr, dfn, kbd, q, cite, var, nav, header, footer, aside, section, article, figure, figcaption, main, div, form, fieldset, legend, label, button, input, textarea, select, option, optgroup, progress, meter, output, details, summary, dialog, menu, menuitem, menuitemcheckbox, menuitemradio, script, style, link, meta, title, base, head, body, html');
-
-    //     isEnabled = !isEnabled; // Toggle state
-
-    //     elements.forEach(element => {
-    //         if (element.id !== "accessibilty") { // Skip the element with ID 'accessibility'
-    //             if (isEnabled) {
-    //                 // Store the original classes if not already stored
-    //                 if (!originalClasses.has(element)) {
-    //                     originalClasses.set(element, element.className || ''); // Use empty string if no class exists
-    //                 }
-    //                 element.removeAttribute('class'); // Remove all classes
-    //                 body.style.margin = '0px auto';
-    //                 body.style.width = '40%';
-    //             } else {
-    //                 // Restore the original classes
-    //                 if (originalClasses.has(element)) {
-    //                     element.className = originalClasses.get(element); // Restore class
-    //                 }
-    //                 body.style.margin = '';
-    //                 body.style.width = '';
+    //     if (whitecondition) {
+    //         allElements.forEach(ele => {
+    //             const computedStyle = window.getComputedStyle(ele);
+    //             if (computedStyle.cursor === "pointer") { // Check computed style, not inline style
+    //                 ele.style.cursor = `url(${cursorPath}) 10 10, pointer`;
     //             }
-    //         }
-    //     });
-
-    // Apply background color to 'change' elements
-    // Array.from(titles).forEach(title => {
-    //         if (isEnabled) {
+    //             else {
+    //                 ele.style.cursor = `url(${autoPath}) 10 10, auto`;
+    //             }
+    //         });
+    //     } else {
+    //         allElements.forEach(ele => {
+    //             const computedStyle = window.getComputedStyle(ele);
+    //             if (computedStyle.cursor.includes("url")) { // Reset only modified elements
+    //                 ele.style.cursor = ""; // Restore to original pointer
+    //             }
+    //         });
+    //         document.body.style.cursor = "default"; // Set the default cursor
+    //     }
+    //     Array.from(titles).forEach(title => {
+    //         if (whitecondition) {
     //             title.style.backgroundColor = "#146FF8";
     //             title.style.color = 'white';
     //         } else {
-    //             title.style.backgroundColor = ''; // Reset to default
+    //             title.style.backgroundColor = '';
     //             title.style.color = '';
 
     //         }
     //     });
-
-    //     // Clear the originalClasses map when disabling read mode to avoid memory leaks
-    //     if (!isEnabled) {
-    //         originalClasses.clear();
-    //     }
-    // };
+    // }
 
 
-    // let mask = false;
-    // let Readingmask = null; // Declare the reference outside the function
 
-    // const readingmask = () => {
-    //     mask = !mask;
-    //     const titles = document.getElementsByClassName('readingmask');
-    //     Array.from(titles).forEach(title => {
-    //         if (mask) {
-    //             title.style.backgroundColor = "#146FF8";
-    //             title.style.color = '#ffffff';
-    //         } else {
-    //             title.style.backgroundColor = '';
-    //             title.style.color = '';
-    //         }
-    //     })
 
-    //     if (mask) {
-    //         // Create the element when mask is true, if it doesn't already exist
-    //         if (!Readingmask) {
-    //             Readingmask = document.createElement("div");
-    //             Object.assign(Readingmask.style, {
-    //                 position: "fixed",
-    //                 backgroundColor: "transparent",
-    //                 boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
-    //                 height: "150px",
-    //                 width: "100%",
-    //                 zIndex: "9999",
-    //                 pointerEvents: "none"
-    //             });
-    //             document.body.appendChild(Readingmask);
 
-    //             document.addEventListener("mousemove", (event) => {
-    //                 if (Readingmask) { // Check if Readingmask exists before updating style
-    //                     let maskWidth = window.innerWidth;
-    //                     let maskHeight = 150; // Same height as above
-    //                     let newX = event.clientX - maskWidth / 2;
-    //                     let newY = event.clientY - maskHeight / 2;
-    //                     newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
-    //                     newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
-    //                     Readingmask.style.left = `${newX}px`;
-    //                     Readingmask.style.top = `${newY}px`;
-    //                 }
-    //             });
-    //         }
-    //     } else {
-    //         // Remove the mask element when mask is false
-    //         if (Readingmask) {
-    //             document.body.removeChild(Readingmask); // Remove the mask element
-    //             Readingmask = null; // Clear the reference
-    //         }
-    //     }
-    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -360,7 +261,7 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (45).svg"}
                                 heading={"Big White Cursor"}
-                                onClick={whiteFunction}
+                                onClick={togglewhitecursor}
                                 customStyle={"white"}
 
                             />
