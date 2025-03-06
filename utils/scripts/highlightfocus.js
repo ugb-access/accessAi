@@ -82,11 +82,13 @@ export const FOCOUS_HIGHLIGHT = () => {
                         if (window.location.pathname !== lastPath) {
                             lastPath = window.location.pathname;
                             attachListeners();
+                            
+                        
                         }
                     }, 500);
                     };
-                    observeRouteChanges();
                     toggleclickhighlight();
+                    observeRouteChanges();
                     
                     })();
                     \`;
@@ -103,12 +105,7 @@ export const FOCOUS_HIGHLIGHT = () => {
                     event.target.style.border = "2px solid orange";
                     event.target.style.outline = "2px solid blue";
                     };
-
-
-
-
-
-                      Array.from(titles).forEach(title => {
+                           Array.from(titles).forEach(title => {
                             title.style.backgroundColor = "#146FF8";
                             title.style.color = '#ffffff';
                         

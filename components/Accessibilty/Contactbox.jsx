@@ -21,6 +21,7 @@ import { READ_MASK } from "../../utils/scripts/readingmask"
 import { WHITE_CURSOR } from "../../utils/scripts/whitecursor"
 import { BLACK_CURSOR } from "../../utils/scripts/blackcursor"
 import { FOCOUS_HIGHLIGHT } from "../../utils/scripts/highlightfocus"
+import { HIGHLIGHT_TITLE } from "../../utils/scripts/highlighttitle"
 
 
 
@@ -289,6 +290,10 @@ const Contactbox = () => {
         if (localStorage.getItem('focouslocal') === 'true') {
                  togglefocoushighlight()
          }
+        ${HIGHLIGHT_TITLE()}
+        if (localStorage.getItem('highlighttitlelocal') === 'true') {
+                 togglehighlighttitle()
+         }
         
 
             `;
@@ -320,7 +325,7 @@ const Contactbox = () => {
                             heading={"Highlight Titles"}
                             onClick={() => {
                                 is_highlight_title = !is_highlight_title
-                                highlightAllTitles(is_highlight_title)
+                                togglehighlighttitle(is_highlight_title)
                             }}
                             customStyle={'highlighttitle'}
 
@@ -420,31 +425,31 @@ export const handleHighLight = (active) => {
     highlightAllTitles(active)
 }
 
-const highlightAllTitles = (active) => {
-    const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
-    const titles = document.getElementsByClassName('highlighttitle')
+// const highlightAllTitles = (active) => {
+//     const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
+//     const titles = document.getElementsByClassName('highlighttitle')
 
-    if (!active) {
-        title.forEach((title) => {
-            title.style.border = '';
-            title.style.padding = '';
-        })
-    } else {
-        title.forEach((title) => {
-            title.style.border = '2px solid #146FF8';
-            title.style.padding = '5px';
-        })
-    }
-    Array.from(titles).forEach((title) => {
-        if (active) {
-            title.style.backgroundColor = "#146FF8";
-            title.style.color = '#ffffff';
-        } else {
-            title.style.backgroundColor = '';
-            title.style.color = '';
-        }
-    })
-}
+//     if (!active) {
+//         title.forEach((title) => {
+//             title.style.border = '';
+//             title.style.padding = '';
+//         })
+//     } else {
+//         title.forEach((title) => {
+//             title.style.border = '2px solid #146FF8';
+//             title.style.padding = '5px';
+//         })
+//     }
+//     Array.from(titles).forEach((title) => {
+//         if (active) {
+//             title.style.backgroundColor = "#146FF8";
+//             title.style.color = '#ffffff';
+//         } else {
+//             title.style.backgroundColor = '';
+//             title.style.color = '';
+//         }
+//     })
+// }
 
 
 const highlightAllLink = (active) => {

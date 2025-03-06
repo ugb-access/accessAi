@@ -5,53 +5,6 @@ import Content_box1 from './Content_box1';
 
 
 const Orientation = () => {
-
-
-
-
-
-
-    // const handleclick = (event) => {
-    //     console.log('handleclick : ', handleclick);
-    //     event.target.style.border = "2px solid orange"
-    //     event.target.style.outline = "2px solid blue"
-
-    // }
-    // let clickhighlight = false
-    // const toggleclickhighlight = () => {
-    //     clickhighlight = !clickhighlight
-    //     console.log('clickhighlight:', clickhighlight);
-    //     const elements = document.querySelectorAll('form,a')
-    //     const titles = document.getElementsByClassName('HighLight')
-
-    //     if (clickhighlight) {
-    //         elements.forEach((ele) => {
-    //             ele.addEventListener("click", handleclick)
-    //         })
-    //     } else {
-    //         elements.forEach((ele) => {
-    //             ele.removeEventListener("click", handleclick)
-    //         })
-    //         elements.forEach((ele) => {
-    //             ele.style.border = ""; // Remove border
-    //             ele.style.outline = ""; // Remove outline
-    //         });
-    //     }
-    //     Array.from(titles).forEach(title => {
-    //         if (clickhighlight) {
-    //             title.style.backgroundColor = "#146FF8";
-    //             title.style.color = 'white';
-    //         } else {
-    //             title.style.backgroundColor = '';
-    //             title.style.color = '';
-
-    //         }
-    //     });
-    // }
-
-
-
-
     return (
         <>
             <div id="accessibilty" className='m-5 bg-[#fff] px-4 rounded-xl '>
