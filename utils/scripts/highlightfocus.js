@@ -21,7 +21,6 @@ export const FOCOUS_HIGHLIGHT = () => {
                     title.style.color = "";
                 });
 
-                // Remove borders and event listeners
                 const elements = document.querySelectorAll('form, a');
                 elements.forEach((ele) => {
                     ele.style.border = "";
@@ -38,7 +37,8 @@ export const FOCOUS_HIGHLIGHT = () => {
             focous.innerHTML = \`
             (function () {
                 let clickhighlight = localStorage.getItem("focouslocal") === "true";
-                localStorage.setItem("focouslocal", "true");
+                                    localStorage.setItem("focouslocal", "true");
+
                 
                 const handleclick = (event) => {
                     event.target.style.border = "2px solid orange";
@@ -48,7 +48,7 @@ export const FOCOUS_HIGHLIGHT = () => {
                 const attachListeners = () => {
                     const elements = document.querySelectorAll('form, a');
                     elements.forEach((ele) => {
-                        ele.addEventListener("click", handleclick);
+                    ele.addEventListener("click", handleclick);
                         });
                     };
 
@@ -56,8 +56,6 @@ export const FOCOUS_HIGHLIGHT = () => {
 
                 const toggleclickhighlight = () => {
                     clickhighlight = !clickhighlight;
-                    localStorage.setItem("focouslocal", clickhighlight);
-
                     const elements = document.querySelectorAll('form, a');
                     const titles = document.getElementsByClassName('HighLight');
 
@@ -77,8 +75,7 @@ export const FOCOUS_HIGHLIGHT = () => {
                     });
                 };
 
-                toggleclickhighlight();
-
+                
                 const observeRouteChanges = () => {
                     let lastPath = window.location.pathname;
                     setInterval(() => {
@@ -87,19 +84,35 @@ export const FOCOUS_HIGHLIGHT = () => {
                             attachListeners();
                         }
                     }, 500);
-                };
-                observeRouteChanges();
-
-            })();
-            \`;
-
+                    };
+                    observeRouteChanges();
+                    toggleclickhighlight();
+                    
+                    })();
+                    \`;
+                    
             document.body.appendChild(focous);
         };
 
         // Ensure script is injected on page load if needed
         window.addEventListener("load", () => {
             if (localStorage.getItem("focouslocal") === "true") {
-                togglefocoushighlight();
+             const titles = document.getElementsByClassName('HighLight');
+             
+                const handleclick = (event) => {
+                    event.target.style.border = "2px solid orange";
+                    event.target.style.outline = "2px solid blue";
+                    };
+
+
+
+
+
+                      Array.from(titles).forEach(title => {
+                            title.style.backgroundColor = "#146FF8";
+                            title.style.color = '#ffffff';
+                        
+                    });
             }
         });
     `;
