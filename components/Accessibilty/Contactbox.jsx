@@ -22,6 +22,7 @@ import { WHITE_CURSOR } from "../../utils/scripts/whitecursor"
 import { BLACK_CURSOR } from "../../utils/scripts/blackcursor"
 import { FOCOUS_HIGHLIGHT } from "../../utils/scripts/highlightfocus"
 import { HIGHLIGHT_TITLE } from "../../utils/scripts/highlighttitle"
+import { HIGHLIGHT_LINK } from "../../utils/scripts/highlightlink"
 
 
 
@@ -294,6 +295,10 @@ const Contactbox = () => {
         if (localStorage.getItem('highlighttitlelocal') === 'true') {
                  togglehighlighttitle()
          }
+        ${HIGHLIGHT_LINK()}
+        if (localStorage.getItem('highlightlinklocal') === 'true') {
+                 togglehighlightlink()
+         }
         
 
             `;
@@ -336,7 +341,7 @@ const Contactbox = () => {
                             heading={"Highlight Links"}
                             onClick={() => {
                                 is_highlight_link = !is_highlight_link
-                                highlightAllLink(is_highlight_link)
+                                togglehighlightlink(is_highlight_link)
                             }}
                             customStyle={"highlightlink "}
 
@@ -421,59 +426,10 @@ export default Contactbox
 
 
 export const handleHighLight = (active) => {
-    highlightAllLink(active)
-    highlightAllTitles(active)
+    togglehighlightlink(active)
+    togglehighlighttitle(active)
 }
 
-// const highlightAllTitles = (active) => {
-//     const title = document.querySelectorAll('h1,h2,h3,h4,h5,h6')
-//     const titles = document.getElementsByClassName('highlighttitle')
-
-//     if (!active) {
-//         title.forEach((title) => {
-//             title.style.border = '';
-//             title.style.padding = '';
-//         })
-//     } else {
-//         title.forEach((title) => {
-//             title.style.border = '2px solid #146FF8';
-//             title.style.padding = '5px';
-//         })
-//     }
-//     Array.from(titles).forEach((title) => {
-//         if (active) {
-//             title.style.backgroundColor = "#146FF8";
-//             title.style.color = '#ffffff';
-//         } else {
-//             title.style.backgroundColor = '';
-//             title.style.color = '';
-//         }
-//     })
-// }
 
 
-const highlightAllLink = (active) => {
 
-    const title = document.querySelectorAll('a')
-    const titles = document.getElementsByClassName('highlightlink')
-
-    // const textcolor = document.getElementsByClassName("changeColor")
-    if (!active) {
-        title.forEach((title) => {
-            title.style.border = ''
-        })
-    } else {
-        title.forEach((title) => {
-            title.style.border = '2px solid #ff9a68';
-        })
-    }
-    Array.from(titles).forEach((title) => {
-        if (active) {
-            title.style.backgroundColor = "#146FF8";
-            title.style.color = '#ffffff';
-        } else {
-            title.style.backgroundColor = '';
-            title.style.color = '';
-        }
-    })
-}
