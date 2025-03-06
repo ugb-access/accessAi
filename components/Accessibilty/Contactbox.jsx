@@ -19,6 +19,8 @@ import { HOVER_HIGHLIGHT } from "../../utils/scripts/hoverhighlight"
 import { READ_GUIDE } from "../../utils/scripts/readingguide"
 import { READ_MASK } from "../../utils/scripts/readingmask"
 import { WHITE_CURSOR } from "../../utils/scripts/whitecursor"
+import { BLACK_CURSOR } from "../../utils/scripts/blackcursor"
+import { FOCOUS_HIGHLIGHT } from "../../utils/scripts/highlightfocus"
 
 
 
@@ -278,6 +280,14 @@ const Contactbox = () => {
         ${WHITE_CURSOR()}
         if (localStorage.getItem('whitecursorlocal') === 'true') {
                  togglewhitecursor()
+         }
+        ${BLACK_CURSOR()}
+        if (localStorage.getItem('blackcursorlocal') === 'true') {
+                 toggleblackcursor()
+         }
+        ${FOCOUS_HIGHLIGHT()}
+        if (localStorage.getItem('focouslocal') === 'true') {
+                 togglefocoushighlight()
          }
         
 

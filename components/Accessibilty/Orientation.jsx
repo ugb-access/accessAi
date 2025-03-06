@@ -11,114 +11,34 @@ const Orientation = () => {
 
 
 
-    const handleclick = (event) => {
-        event.target.style.border = "2px solid orange"
-        event.target.style.outline = "2px solid blue"
+    // const handleclick = (event) => {
+    //     console.log('handleclick : ', handleclick);
+    //     event.target.style.border = "2px solid orange"
+    //     event.target.style.outline = "2px solid blue"
 
-    }
-    let clickhighlight = false
-    const toggleclickhighlight = () => {
-        clickhighlight = !clickhighlight
-        console.log('clickhighlight:', clickhighlight);
-        const elements = document.querySelectorAll('form,a')
-        const titles = document.getElementsByClassName('HighLight')
+    // }
+    // let clickhighlight = false
+    // const toggleclickhighlight = () => {
+    //     clickhighlight = !clickhighlight
+    //     console.log('clickhighlight:', clickhighlight);
+    //     const elements = document.querySelectorAll('form,a')
+    //     const titles = document.getElementsByClassName('HighLight')
 
-        if (clickhighlight) {
-            elements.forEach((ele) => {
-                ele.addEventListener("click", handleclick)
-            })
-        } else {
-            elements.forEach((ele) => {
-                ele.addEventListener("click", handleclick)
-            })
-        }
-        Array.from(titles).forEach(title => {
-            if (clickhighlight) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        });
-    }
-
-
-    let condition = false;
-
-    function triggerFunction() {
-        condition = !condition;
-        const cursorPath = '/images/black-pointer.svg';
-        const autoPath = '/images/black-cursor.svg';
-        const allElements = document.querySelectorAll('*');
-        const titles = document.getElementsByClassName('black')
-
-        if (condition) {
-            allElements.forEach(ele => {
-                const computedStyle = window.getComputedStyle(ele);
-                if (computedStyle.cursor === "pointer") { // Check computed style, not inline style
-                    ele.style.cursor = `url(${cursorPath}) 10 10, pointer`;
-                }
-                else {
-                    ele.style.cursor = `url(${autoPath}) 10 10, auto`;
-                }
-            });
-        } else {
-            allElements.forEach(ele => {
-                const computedStyle = window.getComputedStyle(ele);
-                if (computedStyle.cursor.includes("url")) { // Reset only modified elements
-                    ele.style.cursor = ""; // Restore to original pointer
-                }
-            });
-            document.body.style.cursor = "default"; // Set the default cursor
-        }
-        Array.from(titles).forEach(title => {
-            if (condition) {
-                title.style.backgroundColor = "#146FF8";
-                title.style.color = 'white';
-            } else {
-                title.style.backgroundColor = '';
-                title.style.color = '';
-
-            }
-        });
-    }
-
-
-
-
-
-    // let whitecondition = false;
-
-    // function whiteFunction() {
-    //     whitecondition = !whitecondition;
-    //     const cursorPath = '/images/white-pointer.svg';
-    //     const autoPath = '/images/white.svg';
-    //     const allElements = document.querySelectorAll('*');
-    //     const titles = document.getElementsByClassName('white')
-
-    //     if (whitecondition) {
-    //         allElements.forEach(ele => {
-    //             const computedStyle = window.getComputedStyle(ele);
-    //             if (computedStyle.cursor === "pointer") { // Check computed style, not inline style
-    //                 ele.style.cursor = `url(${cursorPath}) 10 10, pointer`;
-    //             }
-    //             else {
-    //                 ele.style.cursor = `url(${autoPath}) 10 10, auto`;
-    //             }
-    //         });
+    //     if (clickhighlight) {
+    //         elements.forEach((ele) => {
+    //             ele.addEventListener("click", handleclick)
+    //         })
     //     } else {
-    //         allElements.forEach(ele => {
-    //             const computedStyle = window.getComputedStyle(ele);
-    //             if (computedStyle.cursor.includes("url")) { // Reset only modified elements
-    //                 ele.style.cursor = ""; // Restore to original pointer
-    //             }
+    //         elements.forEach((ele) => {
+    //             ele.removeEventListener("click", handleclick)
+    //         })
+    //         elements.forEach((ele) => {
+    //             ele.style.border = ""; // Remove border
+    //             ele.style.outline = ""; // Remove outline
     //         });
-    //         document.body.style.cursor = "default"; // Set the default cursor
     //     }
     //     Array.from(titles).forEach(title => {
-    //         if (whitecondition) {
+    //         if (clickhighlight) {
     //             title.style.backgroundColor = "#146FF8";
     //             title.style.color = 'white';
     //         } else {
@@ -128,42 +48,6 @@ const Orientation = () => {
     //         }
     //     });
     // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -199,7 +83,7 @@ const Orientation = () => {
                         <Content_box2
                             imag={"/images/svgviewer-output (43).svg"}
                             heading={"Highlight Focus"}
-                            onClick={toggleclickhighlight}
+                            onClick={togglefocoushighlight}
                             customStyle={'HighLight'}
 
                         />
@@ -252,7 +136,7 @@ const Orientation = () => {
                             <Content_box2
                                 imag={"/images/svgviewer-output (44).svg"}
                                 heading={"Big Black Cursor"}
-                                onClick={triggerFunction}
+                                onClick={toggleblackcursor}
                                 customStyle={"black"}
 
 
