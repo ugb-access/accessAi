@@ -23,6 +23,7 @@ import { BLACK_CURSOR } from "../../utils/scripts/blackcursor"
 import { FOCOUS_HIGHLIGHT } from "../../utils/scripts/highlightfocus"
 import { HIGHLIGHT_TITLE } from "../../utils/scripts/highlighttitle"
 import { HIGHLIGHT_LINK } from "../../utils/scripts/highlightlink"
+import { FONT_SIZE } from "../../utils/scripts/fontsize"
 
 
 
@@ -90,41 +91,39 @@ const Contactbox = () => {
 
 
 
-    const originalFontSizes = new Map();
-
-    // Load Saved Font Size from Local Storage on Page Load
-    window.addEventListener("DOMContentLoaded", () => {
-        let savedFontSize = localStorage.getItem("font-size");
-        if (savedFontSize) {
-            console.log('savedFontSize: ', savedFontSize);
-            document.body.style.fontSize = savedFontSize;
-        }
-    });
-    const adjustFontSize = (isIncrease) => {
-        const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
-        elements.forEach((element) => {
-            if (element.id === "accessibilty") return;
-            const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-            if (!originalFontSizes.has(element)) {
-                originalFontSizes.set(element, currentFontSize);
-            }
-            const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
-            if (!isNaN(newFontSize) && newFontSize > 0) {
-                element.style.fontSize = `${newFontSize}px`;
-            }
-        });
-        // Update Percentage Display
-        const percentageElement = document.querySelector(".font-percentage");
-        let current = percentageElement.innerText;
-        let percentage = current == "Default" ? 0 : parseInt(current.replace("%", ""));
-        percentage = isIncrease ? percentage + 10 : percentage - 10;
-        if (percentageElement) {
-            percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
-        }
-        // Save New Font Size to Local Storage
-        let bodyFontSize = getComputedStyle(document.body).fontSize;
-        localStorage.setItem("font-size", bodyFontSize);
-    };
+    // const originalFontSizes = new Map();
+    // window.addEventListener("DOMContentLoaded", () => {
+    //     let savedFontSize = localStorage.getItem("font-sizelocal");
+    //     if (savedFontSize) {
+    //         console.log('savedFontSize: ', savedFontSize);
+    //         document.body.style.fontSize = savedFontSize;
+    //     }
+    // });
+    // const adjustFontSize = (isIncrease) => {
+    //     const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
+    //     elements.forEach((element) => {
+    //         if (element.id === "accessibilty") return;
+    //         const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
+    //         if (!originalFontSizes.has(element)) {
+    //             originalFontSizes.set(element, currentFontSize);
+    //         }
+    //         const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
+    //         if (!isNaN(newFontSize) && newFontSize > 0) {
+    //             element.style.fontSize = `${newFontSize}px`;
+    //         }
+    //     });
+    //     // Update Percentage Display
+    //     const percentageElement = document.querySelector(".font-percentage");
+    //     let current = percentageElement.innerText;
+    //     let percentage = current == "Default" ? 0 : parseInt(current.replace("%", ""));
+    //     percentage = isIncrease ? percentage + 10 : percentage - 10;
+    //     if (percentageElement) {
+    //         percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
+    //     }
+    //     // Save New Font Size to Local Storage
+    //     let bodyFontSize = getComputedStyle(document.body).fontSize;
+    //     localStorage.setItem("font-sizelocal", bodyFontSize);
+    // };
 
 
 
@@ -299,6 +298,10 @@ const Contactbox = () => {
         if (localStorage.getItem('highlightlinklocal') === 'true') {
                  togglehighlightlink()
          }
+        ${FONT_SIZE()}
+        if (localStorage.getItem('font-sizelocal') === 'true') {
+                 increasedecreasefontsize()
+         }
         
 
             `;
@@ -351,8 +354,8 @@ const Contactbox = () => {
                     </div>
                     <Content_box1
                         imag={"/images/svgviewer-output (24).svg"}
-                        handleImageClick={() => adjustFontSize(true)} // Increase by 10%
-                        handleImagClick={() => adjustFontSize(false)} // Decrease by 10%
+                        handleImageClick={() => increasedecreasefontsize(true)} // Increase by 10%
+                        handleImagClick={() => increasedecreasefontsize(false)} // Decrease by 10%
                         heading={"Adjust Font Sizing"}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={<span id='accessibilty' className="font-percentage">Default</span>} // Initially "Default"
