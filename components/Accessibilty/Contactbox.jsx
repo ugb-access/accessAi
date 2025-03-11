@@ -91,39 +91,39 @@ const Contactbox = () => {
 
 
 
-    // const originalFontSizes = new Map();
-    // window.addEventListener("DOMContentLoaded", () => {
-    //     let savedFontSize = localStorage.getItem("font-sizelocal");
-    //     if (savedFontSize) {
-    //         console.log('savedFontSize: ', savedFontSize);
-    //         document.body.style.fontSize = savedFontSize;
-    //     }
-    // });
-    // const adjustFontSize = (isIncrease) => {
-    //     const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
-    //     elements.forEach((element) => {
-    //         if (element.id === "accessibilty") return;
-    //         const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-    //         if (!originalFontSizes.has(element)) {
-    //             originalFontSizes.set(element, currentFontSize);
-    //         }
-    //         const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
-    //         if (!isNaN(newFontSize) && newFontSize > 0) {
-    //             element.style.fontSize = `${newFontSize}px`;
-    //         }
-    //     });
-    //     // Update Percentage Display
-    //     const percentageElement = document.querySelector(".font-percentage");
-    //     let current = percentageElement.innerText;
-    //     let percentage = current == "Default" ? 0 : parseInt(current.replace("%", ""));
-    //     percentage = isIncrease ? percentage + 10 : percentage - 10;
-    //     if (percentageElement) {
-    //         percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
-    //     }
-    //     // Save New Font Size to Local Storage
-    //     let bodyFontSize = getComputedStyle(document.body).fontSize;
-    //     localStorage.setItem("font-sizelocal", bodyFontSize);
-    // };
+    const originalFontSizes = new Map();
+    window.addEventListener("DOMContentLoaded", () => {
+        let savedFontSize = localStorage.getItem("font-sizelocal");
+        if (savedFontSize) {
+            console.log('savedFontSize: ', savedFontSize);
+            document.body.style.fontSize = savedFontSize;
+        }
+    });
+    const adjustFontSize = (isIncrease) => {
+        const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
+        elements.forEach((element) => {
+            if (element.id === "accessibilty") return;
+            const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
+            if (!originalFontSizes.has(element)) {
+                originalFontSizes.set(element, currentFontSize);
+            }
+            const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
+            if (!isNaN(newFontSize) && newFontSize > 0) {
+                element.style.fontSize = `${newFontSize}px`;
+            }
+        });
+        // Update Percentage Display
+        const percentageElement = document.querySelector(".font-percentage");
+        let current = percentageElement.innerText;
+        let percentage = current == "Default" ? 0 : parseInt(current.replace("%", ""));
+        percentage = isIncrease ? percentage + 10 : percentage - 10;
+        if (percentageElement) {
+            percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
+        }
+        // Save New Font Size to Local Storage
+        let bodyFontSize = getComputedStyle(document.body).fontSize;
+        localStorage.setItem("font-sizelocal", bodyFontSize);
+    };
 
 
 

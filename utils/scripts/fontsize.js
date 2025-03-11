@@ -1,101 +1,64 @@
 export const FONT_SIZE = () => {
     return `
         const increasedecreasefontsize = (isIncrease) => {
-            let isScriptInjected = document.getElementById("FontSize");
-
-            console.log("Injecting script...");
-            const fontsize = document.createElement('script');
-            fontsize.id = "FontSize";
-            fontsize.innerHTML = \`
-            (function (){
-                let baseFontSize = 16; // Default base font size
-                let storedFontSizes = JSON.parse(localStorage.getItem('font-sizelocal')) || {}; // Store individual sizes
-
-                const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-
-                // Apply stored font sizes on page load
-                window.addEventListener('DOMContentLoaded', () => {
-                    elements.forEach((element) => {
-                        if (element.id === "accessibilty") return;
-                        if (storedFontSizes[element.tagName]) {
-                            element.style.fontSize = storedFontSizes[element.tagName];
-                        }
-                    });
-                });
-
-                const adjustFontSize = (isIncrease) => {
-                    elements.forEach((element) => {
-                        if (element.id === "accessibilty") return;
-
-                        let currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-                        let newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
-
-                        if (!isNaN(newFontSize) && newFontSize >= 10) {
-                            element.style.fontSize = newFontSize + 'px';
-                            storedFontSizes[element.tagName] = newFontSize + 'px';
+            let existingScript = document.getElementById("FontSize");
+            if (!existingScript) {
+                console.log("Injecting script...");
+                const fontsize = document.createElement('script');
+                fontsize.id = "FontSize";
+                fontsize.innerHTML = \`
+                (function (){
+                    const originalFontSizes = new Map();
+                    window.addEventListener("DOMContentLoaded", () => {
+                        let storedFontSizes = JSON.parse(localStorage.getItem("font-sizelocal")) || {};
+                        if (storedFontSizes) {
+                            console.log('Restoring font sizes:', storedFontSizes);
+                            Object.keys(storedFontSizes).forEach(tag => {
+                                document.querySelectorAll(tag).forEach(element => {
+                                    element.style.fontSize = storedFontSizes[tag];
+                                });
+                            });
                         }
                     });
 
-                    localStorage.setItem('font-sizelocal', JSON.stringify(storedFontSizes));
+                    window.adjustFontSize = (isIncrease) => {
+                        let storedFontSizes = JSON.parse(localStorage.getItem("font-sizelocal")) || {};
+                        const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
+                        elements.forEach((element) => {
+                            if (element.id === "accessibilty") return;
+                            const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
+                            if (!originalFontSizes.has(element)) {
+                                originalFontSizes.set(element, currentFontSize);
+                            }
+                            const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
+                            if (!isNaN(newFontSize) && newFontSize > 0) {
+                                element.style.fontSize = newFontSize + "px";
+                                storedFontSizes[element.tagName] = newFontSize + "px";
+                            }
+                        });
 
-                    // Update Percentage Display
-                    let sampleElement = document.querySelector('p') || document.querySelector('span');
-                    if (sampleElement) {
-                        let newFontSize = parseFloat(storedFontSizes[sampleElement.tagName]) || baseFontSize;
-                        let increasePercentage = ((newFontSize - baseFontSize) / 1) * 10;
-
-                        const percentageElement = document.querySelector('.font-percentage');
+                        const percentageElement = document.querySelector(".font-percentage");
                         if (percentageElement) {
-                            percentageElement.innerText = increasePercentage === 0 ? "Default" : increasePercentage + '%';
+                            let sampleElement = document.querySelector("p") || document.querySelector("span");
+                            let sampleFontSize = sampleElement ? parseFloat(getComputedStyle(sampleElement).fontSize) : 16;
+                            let increasePercentage = ((sampleFontSize - 16) / 10) * 100;
+                            percentageElement.innerText = increasePercentage === 0 ? "Default" : increasePercentage.toFixed(0) + "%";
                         }
-                    }
-                };
 
-                // Adjust font size when script is injected
-                adjustFontSize(\${isIncrease ? 'true' : 'false'});
-            })();
-            \`;
+                        localStorage.setItem("font-sizelocal", JSON.stringify(storedFontSizes));
+                    };
 
-            document.body.appendChild(fontsize);
-        };
-       window.addEventListener('load', () => {
-     const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-     let storedFontSizes = JSON.parse(localStorage.getItem('font-sizelocal')) || {}; // Store individual sizes
-                     let baseFontSize = 16; // Default base font size
+                     adjustFontSize(\${isIncrease});
+                })();
+                \`;
 
-
-
-    elements.forEach((element) => {
-        if (storedFontSizes[element.tagName]) {
-                                if (element.id === "accessibilty") return;
-
-            element.style.fontSize = storedFontSizes[element.tagName];
-        }
-    });
-
-    // ✅ Routing ke baad bhi font size apply hoga
-    window.addEventListener('pushstate', () => {
-        elements.forEach((element) => {
-                                    if (element.id === "accessibilty") return;
-
-            if (storedFontSizes[element.tagName]) {
-                element.style.fontSize = storedFontSizes[element.tagName];
+                document.body.appendChild(fontsize);
+            } else {
+               window.adjustFontSize(isIncrease);
             }
+        };
+        window.addEventListener("load", () => {
+            
         });
-    });
-
-    // ✅ Percentage update
-    let sampleElement = document.querySelector('p') || document.querySelector('span');
-    if (sampleElement) {
-        let newFontSize = parseFloat(storedFontSizes[sampleElement.tagName]) || baseFontSize;
-        let increasePercentage = ((newFontSize - baseFontSize) / 1) * 10;
-        const percentageElement = document.querySelector('.font-percentage');
-        if (percentageElement) {
-            percentageElement.innerText = increasePercentage === 0 ? "Default" : increasePercentage + "%";
-        }
-    }
-});
-
-
     `;
 };
