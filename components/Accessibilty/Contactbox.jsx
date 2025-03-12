@@ -26,6 +26,7 @@ import { HIGHLIGHT_LINK } from "../../utils/scripts/highlightlink"
 import { FONT_SIZE } from "../../utils/scripts/fontsize"
 import { CONTENT_SCALING } from "../../utils/scripts/scaling"
 import { LINE_HEIGHT_ADJUSTMENT } from "../../utils/scripts/lineheight"
+import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
 
 
 
@@ -51,36 +52,7 @@ const Contactbox = () => {
 
 
 
-    // increase/decrease lineHeight
-    const originalLineHeights = new Map();
-    const adjustLineHeight = (isIncrease) => {
-        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-        elements.forEach((element) => {
-            if (element.id === "accessibilty") return; // ✅ Skip this element
-            const currentLineHeight = parseFloat(getComputedStyle(element).lineHeight);
-            if (!originalLineHeights.has(element)) {
-                originalLineHeights.set(element, currentLineHeight);
-            }
-            const newLineHeight = isIncrease ? currentLineHeight + 1 : currentLineHeight - 1;
-            if (!isNaN(newLineHeight) && newLineHeight > 0) {
-                element.style.lineHeight = `${newLineHeight}px`;
-            }
-        });
-        const percentageElement = document.querySelector(".line-height-percentage");
-        let current = percentageElement.innerText;
-        let percentage = current == "Default" ? 0 : current?.replace("%", "");
-        if (isIncrease) {
-            percentage = +percentage + 10
-        } else {
-            percentage = +percentage - 10
-        }
-        if (percentageElement) {
-            if (percentage === 0) { percentageElement.innerText = "Default" }
-            else {
-                percentageElement.innerText = `${percentage}%`
-            };
-        }
-    };
+
 
 
     // increase/decrease letterspacingconst originalLetterSpacing = new Map();
@@ -231,8 +203,12 @@ const Contactbox = () => {
                  increasedecreasescaling()
          }
         ${LINE_HEIGHT_ADJUSTMENT()}
-        if (localStorage.getItem('font-sizelocal') === 'true') {
+        if (localStorage.getItem('line-height-local') === 'true') {
                  increaseDecreaseLineHeight()
+         }
+        ${LETTER_SPACING_ADJUSTMENT()}
+        if (localStorage.getItem('letter-spacing-local') === 'true') {
+                 increaseDecreaseLetterSpacing()
          }
         
 
@@ -308,8 +284,8 @@ const Contactbox = () => {
                     <Content_box1
                         imag={"/images/svgviewer-output (26).svg"}
                         heading={"Adjust Letter Spacing"}
-                        handleImageClick={() => adjustLetterSpacing(true)} // Increase by 10%
-                        handleImagClick={() => adjustLetterSpacing(false)}
+                        handleImageClick={() => increaseDecreaseLetterSpacing(true)} // Increase by 10%
+                        handleImagClick={() => increaseDecreaseLetterSpacing(false)}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={<span id='accessibilty' className='letter-spacing-percentage'>Default</span>}
                         imag3={"/images/svgviewer-output (17).svg"}
