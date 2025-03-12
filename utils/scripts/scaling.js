@@ -50,12 +50,19 @@ export const CONTENT_SCALING = () => {
             }
         };
 
-        // window.addEventListener("load", () => {
-        //     let savedScale = parseFloat(localStorage.getItem("content-scale")) || 1;
-        //     if (savedScale !== 1) {
-        //         document.body.style.transform = "scale(" + savedScale + ")";
-        //         document.body.style.transformOrigin = "top left";
-        //     }
-        // });
+        window.addEventListener("load", () => {
+            let savedScale = parseFloat(localStorage.getItem("content-scale")) || 1;
+                                let scaleFactor = parseFloat(localStorage.getItem("content-scale")) || 1;
+
+            if (savedScale !== 1) {
+                document.body.style.transform = "scale(" + savedScale + ")";
+                document.body.style.transformOrigin = "top left";
+            }
+                         const percentageElement = document.querySelector(".scale-percentage");
+                if (percentageElement) {
+                            let percentage = ((scaleFactor - 1) *1000).toFixed(0); // Shows 10%, 20%, etc.
+                            percentageElement.innerText = percentage === "0" ? "Default" : percentage + "%";
+                        }
+        });
     `;
 };
