@@ -1,64 +1,61 @@
 export const CONTENT_SCALING = () => {
     return `
         const increasedecreasescaling = (isIncrease) => {
-            let existingScript = document.getElementById("FontSize");
+            let existingScript = document.getElementById("ContentScale");
             if (!existingScript) {
                 console.log("Injecting script...");
-                const fontsize = document.createElement('script');
-                fontsize.id = "FontSize";
-                fontsize.innerHTML = \`
-                (function (){
-                    const originalFontSizes = new Map();
-                    window.addEventListener("DOMContentLoaded", () => {
-                        let storedFontSizes = JSON.parse(localStorage.getItem("scaling_local")) || {};
-                        if (storedFontSizes) {
-                            console.log('Restoring font sizes:', storedFontSizes);
-                            Object.keys(storedFontSizes).forEach(tag => {
-                                document.querySelectorAll(tag).forEach(element => {
-                                    element.style.fontSize = storedFontSizes[tag];
-                                });
-                            });
-                        }
-                    });
+                const scaleScript = document.createElement('script');
+                scaleScript.id = "ContentScale";
+                scaleScript.innerHTML = \`
+                (function () {
+                    let scaleFactor = parseFloat(localStorage.getItem("content-scale")) || 1;
 
-                    window.adjustFontSize = (isIncrease) => {
-                        let storedFontSizes = JSON.parse(localStorage.getItem("font-sizelocal")) || {};
-                        const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
-                        elements.forEach((element) => {
-                            if (element.id === "accessibilty") return;
-                            const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-                            if (!originalFontSizes.has(element)) {
-                                originalFontSizes.set(element, currentFontSize);
-                            }
-                            const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
-                            if (!isNaN(newFontSize) && newFontSize > 0) {
-                                element.style.fontSize = newFontSize + "px";
-                                storedFontSizes[element.tagName] = newFontSize + "px";
-                            }
-                        });
+                    window.adjustScale = (isIncrease) => {
+                        scaleFactor = isIncrease ? scaleFactor + 0.01 : scaleFactor - 0.01;
 
-                        const percentageElement = document.querySelector(".font-percentage");
-                        if (percentageElement) {
-                            let sampleElement = document.querySelector("p") || document.querySelector("span");
-                            let sampleFontSize = sampleElement ? parseFloat(getComputedStyle(sampleElement).fontSize) : 16;
-                            let increasePercentage = ((sampleFontSize - 16) / 10) * 100;
-                            percentageElement.innerText = increasePercentage === 0 ? "Default" : increasePercentage.toFixed(0) + "%";
+                        if (scaleFactor < 0.5) scaleFactor = 0.5;  // Minimum scaling
+                        if (scaleFactor > 2) scaleFactor = 2;    // Maximum scaling
+
+                        document.body.style.transform = "scale(" + scaleFactor + ")";
+                     document.body.style.transformOrigin = "centercenter";
+
+                   
+
+                        // Update percentage display
+                        const percentageElement = document.querySelector(".scale-percentage");
+                if (percentageElement) {
+                            let percentage = ((scaleFactor - 1) *1000).toFixed(0); // Shows 10%, 20%, etc.
+                            percentageElement.innerText = percentage === "0" ? "Default" : percentage + "%";
                         }
 
-                        localStorage.setItem("font-sizelocal", JSON.stringify(storedFontSizes));
+                        // Save scale to localStorage
+                        localStorage.setItem("content-scale", scaleFactor);
+
+                        // Reset and remove script if back to default
+                        if (scaleFactor === 1) {
+                            console.log("Reset to default. Removing script...");
+                            localStorage.removeItem("content-scale");
+                            const scriptElement = document.getElementById("ContentScale");
+                            if (scriptElement) scriptElement.remove();
+                        }
                     };
 
-                     adjustFontSize(\${isIncrease});
+                    adjustScale(\${isIncrease});
                 })();
                 \`;
 
-                document.body.appendChild(fontsize);
+                document.body.appendChild(scaleScript);
             } else {
-               window.adjustFontSize(isIncrease);
+                window.adjustScale(isIncrease);
             }
         };
-        window.addEventListener("load", () => {
-            
-        });
+
+        // window.addEventListener("load", () => {
+        //     let savedScale = parseFloat(localStorage.getItem("content-scale")) || 1;
+        //     if (savedScale !== 1) {
+        //         document.body.style.transform = "scale(" + savedScale + ")";
+        //         document.body.style.transformOrigin = "top left";
+        //     }
+        // });
     `;
 };

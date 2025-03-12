@@ -9,17 +9,7 @@ export const FONT_SIZE = () => {
                 fontsize.innerHTML = \`
                 (function (){
                     const originalFontSizes = new Map();
-                    window.addEventListener("DOMContentLoaded", () => {
-                        let storedFontSizes = JSON.parse(localStorage.getItem("font-sizelocal")) || {};
-                        if (storedFontSizes) {
-                            console.log('Restoring font sizes:', storedFontSizes);
-                            Object.keys(storedFontSizes).forEach(tag => {
-                                document.querySelectorAll(tag).forEach(element => {
-                                    element.style.fontSize = storedFontSizes[tag];
-                                });
-                            });
-                        }
-                    });
+             
 
                     window.adjustFontSize = (isIncrease) => {
                         let storedFontSizes = JSON.parse(localStorage.getItem("font-sizelocal")) || {};
