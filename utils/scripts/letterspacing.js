@@ -42,6 +42,7 @@ export const LETTER_SPACING_ADJUSTMENT = () => {
                         percentage = isIncrease ? percentage + 10 : percentage - 10;
                         
                         if (percentageElement) {
+                        
                             percentageElement.innerText = percentage === 0 ? "Default" : percentage + "%";
                             localStorage.setItem("letter-spacing-percentage", percentage);
                         }
@@ -74,11 +75,13 @@ export const LETTER_SPACING_ADJUSTMENT = () => {
             const percentageElement = document.querySelector(".letter-spacing-percentage");
             
             if (percentageElement) {
-                percentageElement.innerText = storedPercentage === 0 ? "Default" : storedPercentage + "%";
+                
+            percentageElement.innerText = storedPercentage === 0 ? "Default" : storedPercentage + "%";
             }
 
             const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
             elements.forEach((element) => {
+                if (element.id === "accessibilty") return;
                 if (storedLetterSpacings[element.tagName]) {
                     element.style.letterSpacing = storedLetterSpacings[element.tagName];
                 }
