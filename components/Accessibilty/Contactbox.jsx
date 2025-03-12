@@ -25,6 +25,7 @@ import { HIGHLIGHT_TITLE } from "../../utils/scripts/highlighttitle"
 import { HIGHLIGHT_LINK } from "../../utils/scripts/highlightlink"
 import { FONT_SIZE } from "../../utils/scripts/fontsize"
 import { CONTENT_SCALING } from "../../utils/scripts/scaling"
+import { LINE_HEIGHT_ADJUSTMENT } from "../../utils/scripts/lineheight"
 
 
 
@@ -44,87 +45,7 @@ const Contactbox = () => {
 
 
 
-    const updateScale = (isIncrease) => {
-        const body = document.body;
-        const currentTransform = getComputedStyle(body).transform;
 
-        let currentScale = 1;
-        if (currentTransform !== 'none') {
-            const matrix = currentTransform.match(/matrix\(([^)]+)\)/);
-            if (matrix) {
-                currentScale = parseFloat(matrix[1].split(', ')[0]);
-            }
-        }
-
-        // Adjust scale
-        let newScale = isIncrease ? currentScale + 0.01 : currentScale - 0.01;
-        // Limit min/max scale range (0.5 to 2)
-        newScale = Math.max(0.5, Math.min(2, newScale));
-
-        // Apply new scale
-        body.style.transform = `scale(${newScale.toFixed(2)})`;
-
-        const percentageElement = document.querySelector(".scale-percentage");
-        let current = percentageElement.innerText;
-        let percentage = current == "Default" ? 0 : current?.replace("%", "");
-        if (isIncrease) {
-            percentage = +percentage + 10
-        } else {
-            percentage = +percentage - 10
-        }
-        if (percentageElement) {
-            if (percentage === 0) {
-                percentageElement.innerText = "Default";
-            } else {
-                percentageElement.innerText = `${percentage}%`
-            }
-        }
-
-
-    };
-
-
-
-
-
-
-
-
-
-
-    // const originalFontSizes = new Map();
-    // window.addEventListener("DOMContentLoaded", () => {
-    //     let savedFontSize = localStorage.getItem("font-sizelocal");
-    //     if (savedFontSize) {
-    //         console.log('savedFontSize: ', savedFontSize);
-    //         document.body.style.fontSize = savedFontSize;
-    //     }
-    // });
-    // const adjustFontSize = (isIncrease) => {
-    //     const elements = document.body.querySelectorAll("h1, h2, h3, h4, h5, h6, p, a, button, span");
-    //     elements.forEach((element) => {
-    //         if (element.id === "accessibilty") return;
-    //         const currentFontSize = parseFloat(getComputedStyle(element).fontSize);
-    //         if (!originalFontSizes.has(element)) {
-    //             originalFontSizes.set(element, currentFontSize);
-    //         }
-    //         const newFontSize = isIncrease ? currentFontSize + 1 : currentFontSize - 1;
-    //         if (!isNaN(newFontSize) && newFontSize > 0) {
-    //             element.style.fontSize = `${newFontSize}px`;
-    //         }
-    //     });
-    //     // Update Percentage Display
-    //     const percentageElement = document.querySelector(".font-percentage");
-    //     let current = percentageElement.innerText;
-    //     let percentage = current == "Default" ? 0 : parseInt(current.replace("%", ""));
-    //     percentage = isIncrease ? percentage + 10 : percentage - 10;
-    //     if (percentageElement) {
-    //         percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
-    //     }
-    //     // Save New Font Size to Local Storage
-    //     let bodyFontSize = getComputedStyle(document.body).fontSize;
-    //     localStorage.setItem("font-sizelocal", bodyFontSize);
-    // };
 
 
 
@@ -160,6 +81,8 @@ const Contactbox = () => {
             };
         }
     };
+
+
     // increase/decrease letterspacingconst originalLetterSpacing = new Map();
     const originalLetterSpacing = new Map();
     const adjustLetterSpacing = (isIncrease) => {
@@ -307,6 +230,10 @@ const Contactbox = () => {
         if (localStorage.getItem('font-sizelocal') === 'true') {
                  increasedecreasescaling()
          }
+        ${LINE_HEIGHT_ADJUSTMENT()}
+        if (localStorage.getItem('font-sizelocal') === 'true') {
+                 increaseDecreaseLineHeight()
+         }
         
 
             `;
@@ -370,8 +297,8 @@ const Contactbox = () => {
 
                     <Content_box1
                         imag={"/images/svgviewer-output (24).svg"}
-                        handleImageClick={() => adjustLineHeight(true)} // Increase by 10%
-                        handleImagClick={() => adjustLineHeight(false)} // Decrease by 10%
+                        handleImageClick={() => increaseDecreaseLineHeight(true)} // Increase by 10%
+                        handleImagClick={() => increaseDecreaseLineHeight(false)} // Decrease by 10%
                         heading={"Adjust Line Height"}
                         imag2={"/images/svgviewer-output (18).svg"}
                         para={<span id='accessibilty' className="line-height-percentage">Default</span>} // Initially "Default"
