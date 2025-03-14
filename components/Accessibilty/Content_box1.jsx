@@ -52,7 +52,7 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
     { value: "/accessscan", label: "Web accessibility audit" },
   ]
   return (
-    <div id="accessibilty" className="bg-[#F2F7FA] rounded-xl max-w-full  mb-5 py-[20px] px-[25px] cursor-pointer  " onClick={onClick}>
+    <div id="accessibilty" className="bg-[#F2F7FA] rounded-xl max-w-full text-center mb-5 py-[20px] px-[25px] cursor-pointer  " onClick={onClick}>
       <div id="accessibilty" className="flex justify-center gap-3 mb-5">
         {img ?
           <Image height={20} width={20} src={imag} alt="" id="accessibilty" />
@@ -95,18 +95,20 @@ const Content_box1 = ({ imag, heading, imag2, para, imag3, showBar = true, butto
           :
           null
       }
-      {colorButton ? <div id="accessibilty" className='flex gap-1 justify-center'>
+      {colorButton ? <div id="accessibilty" className='flex gap-1 justify-center '>
         {colors?.map((item, index) => {
           return (
-            <div key={index} id="accessibilty">
-              <button style={{ backgroundColor: item }} id="accessibilty" className={`h-[24px] w-[24px] border rounded-full`} onClick={() => { onChangeColor(item); }}></button>
+            <div key={index} id="accessibilty" >
+              <div>
+                <button style={{ backgroundColor: item }} id="accessibilty" className={`h-[24px] w-[24px] border rounded-full`} onClick={() => { onChangeColor(item); }}></button>
+              </div>
             </div>
           )
         })}
       </div>
         : null
       }
-      <button id="accessibilty" className='mx-auto w-full mt-1 ' onClick={() => onChangeColor("")}>{button}</button>
+      <button id="accessibilty" className=' hover:border-b-2 hover:border-black mx-auto  mt-1 ' onClick={() => onChangeColor("")}>{button}</button>
     </div >
   )
 }

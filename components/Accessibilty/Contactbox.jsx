@@ -32,8 +32,8 @@ import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
 
 const Contactbox = () => {
 
-    // let is_highlight_title = false
-    // let is_highlight_link = false
+    let is_highlight_title = false
+    let is_highlight_link = false
 
 
 

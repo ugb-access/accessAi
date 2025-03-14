@@ -9,6 +9,7 @@ import Statment from "./Statment";
 import Image from "next/image";
 
 import React, { useState, } from 'react';
+import { Indent } from "lucide-react";
 
 
 
@@ -142,25 +143,32 @@ const SVG6 = () => (
 );
 const Accessibility = ({ handlePageClick }) => {
 
-  const [isCustomColor, setIsCustomColor] = useState(false);
-  const [activeTab, setActiveTab] = useState(-1)
+  let activeTab = -1; // Local variable instead of useState
 
 
 
+  let isCustomColor = false;
 
-  const saveProfileHandler = (active) => {
+  const saveProfileHandler = (active, index) => {
+
     const root = document.documentElement;
 
     if (!active) {
-      root.style.setProperty('--#146FF8-color', '#146FF8');
-      root.classList.remove('sezure');
+
+      root.style.setProperty('--primary-color', '#146FF8');
+      root.classList.remove('seizure');
+
 
     } else {
-      root.style.setProperty('--#146FF8-color', '#3d6aaf');
-      root.classList.add('sezure');
+      root.style.setProperty('--primary-color', '#3d6aaf');
+      root.classList.add('seizure');
+
+
     }
-    setIsCustomColor(!isCustomColor)
-  }
+
+    isCustomColor = !isCustomColor;
+  };
+
 
 
 
@@ -173,8 +181,8 @@ const Accessibility = ({ handlePageClick }) => {
   /////////////titlelink////////////////
   const titlelink = (active) => {
     if (active) {
-      togglehighlighttitle()
       togglehighlightlink()
+      togglehighlighttitle()
     }
   };
 
@@ -263,6 +271,7 @@ const Accessibility = ({ handlePageClick }) => {
   keyboard();
 
 
+  // const [activeTab, setActiveTab] = useState(-1)
   let Readingmask = document.getElementById("reading_mask"); // Global variable to track the mask
   const readingmask = (active) => {
     if (active === true) {
@@ -311,38 +320,63 @@ const Accessibility = ({ handlePageClick }) => {
 
 
 
-  const handleOn = (index) => {
 
-    setActiveTab(index)
+  const handleOn = (index) => {
+    activeTab = index; // Update the local variable
 
     if (index === 0) {
       saveProfileHandler(true)
-    }
-    if (index === 4) {
-      keyboard(true)
-    }
-    if (index === 1) {
-      scale(true)
-    }
-    if (index === 3) {
-      titlelink(true)
-    }
-    if (index === 2) {
-      readingmask(true)
+      const activeElements = document.getElementsByClassName('active');
+      const notactiveElements = document.getElementsByClassName('not-active');
+      const bgcolor = document.getElementsByClassName('bgc');
 
+      if (activeElements.length) activeElements[0].style.cssText = "background-color: #146FF8; color: #fff; border-radius: 100px; height: 100%; width: 50%; z-index: 10;";
+
+      if (notactiveElements.length) notactiveElements[0].style.cssText = "background-color: #fff; color: #000; height: 100%; width: 50%; z-index: 10; border: none;";
+
+      if (bgcolor.length > 0) {
+        bgcolor[0].style.backgroundColor = '#fff'; // ✅ Sirf pehle element pe apply hoga
+
+      }
     }
 
-  }
+    if (index === 4) keyboard(true);
+    if (index === 1) scale(true);
+    if (index === 3) titlelink(true);
+    if (index === 2) readingmask(true);
+
+
+  };
+
   const handleOff = () => {
-    setActiveTab(-1);
-    saveProfileHandler(false);
+    activeTab = -1; // 
+    saveProfileHandler(false)
+    const activeElements = document.getElementsByClassName('active');
+    const notactiveElements = document.getElementsByClassName('active');
+    const bgcolor = document.getElementsByClassName('bgc');
+
+    if (activeElements.length >= 0) {
+      activeElements[0].style.backgroundColor = ''; // ✅ Sirf pehle element pe apply hoga
+      activeElements[0].style.color = '';
+    }
+    if (notactiveElements.length >= 0) {
+      notactiveElements[0].style.backgroundColor = '#e1e5e7'; // ✅ Sirf pehle element pe apply hoga
+      notactiveElements[0].style.color = '';
+
+    }
+    if (bgcolor.length > 0) {
+      bgcolor[0].style.backgroundColor = ''; // ✅ Sirf pehle element pe apply hoga
+
+    }
+
+
     keyboard(false);
     scale(false);
     titlelink(false);
-    readingmask(false); // This will toggle it OFF if it's currently ON
+    readingmask(false); // Turn off reading mask
     console.log('readingmask: ', readingmask);
-
   };
+
 
 
   const data = [{
@@ -532,16 +566,16 @@ const Accessibility = ({ handlePageClick }) => {
             <>
               <div key={index} id="accessibilty" className={`  border-b-2 py-[18px] px-2 group ${isTabActive && ' bg-gray-300 mx-5 rounded-xl'}`}>
                 <div id="accessibilty" className="flex justify-between">
-                  <div id="accessibilty" className=" h-[35px] bg-[#e1e5e7] shadow-2xl rounded-[50px] flex-1 flex justify-center transition-all !duration-1000 items-center">
+                  <div id="accessibilty" className="bgc h-[35px] bg-[#e1e5e7] shadow-2xl rounded-[50px] flex-1 flex justify-center  items-center">
 
                     <span
-                      id="accessibilty" className={`flex justify-center transition-all !duration-200 ease-in-out items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
+                      id="accessibilty" className={`not-active flex justify-center  items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
                       onClick={() => { handleOff(index) }}
                     >
                       {item.of}
                     </span>
 
-                    <span id="accessibilty" className={`w-[50%] transition-all !duration-200 ease-in-out text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`}
+                    <span id="accessibilty" className={`active w-[50%]  text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`}
                       onClick={() => handleOn(index)}>{item.on}
 
 
