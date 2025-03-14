@@ -32,8 +32,8 @@ import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
 
 const Contactbox = () => {
 
-    let is_highlight_title = false
-    let is_highlight_link = false
+    // let is_highlight_title = false
+    // let is_highlight_link = false
 
 
 
@@ -55,31 +55,6 @@ const Contactbox = () => {
 
 
 
-    // increase/decrease letterspacingconst originalLetterSpacing = new Map();
-    const originalLetterSpacing = new Map();
-    const adjustLetterSpacing = (isIncrease) => {
-        const elements = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, span');
-        elements.forEach((element) => {
-            if (element.id === "accessibilty") return;
-            let currentLetterSpacing = getComputedStyle(element).letterSpacing;
-            currentLetterSpacing = currentLetterSpacing === "normal" ? "0px" : currentLetterSpacing;
-            currentLetterSpacing = parseFloat(currentLetterSpacing);
-            if (!originalLetterSpacing.has(element)) {
-                originalLetterSpacing.set(element, currentLetterSpacing);
-            }
-            const newLetterSpacing = isIncrease ? currentLetterSpacing + 1 : currentLetterSpacing - 1;
-            if (!isNaN(newLetterSpacing)) {
-                element.style.letterSpacing = `${newLetterSpacing}px`;
-            }
-        });
-        const percentageElement = document.querySelector(".letter-spacing-percentage");
-        let current = percentageElement ? percentageElement.innerText : "Default";
-        let percentage = current === "Default" ? 0 : parseInt(current.replace("%", ""), 10);
-        percentage = isIncrease ? percentage + 10 : percentage - 10;
-        if (percentageElement) {
-            percentageElement.innerText = percentage === 0 ? "Default" : `${percentage}%`;
-        }
-    };
 
 
 

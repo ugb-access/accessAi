@@ -172,7 +172,10 @@ const Accessibility = ({ handlePageClick }) => {
 
   /////////////titlelink////////////////
   const titlelink = (active) => {
-    handleHighLight(active)
+    if (active) {
+      togglehighlighttitle()
+      togglehighlightlink()
+    }
   };
 
 
@@ -260,14 +263,12 @@ const Accessibility = ({ handlePageClick }) => {
   keyboard();
 
 
-  let Readingmask = null; // Global variable to track the mask
-
+  let Readingmask = document.getElementById("reading_mask"); // Global variable to track the mask
   const readingmask = (active) => {
-
-    if (!active) {  // ✅ Activate the mask
-      console.log('active: ', active);
+    if (active === true) {
       if (!Readingmask) { // Only create if it doesn't exist
         Readingmask = document.createElement("div");
+        Readingmask.id = "reading_mask";
         Object.assign(Readingmask.style, {
           position: "fixed",
           backgroundColor: "transparent",
@@ -292,12 +293,13 @@ const Accessibility = ({ handlePageClick }) => {
           }
         });
       }
-    } else {  // ❌ Deactivate the mask
+    } else {
       if (Readingmask) {
-        document.body.removeChild(Readingmask);
+        Readingmask.remove();
         Readingmask = null;
       }
     }
+
   };
 
 
@@ -327,7 +329,7 @@ const Accessibility = ({ handlePageClick }) => {
     }
     if (index === 2) {
       readingmask(true)
-      console.log(' readingmask: ', readingmask);
+
     }
 
   }

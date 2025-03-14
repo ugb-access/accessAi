@@ -1,7 +1,6 @@
 // import React from 'react'
 import Content_box2 from './Content_box2';
 import Content_box1 from './Content_box1';
-import React, { useEffect, } from 'react';
 
 
 const ColorAdjustment = () => {
