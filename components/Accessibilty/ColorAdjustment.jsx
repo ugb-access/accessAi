@@ -61,19 +61,19 @@ const ColorAdjustment = () => {
     // };
 
 
-    const changeTextColor = (color) => {
-        const elements = document.body.querySelectorAll('p, a');
-        const accessibilityElement = document.getElementById('accessibilty');
+    // const changeTextColor = (color) => {
+    //     const elements = document.body.querySelectorAll('p, a');
+    //     const accessibilityElement = document.getElementById('accessibilty');
 
-        elements.forEach((element) => {
-            if (accessibilityElement.contains(element)) {
-                return;
-            }
+    //     elements.forEach((element) => {
+    //         if (accessibilityElement.contains(element)) {
+    //             return;
+    //         }
 
-            // Change the text color for other elements
-            element.style.color = color;
-        });
-    };
+    //         // Change the text color for other elements
+    //         element.style.color = color;
+    //     });
+    // };
 
 
 
@@ -144,7 +144,7 @@ const ColorAdjustment = () => {
                         colorButton={true}
                         img={false}
                         colors={colors}
-                        onChangeColor={changeTextColor}
+                        onChangeColor={changetextcolor}
                     />
                     <Content_box1
                         heading={"Adjust Title Colors"}

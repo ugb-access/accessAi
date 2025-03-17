@@ -28,6 +28,7 @@ import { CONTENT_SCALING } from "../../utils/scripts/scaling"
 import { LINE_HEIGHT_ADJUSTMENT } from "../../utils/scripts/lineheight"
 import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
 import { TITLE_COLOR } from "../../utils/scripts/titlecolor"
+import { TEXT_COLOR } from "../../utils/scripts/textcolor"
 
 
 
@@ -189,6 +190,10 @@ const Contactbox = () => {
         ${TITLE_COLOR()}
         if (localStorage.getItem('titlecolorlocal') === 'true') {
                  changetitlecolor()
+         }
+        ${TEXT_COLOR()}
+        if (localStorage.getItem('titlecolorlocal') === 'true') {
+                changetextcolor()
          }
         
 
