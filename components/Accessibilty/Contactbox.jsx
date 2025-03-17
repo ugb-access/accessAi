@@ -187,7 +187,7 @@ const Contactbox = () => {
                  increaseDecreaseLetterSpacing()
          }
         ${TITLE_COLOR()}
-        if (localStorage.getItem('letter-spacing-local') === 'true') {
+        if (localStorage.getItem('titlecolorlocal') === 'true') {
                  changetitlecolor()
          }
         

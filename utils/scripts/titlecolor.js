@@ -4,35 +4,37 @@ export const TITLE_COLOR = () => {
               let scriptId = "Titlecolor";
               let storedColor = localStorage.getItem("titlecolorlocal");
 
-              // Toggle color: If same as stored, do nothing
               let colorToApply = storedColor === newColor ? storedColor : newColor;
 
               console.log("Applying color:", colorToApply);
 
-              // ✅ Remove existing script if present
               let existingScript = document.getElementById(scriptId);
               if (existingScript) {
-                  existingScript.remove();
+                  console.log('existingScript removed');
+                  existingScript.remove(); // ✅ Old script removed before injecting new one
               }
 
-              // ✅ Update LocalStorage
-              if (colorToApply === "#000") {
-                  localStorage.removeItem("titlecolorlocal"); // ⚠️ Remove color if it's black
-              } else {
-                  localStorage.setItem("titlecolorlocal", colorToApply);
+              // ✅ Jab color remove ho, toh script bhi remove ho jaye
+              if (!newColor || newColor === "#000") {
+                  localStorage.removeItem("titlecolorlocal"); 
+
+                  const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
+                  headings.forEach((heading) => {
+                      heading.style.color = ""; // Reset to default
+                  });
+
+                  return; // ✅ Stop execution, don't inject script
               }
 
-              // ✅ If no color, stop execution (script should be removed)
-              if (!localStorage.getItem("titlecolorlocal")) {
-                  return;
-              }
+              // ✅ Save new color in LocalStorage
+              localStorage.setItem("titlecolorlocal", colorToApply);
 
-              // Inject script to apply color
+              // ✅ Inject script to apply color
               const titlecolor = document.createElement('script');
               titlecolor.id = scriptId;
               titlecolor.innerHTML = \`
                   (function () {
-                      let color = '\$\{colorToApply}';
+                      let color = '\${colorToApply}';
 
                       const changeTitleColor = () => {
                           const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
@@ -53,18 +55,27 @@ export const TITLE_COLOR = () => {
               document.body.appendChild(titlecolor);
           };
 
-          // ✅ On page load, apply last stored color
+          // ✅ On page load, check if color exists
           window.addEventListener("load", () => {
               let storedColor = localStorage.getItem("titlecolorlocal");
 
-              // ✅ Remove script if no color is stored
+              // ✅ If no color is stored, remove script & reset colors
+              let existingScript = document.getElementById("Titlecolor");
               if (!storedColor) {
-                  let existingScript = document.getElementById("Titlecolor");
-                  if (existingScript) existingScript.remove();
+                  if (existingScript) {
+                      console.log("Removing script on load...");
+                      existingScript.remove();
+                  }
+
+                  const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
+                  headings.forEach((heading) => {
+                      heading.style.color = ""; // Reset to default
+                  });
+
                   return;
               }
 
-              // ✅ Apply color if stored
+              // ✅ Apply stored color if it exists
               changetitlecolor(storedColor);
           });
       `;
