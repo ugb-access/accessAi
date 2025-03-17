@@ -45,20 +45,20 @@ const ColorAdjustment = () => {
         }
     };
 
-    const changeTitleColor = (color) => {
-        const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
-        const accessibilityElement = document.getElementById('accessibilty'); //
+    // const changeTitleColor = (color) => {
+    //     const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
+    //     const accessibilityElement = document.getElementById('accessibilty'); //
 
-        headings.forEach((heading) => {
-            // Skip elements that are the "accessibility" element or are inside it
-            if (accessibilityElement.contains(heading)) {
-                return;
-            }
+    //     headings.forEach((heading) => {
+    //         // Skip elements that are the "accessibility" element or are inside it
+    //         if (accessibilityElement.contains(heading)) {
+    //             return;
+    //         }
 
-            // Change the color for other elements
-            heading.style.color = color;
-        });
-    };
+    //         // Change the color for other elements
+    //         heading.style.color = color;
+    //     });
+    // };
 
 
     const changeTextColor = (color) => {
@@ -153,7 +153,7 @@ const ColorAdjustment = () => {
                         colorButton={true}
                         button={"cancel"}
                         colors={colors}
-                        onChangeColor={changeTitleColor}
+                        onChangeColor={changetitlecolor}
                         color={colors}
                     />
                     <Content_box1

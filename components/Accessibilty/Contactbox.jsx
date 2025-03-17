@@ -27,6 +27,7 @@ import { FONT_SIZE } from "../../utils/scripts/fontsize"
 import { CONTENT_SCALING } from "../../utils/scripts/scaling"
 import { LINE_HEIGHT_ADJUSTMENT } from "../../utils/scripts/lineheight"
 import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
+import { TITLE_COLOR } from "../../utils/scripts/titlecolor"
 
 
 
@@ -174,7 +175,7 @@ const Contactbox = () => {
                  increasedecreasefontsize()
          }
         ${CONTENT_SCALING()}
-        if (localStorage.getItem('font-sizelocal') === 'true') {
+        if (localStorage.getItem('content-scale') === 'true') {
                  increasedecreasescaling()
          }
         ${LINE_HEIGHT_ADJUSTMENT()}
@@ -184,6 +185,10 @@ const Contactbox = () => {
         ${LETTER_SPACING_ADJUSTMENT()}
         if (localStorage.getItem('letter-spacing-local') === 'true') {
                  increaseDecreaseLetterSpacing()
+         }
+        ${TITLE_COLOR()}
+        if (localStorage.getItem('letter-spacing-local') === 'true') {
+                 changetitlecolor()
          }
         
 
