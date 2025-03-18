@@ -401,8 +401,8 @@ const Accessibility = ({ handlePageClick }) => {
       para1: "Seizure Safe Profile",
       para2: "Clear flashes &amp; reduces color",
       svg: <SVG />,
-      para: "This profile enables epileptic and seizure prone users to browse safely by eliminating the risk of seizures that result from flashing or blinking animations and risky color combinations."
-
+      para: "This profile enables epileptic and seizure prone users to browse safely by eliminating the risk of seizures that result from flashing or blinking animations and risky color combinations.",
+      storageValue: "seizure"
 
     },
     {
@@ -420,7 +420,8 @@ const Accessibility = ({ handlePageClick }) => {
       para1: "ADHD Friendly Profile",
       para2: "More focus & fewer distractions",
       svg: <SVG3 />,
-      para: "This profile significantly reduces distractions, to help people with ADHD and Neurodevelopmental disorders browse, read, and focus on the essential elements of the website more easily."
+      para: "This profile significantly reduces distractions, to help people with ADHD and Neurodevelopmental disorders browse, read, and focus on the essential elements of the website more easily.",
+      storageValue: "reading_mask"
 
     },
     {
@@ -560,7 +561,10 @@ const Accessibility = ({ handlePageClick }) => {
         <div id="accessibilty" className="px-5">Choose  the right accessibilty profile for you</div>
         {data2.map((item, index) => {
 
-          const isTabActive = activeTab === index
+          const isTabActive = activeTab === index;
+
+          const isEnableFunctionality = localStorage.getItem(item.storageValue) === 'true';
+          console.log('isEnableFunctionality: ', isEnableFunctionality);
 
           return (
             <>

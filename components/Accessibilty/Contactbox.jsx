@@ -29,6 +29,7 @@ import { LINE_HEIGHT_ADJUSTMENT } from "../../utils/scripts/lineheight"
 import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
 import { TITLE_COLOR } from "../../utils/scripts/titlecolor"
 import { TEXT_COLOR } from "../../utils/scripts/textcolor"
+import { BACKGROUND_COLOR } from "../../utils/scripts/backgroudcolor"
 
 
 
@@ -134,7 +135,6 @@ const Contactbox = () => {
                  togglereadmode()
          }
         ${HIDE_IMAGE()}
-        
         if (localStorage.getItem('hideimagelocal') === 'true') {
                  togglehideimage()
          }
@@ -195,9 +195,11 @@ const Contactbox = () => {
         if (localStorage.getItem('titlecolorlocal') === 'true') {
                 changetextcolor()
          }
-        
-
-            `;
+        ${BACKGROUND_COLOR()}
+        if (localStorage.getItem('bgcolorlocal') === 'true') {
+                changeBackgroundColor()
+         }
+          `;
 
     const isMainScriptInjected = document.getElementById("mainScript");
     if (!isMainScriptInjected) document.body.appendChild(mainScript);

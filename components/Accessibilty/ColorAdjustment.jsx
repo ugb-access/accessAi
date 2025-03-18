@@ -45,35 +45,7 @@ const ColorAdjustment = () => {
         }
     };
 
-    // const changeTitleColor = (color) => {
-    //     const headings = document.body.querySelectorAll('h1, h2, h3, h4, h5, h6, button');
-    //     const accessibilityElement = document.getElementById('accessibilty'); //
 
-    //     headings.forEach((heading) => {
-    //         // Skip elements that are the "accessibility" element or are inside it
-    //         if (accessibilityElement.contains(heading)) {
-    //             return;
-    //         }
-
-    //         // Change the color for other elements
-    //         heading.style.color = color;
-    //     });
-    // };
-
-
-    // const changeTextColor = (color) => {
-    //     const elements = document.body.querySelectorAll('p, a');
-    //     const accessibilityElement = document.getElementById('accessibilty');
-
-    //     elements.forEach((element) => {
-    //         if (accessibilityElement.contains(element)) {
-    //             return;
-    //         }
-
-    //         // Change the text color for other elements
-    //         element.style.color = color;
-    //     });
-    // };
 
 
 
