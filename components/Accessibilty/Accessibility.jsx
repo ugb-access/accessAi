@@ -502,14 +502,46 @@ const Accessibility = ({ handlePageClick }) => {
       toggleId.style.display = 'none'
     }
   }
-  let hide = true
+
+
+  let hide = localStorage.getItem("hideState") === "false";
+
   const hideinterface = () => {
-    const elements = document.querySelectorAll("[id ='accessibilty']")
-    hide = !hide
+    const elements = document.querySelectorAll("#accessibilty");
+
+    if (!hide) {
+      hide = true;
+      localStorage.setItem("hideState", "false");
+
+      elements.forEach((element) => {
+        element.classList.add("hidden");
+      });
+    }
+  };
+  window.addEventListener("load", () => {
+    const savedState = localStorage.getItem("hideState");
+    if (savedState === null) {
+      return;
+    }
+
+    hide = savedState === "false";
+
+    const elements = document.querySelectorAll("#accessibilty");
     elements.forEach((element) => {
-      element.style.display = hide ? "block" : "none"
-    })
-  }
+      if (hide) {
+        element.classList.add("hidden");
+      }
+    });
+  });
+
+
+
+
+
+
+
+
+
   const handle = (index) => {
     if (index === 1) {
       statment()

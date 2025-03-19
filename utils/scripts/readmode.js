@@ -23,8 +23,7 @@ export const READ_MODE = () => {
                     title.style.color = '';
                 });
 
-                // Clear stored classes to prevent memory leaks
-                // window.originalClasses.clear();
+              
                 return;
                 
             }
@@ -59,7 +58,9 @@ export const READ_MODE = () => {
                 } else {
                     // Restore the original classes
                     if (originalClasses.has(element)) {
-                        element.className = originalClasses.get(element); // Restore class
+                        element.className = originalClasses.get(element); 
+                                            element.Attribute('class'); // Remove all classes
+
                     }
                     body.style.margin = '';
                     body.style.width = '';

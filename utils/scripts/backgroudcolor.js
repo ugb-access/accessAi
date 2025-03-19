@@ -13,6 +13,10 @@ export const BACKGROUND_COLOR = () => {
               }
 
               localStorage.setItem("bgcolorlocal", bgColorToApply);
+     
+
+
+
               document.body.style.setProperty("background-color", bgColorToApply, "important");
               
               const footer = document.getElementsByTagName('footer');
@@ -42,3 +46,15 @@ export const BACKGROUND_COLOR = () => {
           });
       `;
 };
+
+
+
+
+
+
+
+
+
+
+
+
