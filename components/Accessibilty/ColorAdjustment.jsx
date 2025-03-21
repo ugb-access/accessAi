@@ -5,58 +5,8 @@ import Content_box1 from './Content_box1';
 
 const ColorAdjustment = () => {
     const colors = ["#0076B4", "#7a549c", "#c83733", "#D07021", "#26999f", "#4d7831", "#fff", "#000000"]
-    // const defaultColor = '';
-
-    // const changeBackgroundColor = (color) => {
-    //     localStorage.setItem("background-color", color)
-    //     document.body.style.background = color
-
-
-    //     const footer = document.getElementsByTagName('footer');
-
-    //     if (footer.length > 0) {
-    //         // Add the class to the footer
-    //         footer[0].classList.add('important-background');
-
-    //         // Check if the style already exists
-    //         let styleElement = document.getElementById('dynamic-styles');
-    //         if (color.id === "accessibilty") {
-
-    //         }
-    //         if (!styleElement) {
-    //             // Create a <style> element if it doesn't exist
-    //             styleElement = document.createElement('style');
-    //             styleElement.id = 'dynamic-styles';
-    //             document.head.appendChild(styleElement);
-    //         }
-
-    //         // Add or update the CSS rule for .important-background
-    //         styleElement.innerHTML = `
-    //             .important-background {
-    //                 background: ${color} !important;
-    //                 color: white; /* Example of additional style */
-    //                   transition: background-color 0.3s ease;
-
-
-    //             }
-    //         `;
-
-    //     } else {
-    //     }
-    // };
-
-
-
-
-
-
 
     return (
-
-
-
-
-
 
         <div id="accessibilty" className='m-5 bg-[#fff] p-5 rounded-xl '>
             <div id="accessibilty" className='text-[18px] pb-5'>Color Adjustments</div>

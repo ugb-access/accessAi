@@ -5,7 +5,6 @@ export const BACKGROUND_COLOR = () => {
             let storedBgColor = localStorage.getItem("bgcolorlocal");
 
             let bgColorToApply = storedBgColor === newBgColor ? storedBgColor : newBgColor;
-            console.log("Applying background color:", bgColorToApply);
 
             let existingScript = document.getElementById(scriptId);
             if (existingScript) {
