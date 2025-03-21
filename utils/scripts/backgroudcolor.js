@@ -1,28 +1,18 @@
 export const BACKGROUND_COLOR = () => {
     return `
         const changeBackgroundColor = (newBgColor) => {
-            let storedBgColor = localStorage.getItem("bgcolorlocal");
-
-            if (!storedBgColor) {
-                console.log("No stored background color. Skipping script injection.");
-                return; // Stop execution if no color is set
-            }
-
-            let bgColorToApply = storedBgColor === newBgColor ? storedBgColor : newBgColor;
-            console.log("Applying background color:", bgColorToApply);
-
             if (!newBgColor || newBgColor === "#fff") {
                 localStorage.removeItem("bgcolorlocal");
-                document.body.style.setProperty("background-color", "", "important");
+                document.body.style.removeProperty("background-color");
                 return;
             }
 
-            localStorage.setItem("bgcolorlocal", bgColorToApply);
-            document.body.style.setProperty("background-color", bgColorToApply, "important");
+            localStorage.setItem("bgcolorlocal", newBgColor);
+            document.body.style.setProperty("background-color", newBgColor, "important");
 
-            const footer = document.getElementsByTagName('footer');
-            if (footer.length > 0) {
-                footer[0].classList.add('important-background');
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.classList.add('important-background');
                 let styleElement = document.getElementById('dynamic-styles');
                 if (!styleElement) {
                     styleElement = document.createElement('style');
@@ -31,7 +21,7 @@ export const BACKGROUND_COLOR = () => {
                 }
                 styleElement.innerHTML = \`
                     .important-background {
-                        background: \${bgColorToApply} !important;
+                        background: \${newBgColor} !important;
                         color: white;
                         transition: background-color 0.3s ease;
                     }
@@ -42,7 +32,7 @@ export const BACKGROUND_COLOR = () => {
         window.addEventListener("load", () => {
             let storedBgColor = localStorage.getItem("bgcolorlocal");
             if (storedBgColor) {
-                changeBackgroundColor(storedBgColor);
+                changeBackgroundColor(storedBgColor); // Corrected function call
             }
         });
     `;
