@@ -147,34 +147,37 @@ const Accessibility = ({ handlePageClick }) => {
 
 
 
-  let isCustomColor = false;
-
+  let isCustomColor = localStorage.getItem('isCustomColor') === 'true';
   const saveProfileHandler = (active, index) => {
-
     const root = document.documentElement;
-
     if (!active) {
-
       root.style.setProperty('--primary-color', '#146FF8');
       root.classList.remove('seizure');
-
-
+      isCustomColor = false;
     } else {
       root.style.setProperty('--primary-color', '#3d6aaf');
       root.classList.add('seizure');
+      isCustomColor = true;
+    }
+    localStorage.setItem('isCustomColor', isCustomColor);
+    localStorage.setItem('primaryColor', root.style.getPropertyValue('--primary-color'));
+  };
+  // Load saved settings on page load
+  window.addEventListener('load', () => {
+    const root = document.documentElement;
+    const savedColor = localStorage.getItem('primaryColor');
+    const savedCustomColor = localStorage.getItem('isCustomColor') === 'true';
 
-
+    if (savedColor) {
+      root.style.setProperty('--primary-color', savedColor);
     }
 
-    isCustomColor = !isCustomColor;
-  };
-
-
-
-
-
-
-
+    if (savedCustomColor) {
+      root.classList.add('seizure');
+    } else {
+      root.classList.remove('seizure');
+    }
+  });
 
 
 
@@ -195,11 +198,20 @@ const Accessibility = ({ handlePageClick }) => {
     if (active) {
 
       body.style.transform = 'scale(1.1)';
+      localStorage.setItem('scale', '1.1');
     } else {
       body.style.transform = `scale(${DefaultScale})`;
+      localStorage.setItem('scale', DefaultScale.toString());
 
     }
+
   }
+  window.addEventListener('load', () => {
+    const savedScale = localStorage.getItem('scale', '');
+    if (savedScale) {
+      document.body.style.transform = `scale(${savedScale})`;
+    }
+  });
 
 
   /////////////////////keyboard//////////////////////
@@ -272,44 +284,70 @@ const Accessibility = ({ handlePageClick }) => {
 
 
   // const [activeTab, setActiveTab] = useState(-1)
-  let Readingmask = document.getElementById("reading_mask"); // Global variable to track the mask
-  const readingmask = (active) => {
-    if (active === true) {
-      if (!Readingmask) { // Only create if it doesn't exist
-        Readingmask = document.createElement("div");
-        Readingmask.id = "reading_mask";
-        Object.assign(Readingmask.style, {
-          position: "fixed",
-          backgroundColor: "transparent",
-          boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
-          height: "150px",
-          width: "100%",
-          zIndex: "9999",
-          pointerEvents: "none"
-        });
-        document.body.appendChild(Readingmask);
+  const createReadingMask = () => {
+    if (!document.getElementById("reading_mask")) { // Ensure we don't duplicate
+      let Readingmask = document.createElement("div");
+      Readingmask.id = "reading_mask";
+      Object.assign(Readingmask.style, {
+        position: "fixed",
+        backgroundColor: "transparent",
+        boxShadow: "0px 0px 10000px 5000px rgba(0, 0, 0, 0.6)",
+        height: "150px",
+        width: "100%",
+        zIndex: "9999",
+        pointerEvents: "none"
+      });
+      document.body.appendChild(Readingmask);
 
-        document.addEventListener("mousemove", (event) => {
-          if (Readingmask) {
-            let maskWidth = window.innerWidth;
-            let maskHeight = 150;
-            let newX = event.clientX - maskWidth / 2;
-            let newY = event.clientY - maskHeight / 2;
-            newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
-            newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
-            Readingmask.style.left = `${newX}px`;
-            Readingmask.style.top = `${newY}px`;
-          }
-        });
-      }
-    } else {
-      if (Readingmask) {
-        Readingmask.remove();
-        Readingmask = null;
-      }
+      document.addEventListener("mousemove", (event) => {
+        let mask = document.getElementById("reading_mask");
+        if (mask) {
+          let maskWidth = window.innerWidth;
+          let maskHeight = 150;
+          let newX = event.clientX - maskWidth / 2;
+          let newY = event.clientY - maskHeight / 2;
+          newX = Math.max(0, Math.min(newX, window.innerWidth - maskWidth));
+          newY = Math.max(0, Math.min(newY, window.innerHeight - maskHeight));
+          mask.style.left = `${newX}px`;
+          mask.style.top = `${newY}px`;
+        }
+      });
     }
-
   };
+
+  const removeReadingMask = () => {
+    let mask = document.getElementById("reading_mask"); // Always get the latest reference
+    if (mask) {
+      mask.remove();
+    }
+  };
+
+  // Function to toggle reading mask and save to localStorage
+  const readingmask = (active) => {
+    if (active) {
+      createReadingMask();
+      localStorage.setItem("readingMaskActive", "true");
+    } else {
+      removeReadingMask();
+      localStorage.setItem("readingMaskActive", "false");
+    }
+  };
+
+  // Load saved state on page load
+  window.addEventListener("load", () => {
+    const savedMaskState = localStorage.getItem("readingMaskActive") === "true";
+    if (savedMaskState) {
+      createReadingMask();
+    }
+  });
+
+  // Example: Click anywhere to toggle the mask
+  document.addEventListener("click", () => {
+    const isActive = localStorage.getItem("readingMaskActive") === "true";
+    readingmask(!isActive);
+  });
+
+
 
 
 
@@ -335,7 +373,7 @@ const Accessibility = ({ handlePageClick }) => {
       if (notactiveElements.length) notactiveElements[0].style.cssText = "background-color: #fff; color: #000; height: 100%; width: 50%; z-index: 10; border: none;";
 
       if (bgcolor.length > 0) {
-        bgcolor[0].style.backgroundColor = '#fff'; // ✅ Sirf pehle element pe apply hoga
+        bgcolor[0].style.backgroundColor = '#fff';
 
       }
     }
@@ -356,16 +394,16 @@ const Accessibility = ({ handlePageClick }) => {
     const bgcolor = document.getElementsByClassName('bgc');
 
     if (activeElements.length >= 0) {
-      activeElements[0].style.backgroundColor = ''; // ✅ Sirf pehle element pe apply hoga
+      activeElements[0].style.backgroundColor = '';
       activeElements[0].style.color = '';
     }
     if (notactiveElements.length >= 0) {
-      notactiveElements[0].style.backgroundColor = '#e1e5e7'; // ✅ Sirf pehle element pe apply hoga
+      notactiveElements[0].style.backgroundColor = '#e1e5e7';
       notactiveElements[0].style.color = '';
 
     }
     if (bgcolor.length > 0) {
-      bgcolor[0].style.backgroundColor = ''; // ✅ Sirf pehle element pe apply hoga
+      bgcolor[0].style.backgroundColor = '';
 
     }
 

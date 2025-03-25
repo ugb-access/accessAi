@@ -6,7 +6,6 @@ export const SCRIPT_HIGHSATURATION = () => {
             const body = document.body;
 
             if (isScriptInjected) {
-                console.log("Removing script...");
                 localStorage.setItem("highsaturationlocal", "false");
                 isScriptInjected.remove();
 
