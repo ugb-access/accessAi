@@ -148,37 +148,7 @@ const Accessibility = ({ handlePageClick }) => {
 
 
 
-  // let isCustomColor = localStorage.getItem('isCustomColor') === 'true';
-  // const saveProfileHandler = (active, index) => {
-  //   const root = document.documentElement;
-  //   if (!active) {
-  //     root.style.setProperty('--primary-color', '#146FF8');
-  //     root.classList.remove('seizure');
-  //     isCustomColor = false;
-  //   } else {
-  //     root.style.setProperty('--primary-color', '#3d6aaf');
-  //     root.classList.add('seizure');
-  //     isCustomColor = true;
-  //   }
-  //   localStorage.setItem('isCustomColor', isCustomColor);
-  //   localStorage.setItem('primaryColor', root.style.getPropertyValue('--primary-color'));
-  // };
-  // // Load saved settings on page load
-  // window.addEventListener('load', () => {
-  //   const root = document.documentElement;
-  //   const savedColor = localStorage.getItem('primaryColor');
-  //   const savedCustomColor = localStorage.getItem('isCustomColor') === 'true';
 
-  //   if (savedColor) {
-  //     root.style.setProperty('--primary-color', savedColor);
-  //   }
-
-  //   if (savedCustomColor) {
-  //     root.classList.add('seizure');
-  //   } else {
-  //     root.classList.remove('seizure');
-  //   }
-  // });
 
 
 
@@ -360,34 +330,42 @@ const Accessibility = ({ handlePageClick }) => {
 
 
 
-  const handleOn = (index) => {
-    activeTab = index; // Update the local variable
+  const handleOn = (key) => {
 
-    if (index === 0) {
-      saveProfileHandler(true)
-      const activeElements = document.getElementsByClassName('active');
-      const notactiveElements = document.getElementsByClassName('not-active');
-      const bgcolor = document.getElementsByClassName('bgc');
 
-      if (activeElements.length) activeElements[0].style.cssText = "background-color: #146FF8; color: #fff; border-radius: 100px; height: 100%; width: 50%; z-index: 10;";
+    localStorage.setItem(key, true);
 
-      if (notactiveElements.length) notactiveElements[0].style.cssText = "background-color: #fff; color: #000; height: 100%; width: 50%; z-index: 10; border: none;";
+    // if (index === 0) {
+    //   saveProfileHandler(true)
+    //   const activeElements = document.getElementsByClassName('active');
+    //   const notactiveElements = document.getElementsByClassName('not-active');
+    //   const bgcolor = document.getElementsByClassName('bgc');
 
-      if (bgcolor.length > 0) {
-        bgcolor[0].style.backgroundColor = '#fff';
+    //   if (activeElements.length) activeElements[0].style.cssText = "background-color: #146FF8; color: #fff; border-radius: 100px; height: 100%; width: 50%; z-index: 10;";
 
-      }
+    //   if (notactiveElements.length) notactiveElements[0].style.cssText = "background-color: #fff; color: #000; height: 100%; width: 50%; z-index: 10; border: none;";
+
+    //   if (bgcolor.length > 0) {
+    //     bgcolor[0].style.backgroundColor = '#fff';
+
+    //   }
+    // }
+
+    if (key === 'scale_vision') {
+      scale(true)
     }
 
-    if (index === 1) scale(true);
-    if (index === 2) readingmask(true);
-    if (index === 3) titlelink(true);
-    if (index === 4) keyboard(true);
+    // if (index === 1) scale(true);
+    // if (index === 2) readingmask(true);
+    // if (index === 3) titlelink(true);
+    // if (index === 4) keyboard(true);
 
 
   };
 
-  const handleOff = () => {
+  const handleOff = (key) => {
+
+    localStorage.setItem(key, 'false');
     activeTab = -1; // 
     const activeElements = document.getElementsByClassName('active');
     const notactiveElements = document.getElementsByClassName('active');
@@ -409,10 +387,16 @@ const Accessibility = ({ handlePageClick }) => {
     }
 
 
-    keyboard(false);
-    scale(false);
-    titlelink(false);
-    readingmask(false); // Turn off reading mask
+    // keyboard(false);
+
+
+    if (key === 'scale_vision') {
+      scale(false)
+    }
+
+    // scale(false);
+    // titlelink(false);
+    // readingmask(false); // Turn off reading mask
   };
 
 
@@ -449,7 +433,9 @@ const Accessibility = ({ handlePageClick }) => {
       para1: "Vision Impaired Profile",
       para2: " Enhances website's visuals",
       svg: <SVG2 />,
-      para: "This profile adjusts the website, so that it is accessible to the majority of visual impairments such as Degrading Eyesight, Tunnel Vision, Cataract, Glaucoma, and others."
+      para: "This profile adjusts the website, so that it is accessible to the majority of visual impairments such as Degrading Eyesight, Tunnel Vision, Cataract, Glaucoma, and others.",
+      storageValue: "scale_vision"
+
 
     },
     {
@@ -630,11 +616,17 @@ const Accessibility = ({ handlePageClick }) => {
       <div id="accessibilty" className="m-5 cursor-pointer  bg-[#fff] rounded-xl py-5" >
         <div id="accessibilty" className="px-5">Choose  the right accessibilty profile for you</div>
         {data2.map((item, index) => {
+          console.log('item: ', item);
 
           const isTabActive = activeTab === index;
 
           const isEnableFunctionality = localStorage.getItem(item.storageValue) === 'true';
-          console.log('isEnableFunctionality: ', isEnableFunctionality);
+
+          if (item.storageValue === 'scale_vision') {
+
+            console.log('isEnableFunctionality: ', isEnableFunctionality, index);
+          }
+
 
           return (
             <>
@@ -643,14 +635,14 @@ const Accessibility = ({ handlePageClick }) => {
                   <div id="accessibilty" className="bgc h-[35px] bg-[#e1e5e7] shadow-2xl rounded-[50px] flex-1 flex justify-center  items-center">
 
                     <span
-                      id="accessibilty" className={`not-active flex justify-center  items-center w-[50%] ${!isTabActive ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
-                      onClick={() => { handleOff(index) }}
+                      id="accessibilty" className={`not-active flex justify-center  items-center w-[50%] ${!isEnableFunctionality ? 'bg-[#ffffff] z-10 rounded-full h-full border border-gray-100' : ''}`}
+                      onClick={() => { handleOff(item.storageValue) }}
                     >
                       {item.of}
                     </span>
 
-                    <span id="accessibilty" className={`active w-[50%]  text-center ${isTabActive ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`}
-                      onClick={() => handleOn(index)}>{item.on}
+                    <span id="accessibilty" className={`active w-[50%]  text-center ${isEnableFunctionality ? 'bg-primary w-[50%] text-white z-10  rounded-full  h-full  flex justify-center items-center ' : 'bg-grey-500  flex justify-center items-center'}`}
+                      onClick={() => handleOn(item.storageValue)}>{item.on}
 
 
                     </span>
