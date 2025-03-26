@@ -1,6 +1,25 @@
 export const SAFE_PROFILE = () => {
     return `
     const saveprofile = () => {
+
+    const isScriptInjected = document.getElementById('Save_Profile');
+    const savedCustomColor = localStorage.getItem('isCustomColor') === 'true';
+    const savedColor = localStorage.getItem('primaryColor');
+    if (isScriptInjected) {
+                console.log("Removing existing script...");
+      localStorage.setItem('isCustomColor', isCustomColor);
+                localStorage.setItem('primaryColor', root.style.getPropertyValue('--primary-color'));
+    isScriptInjected.remove();
+    return;
+    }
+
+
+
+
+
+
+
+
         console.log('saveprofile: ', saveprofile);
         const saveProfile = document.createElement('script');
         saveProfile.id = "Save_Profile";
