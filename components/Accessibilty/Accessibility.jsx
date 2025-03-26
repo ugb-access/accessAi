@@ -13,6 +13,7 @@ import { Indent } from "lucide-react";
 
 
 
+
 const SVG = () => (
   <svg
     fill="currentColor"
@@ -147,45 +148,45 @@ const Accessibility = ({ handlePageClick }) => {
 
 
 
-  let isCustomColor = localStorage.getItem('isCustomColor') === 'true';
-  const saveProfileHandler = (active, index) => {
-    const root = document.documentElement;
-    if (!active) {
-      root.style.setProperty('--primary-color', '#146FF8');
-      root.classList.remove('seizure');
-      isCustomColor = false;
-    } else {
-      root.style.setProperty('--primary-color', '#3d6aaf');
-      root.classList.add('seizure');
-      isCustomColor = true;
-    }
-    localStorage.setItem('isCustomColor', isCustomColor);
-    localStorage.setItem('primaryColor', root.style.getPropertyValue('--primary-color'));
-  };
-  // Load saved settings on page load
-  window.addEventListener('load', () => {
-    const root = document.documentElement;
-    const savedColor = localStorage.getItem('primaryColor');
-    const savedCustomColor = localStorage.getItem('isCustomColor') === 'true';
+  // let isCustomColor = localStorage.getItem('isCustomColor') === 'true';
+  // const saveProfileHandler = (active, index) => {
+  //   const root = document.documentElement;
+  //   if (!active) {
+  //     root.style.setProperty('--primary-color', '#146FF8');
+  //     root.classList.remove('seizure');
+  //     isCustomColor = false;
+  //   } else {
+  //     root.style.setProperty('--primary-color', '#3d6aaf');
+  //     root.classList.add('seizure');
+  //     isCustomColor = true;
+  //   }
+  //   localStorage.setItem('isCustomColor', isCustomColor);
+  //   localStorage.setItem('primaryColor', root.style.getPropertyValue('--primary-color'));
+  // };
+  // // Load saved settings on page load
+  // window.addEventListener('load', () => {
+  //   const root = document.documentElement;
+  //   const savedColor = localStorage.getItem('primaryColor');
+  //   const savedCustomColor = localStorage.getItem('isCustomColor') === 'true';
 
-    if (savedColor) {
-      root.style.setProperty('--primary-color', savedColor);
-    }
+  //   if (savedColor) {
+  //     root.style.setProperty('--primary-color', savedColor);
+  //   }
 
-    if (savedCustomColor) {
-      root.classList.add('seizure');
-    } else {
-      root.classList.remove('seizure');
-    }
-  });
+  //   if (savedCustomColor) {
+  //     root.classList.add('seizure');
+  //   } else {
+  //     root.classList.remove('seizure');
+  //   }
+  // });
 
 
 
   /////////////titlelink////////////////
   const titlelink = (active) => {
     if (active) {
-      togglehighlightlink()
-      togglehighlighttitle()
+      // togglehighlightlink()
+      // togglehighlighttitle()
     }
   };
 
@@ -378,21 +379,21 @@ const Accessibility = ({ handlePageClick }) => {
       }
     }
 
-    if (index === 4) keyboard(true);
     if (index === 1) scale(true);
-    if (index === 3) titlelink(true);
     if (index === 2) readingmask(true);
+    if (index === 3) titlelink(true);
+    if (index === 4) keyboard(true);
 
 
   };
 
   const handleOff = () => {
     activeTab = -1; // 
-    saveProfileHandler(false)
     const activeElements = document.getElementsByClassName('active');
     const notactiveElements = document.getElementsByClassName('active');
     const bgcolor = document.getElementsByClassName('bgc');
 
+    saveProfileHandler(false)
     if (activeElements.length >= 0) {
       activeElements[0].style.backgroundColor = '';
       activeElements[0].style.color = '';
@@ -412,7 +413,6 @@ const Accessibility = ({ handlePageClick }) => {
     scale(false);
     titlelink(false);
     readingmask(false); // Turn off reading mask
-    console.log('readingmask: ', readingmask);
   };
 
 

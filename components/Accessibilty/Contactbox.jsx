@@ -30,6 +30,7 @@ import { LETTER_SPACING_ADJUSTMENT } from "../../utils/scripts/letterspacing"
 import { TITLE_COLOR } from "../../utils/scripts/titlecolor"
 import { TEXT_COLOR } from "../../utils/scripts/textcolor"
 import { BACKGROUND_COLOR } from "../../utils/scripts/backgroudcolor"
+import { SAFE_PROFILE } from "../../utils/scripts/saveprofile"
 
 
 
@@ -198,6 +199,10 @@ const Contactbox = () => {
         ${BACKGROUND_COLOR()}
         if (localStorage.getItem('bgcolorlocal') === 'true') {
                 changeBackgroundColor()
+         }
+        ${SAFE_PROFILE()}
+        if (localStorage.getItem('primaryColor') === 'true') {
+                saveprofile()
          }
           `;
 
